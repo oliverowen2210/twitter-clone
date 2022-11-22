@@ -17,7 +17,6 @@
   content: "@";
 }
 
-.filter-green {
-  filter: invert(43%) sepia(78%) saturate(3031%) hue-rotate(100deg)
-    brightness(117%) contrast(109%);
+* {
+  overflow-x: hidden;
 }
