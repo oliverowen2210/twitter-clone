@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import Footer from "./components/Footer";
+import Banner from "./components/Banner";
+import Tweets from "./components/Tweets";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex min-h-[1000px] w-screen">
+      <Banner className="hidden sm:block" />
+      <div className="grow">
+        <div className="flex w-[990px]">
+          <Tweets />
+          <Sidebar className="hidden lg:block" />
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }
