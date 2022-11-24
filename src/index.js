@@ -6,7 +6,7 @@ import App from "./components/App";
 /**firebase setup */
 
 import * as firebase from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import {
   getAuth,
   onAuthStateChanged,
@@ -40,12 +40,9 @@ async function createAccount(username, handle, email, password) {
   const response = await createUserWithEmailAndPassword(auth, email, password);
   const user = response.user;
   const joinDate = new Date();
-  await addDoc(collection(db, "users"), {
-    uid: user.uid,
+  await setDoc(doc(db, "users", user.uid), {
     username,
     handle,
-    password,
-    email,
     authProvider: "local",
     joinDate: {
       date: joinDate,
@@ -54,6 +51,7 @@ async function createAccount(username, handle, email, password) {
       day: joinDate.getDate(),
       hour: joinDate.getHours(),
     },
+    tweets: [],
   });
 }
 

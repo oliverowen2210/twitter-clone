@@ -33,8 +33,9 @@ export default function SignupPage(props) {
         placeholder="password"
       />
       <button
-        onClick={() => {
-          props.auth.register(username, handle, email, password);
+        onClick={async () => {
+          await props.auth.register(username, handle, email, password);
+          window.location.href = `/${handle}`;
         }}
       >
         Register
