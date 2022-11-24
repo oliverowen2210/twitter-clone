@@ -17,6 +17,7 @@
   content: "@";
 }
 
-* {
-  overflow-x: hidden;
+.bird svg {
+  transform: scaleX(-1);
+  transform-origin: center center;
 }

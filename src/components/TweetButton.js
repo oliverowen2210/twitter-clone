@@ -14,7 +14,7 @@ export default function TweetButton(props) {
       <p
         className={`px-2 text-gray-500 duration-200 group-hover:text-${props.color}`}
       >
-        {props.count ? props.count : 137}
+        {props.count ? props.count : null}
       </p>
     </button>
   );

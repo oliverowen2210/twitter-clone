@@ -16,12 +16,17 @@ export default function Footer(props) {
           </div>
 
           <div className="flex items-center">
-            <button className="border-solid border-[1px] border-black text-white font-bold px-[16px] py-[8px] rounded-full">
+            <button
+              onClick={props.loginFunc}
+              className="border-solid border-[1px] border-black text-white font-bold px-[16px] py-[8px] rounded-full"
+            >
               Log in
             </button>
-            <button className="bg-black text-red-500 rounded-full px-[16px] py-[8px] ml-[12px] font-bold">
-              Sign up
-            </button>
+            <a href="/signup">
+              <button className="bg-black text-red-500 rounded-full px-[16px] py-[8px] ml-[12px] font-bold">
+                Sign up
+              </button>
+            </a>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ export default function BannerElement(props) {
   let bold = "";
   if (props.bold) bold = "font-bold";
   return (
-    <div>
+    <div className={props.class ? props.class : null}>
       <a
         className="flex items-center w-full"
         href={props.link ? props.link : null}
