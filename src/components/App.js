@@ -9,6 +9,13 @@ import SignupPage from "./SignupPage";
 
 function App(props) {
   let [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (window.location.pathname === "/" && user) {
+      window.location.href = "/home";
+    }
+  });
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (newUser) => {
       console.log("auth state change in app");
