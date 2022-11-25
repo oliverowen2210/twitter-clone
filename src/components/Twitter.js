@@ -22,7 +22,7 @@ export default function Twitter(props) {
       />
       <Banner user={props.user} logoutFunc={props.auth.logout} />
       <div className="w-[600px] lg:w-[920px] xl:w-[990px] grow-2">
-        <div className="flex">
+        <div className="flex grow">
           <Tweets db={props.db} />
           <Sidebar />
         </div>
