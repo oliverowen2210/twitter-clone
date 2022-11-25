@@ -64,6 +64,7 @@ async function logout() {
   try {
     console.log("logging out");
     await signOut(auth);
+    window.location.pathname = "/";
   } catch (err) {
     console.log(err);
     window.location.href = "/";
