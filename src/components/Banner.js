@@ -1,4 +1,5 @@
 import HomeButton from "./HomeButton";
+import Home from "./Home";
 import Explore from "./Explore";
 import UserInfo from "./UserInfo";
 
@@ -7,6 +8,7 @@ export default function Sidebar(props) {
     <div className="flex flex-col items-end grow">
       <div className="flex flex-col w-[88px] xl:w-[275px] h-full px-[12px]">
         <HomeButton />
+        <Home />
         <Explore />
 
         {props.user ? (
