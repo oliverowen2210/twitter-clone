@@ -1,6 +1,6 @@
 export default function BannerElement(props) {
   let bold = "";
-  if (props.bold) bold = "font-bold";
+  if (window.location.pathname === props.link) bold = "font-bold";
   return (
     <div
       className={
