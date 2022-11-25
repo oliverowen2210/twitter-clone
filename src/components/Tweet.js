@@ -5,7 +5,7 @@ import Share from "./Share";
 
 export default function Tweet(props) {
   return (
-    <div className="px-4 py-2 border-b-[1px] border-gray-200 border-solid">
+    <div className="w-[600px] px-4 py-2 border-b-[1px] border-gray-200 border-solid">
       <div className="flex ">
         <a href="/test">
           <div

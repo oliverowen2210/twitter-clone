@@ -1,7 +1,7 @@
-import Tweet from "./Tweet";
-import SVGs from "../images/SVGs";
 import { useState, useEffect } from "react";
 import { getDocs, collection, query, orderBy, limit } from "firebase/firestore";
+import Tweet from "./Tweet";
+import SVGs from "../images/SVGs";
 
 export default function Tweets(props) {
   let [tweets, setTweets] = useState([]);
@@ -9,8 +9,12 @@ export default function Tweets(props) {
   useEffect(() => {
     async function getTweets() {
       if (tweets.length) return;
-      const tweetsCollection = await collection(props.db, "tweets");
-      const q = query(tweetsCollection, orderBy("datePosted"), limit(20));
+      console.log("getting tweets collection");
+      const q = query(
+        collection(props.db, "tweets"),
+        orderBy("datePosted"),
+        limit(20)
+      );
       const qSnap = await getDocs(q);
       let newTweets = [];
       qSnap.forEach((doc) => {
@@ -24,7 +28,7 @@ export default function Tweets(props) {
   }, [tweets, props.db]);
 
   return (
-    <div className="border-x-[1px] border-gray-200 border-solid grow min-h-[99vh] max-w-[600px]">
+    <div className="border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
       <div className="flex w-full h-[53px] max-w-[1000px] px-[16px] py-[6px]">
         <div className="bg-gray-200 rounded-l-full">
           <span className="flex items-center h-full pl-[12px] min-w-[32px]">

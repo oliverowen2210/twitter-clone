@@ -20,19 +20,11 @@ export default function Twitter(props) {
         }}
         loginFunc={props.auth.login}
       />
-      <button
-        className="absolute"
-        onClick={() => {
-          console.log(userPage);
-        }}
-      >
-        test
-      </button>
-      <Banner className="hidden sm:block" user={props.user} />
-      <div className="grow">
-        <div className="flex w-[990px]">
+      <Banner user={props.user} logoutFunc={props.auth.logout} />
+      <div className="w-[600px] lg:w-[920px] xl:w-[990px] grow-2">
+        <div className="flex">
           <Tweets db={props.db} />
-          <Sidebar className="hidden lg:block" />
+          <Sidebar />
         </div>
       </div>
       {props.user ? null : (
