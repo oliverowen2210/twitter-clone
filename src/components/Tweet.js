@@ -13,7 +13,7 @@ export default function Tweet(props) {
             alt="profile pic"
           />
         </a>
-        <div>
+        <div className="w-full">
           <div className="flex">
             <h3 className="font-bold">{props.author}</h3>
             <p className="handle ml-1 text-gray-500">{props.handle}</p>

@@ -9,38 +9,39 @@ import LogInModal from "./LogInModal";
 
 export default function Twitter(props) {
   let [showModal, setShowModal] = useState(false);
-  let { user } = useParams();
+  let { userPage } = useParams();
 
   return (
-    <div className={"flex min-h-[1000px] overflow-x-hidden"}>
+    <div className={"flex min-h-[100vh] overflow-x-hidden"}>
       <LogInModal
         open={showModal}
         closeFunc={() => {
           setShowModal(false);
         }}
-        loginFunc={props.firebase.auth.login}
+        loginFunc={props.auth.login}
       />
       <button
         className="absolute"
         onClick={() => {
-          console.log(user);
+          console.log(userPage);
         }}
       >
         test
       </button>
-      <Banner className="hidden sm:block" />
+      <Banner className="hidden sm:block" user={props.user} />
       <div className="grow">
         <div className="flex w-[990px]">
-          <Tweets db={props.firebase.db} />
+          <Tweets db={props.db} />
           <Sidebar className="hidden lg:block" />
         </div>
       </div>
-      <Footer
-        loginFunc={(state) => {
-          setShowModal(state);
-          console.log(`modal set to ${state}`);
-        }}
-      />
+      {props.user ? null : (
+        <Footer
+          loginFunc={(state) => {
+            setShowModal(state);
+          }}
+        />
+      )}
     </div>
   );
 }

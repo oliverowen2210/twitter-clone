@@ -40,7 +40,7 @@ export default function Tweets(props) {
           className="bg-gray-200 p-[12px] rounded-r-full cursor-text opacity-100 placeholder-black w-full text-black font-[15px]"
         ></input>
       </div>
-      <ul className="min-h-[99vh]">
+      <ul>
         {tweets.length
           ? tweets.map((tweet) => (
               <Tweet
