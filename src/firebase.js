@@ -4,6 +4,7 @@ import * as firebase from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import {
   getAuth,
+  signOut,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
@@ -22,6 +23,7 @@ const app = firebase.initializeApp(config);
 const db = getFirestore(app);
 const auth = getAuth(app);
 let user = null;
+console.log("set firebase");
 
 /**auth setup */
 
@@ -29,6 +31,7 @@ async function createAccount(username, handle, email, password) {
   const response = await createUserWithEmailAndPassword(auth, email, password);
   const user = response.user;
   const joinDate = new Date();
+  console.log("creating account");
   await setDoc(doc(db, "users", user.uid), {
     username,
     email,
@@ -49,6 +52,7 @@ async function createAccount(username, handle, email, password) {
 
 async function login(email, password) {
   try {
+    console.log("logging in");
     await signInWithEmailAndPassword(auth, email, password);
     user = auth;
   } catch (err) {
@@ -56,5 +60,15 @@ async function login(email, password) {
   }
 }
 
+async function logout() {
+  try {
+    console.log("logging out");
+    await signOut(auth);
+  } catch (err) {
+    console.log(err);
+    window.location.href = "/";
+  }
+}
+
 export default app;
-export { db, auth, user, createAccount, login };
+export { db, auth, user, createAccount, login, logout };
