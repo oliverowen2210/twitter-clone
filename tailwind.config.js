@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.js"],
   theme: {
-    extend: {},
+    extend: {
+      flexGrow: {
+        2: 2,
+      },
+    },
   },
   plugins: [],
   variants: {
