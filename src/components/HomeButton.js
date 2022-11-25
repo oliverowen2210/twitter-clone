@@ -3,6 +3,6 @@ import BannerElement from "./BannerElement";
 
 export default function HomeButton(props) {
   return (
-    <BannerElement class="bird" path={SVGs.bird} link="/" color="red-500" />
+    <BannerElement class="bird" path={SVGs.bird} link="/home" color="red-500" />
   );
 }
