@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import Footer from "./Footer";
 import Banner from "./Banner";
-import Tweets from "./Tweets";
+import HomePage from "./HomePage";
 import Sidebar from "./Sidebar";
 import LogInModal from "./LogInModal";
 
@@ -23,7 +23,7 @@ export default function Twitter(props) {
       <Banner user={props.user} logoutFunc={props.auth.logout} />
       <div className="grow">
         <div className="w-[600px] lg:w-[920px] xl:w-[990px] flex grow">
-          <Tweets db={props.db} />
+          <HomePage db={props.db} user={props.user} />
           <Sidebar />
         </div>
       </div>
