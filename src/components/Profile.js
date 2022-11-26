@@ -18,7 +18,12 @@ export default function Profile(props) {
     async function getUserInfo() {
       let uidDocRef = doc(props.db, "handles", props.user);
       let uidDoc = await getDoc(uidDocRef);
-      let uid = uidDoc.data().id;
+      let uid;
+      try {
+        uid = uidDoc.data().id;
+      } catch (err) {
+        window.location.href = "notFound";
+      }
       let docRef = doc(props.db, "users", uid);
       let userDoc = await getDoc(docRef);
       let userInfo = userDoc.data();

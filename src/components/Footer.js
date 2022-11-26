@@ -18,12 +18,12 @@ export default function Footer(props) {
           <div className="flex items-center">
             <button
               onClick={props.loginFunc}
-              className="border-solid border-[1px] border-black text-white font-bold px-[16px] py-[8px] rounded-full"
+              className="hover:bg-red-600 border-solid border-[1px] border-black text-white font-bold px-[16px] py-[8px] rounded-full"
             >
               Log in
             </button>
             <a href="/signup">
-              <button className="bg-black text-red-500 rounded-full px-[16px] py-[8px] ml-[12px] font-bold">
+              <button className="bg-black hover:bg-gray-800 hover:text-red-600 text-red-500 rounded-full px-[16px] py-[8px] ml-[12px] font-bold">
                 Sign up
               </button>
             </a>

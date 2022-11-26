@@ -39,6 +39,17 @@ function App(props) {
         <Route index element={twitterEl} />
         <Route path="/home" element={twitterEl} />
         <Route path="/explore" element={twitterEl} />
+        <Route
+          path="notFound"
+          element={
+            <Twitter
+              notFound={true}
+              user={user}
+              db={db}
+              auth={{ login, logout }}
+            />
+          }
+        />
         <Route path="/:user" element={twitterEl} />
         <Route
           path="/signup"

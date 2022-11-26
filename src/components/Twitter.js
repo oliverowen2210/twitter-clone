@@ -55,14 +55,29 @@ export default function Twitter(props) {
       />
       <Banner user={props.user} logoutFunc={props.auth.logout} />
       <div className="grow">
-        <div className="w-[600px] lg:w-[920px] xl:w-[990px] flex grow">
-          {userPage ? (
-            <Profile db={props.db} user={userPage} />
-          ) : (
-            <HomePage db={props.db} user={props.user} />
-          )}
-          <Sidebar />
-        </div>
+        {props.notFound ? (
+          <div className="w-[600px] lg:w-[920px] xl:w-[990px] flex grow justify-center">
+            <div className="flex flex-col items-center p-[24px] mt-[40px]">
+              <div>
+                Hmm...this page doesn’t exist. Try searching for something else.
+              </div>
+              <a href="/explore">
+                <button className="hover:bg-red-600 mt-[32px] bg-red-500 border-solid border-[1px] border-black text-white font-bold px-[16px] py-[8px] rounded-full">
+                  Search
+                </button>
+              </a>
+            </div>
+          </div>
+        ) : (
+          <div className="w-[600px] lg:w-[920px] xl:w-[990px] flex grow">
+            {userPage ? (
+              <Profile db={props.db} user={userPage} />
+            ) : (
+              <HomePage db={props.db} user={props.user} />
+            )}
+            <Sidebar />
+          </div>
+        )}
       </div>
       {props.user ? null : (
         <Footer
