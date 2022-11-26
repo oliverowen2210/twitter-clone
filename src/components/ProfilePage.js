@@ -10,7 +10,7 @@ import {
 
 import Tweets from "./Tweets";
 
-export default function Profile(props) {
+export default function ProfilePage(props) {
   let [user, setUser] = useState(null);
   let [tweets, setTweets] = useState([]);
 

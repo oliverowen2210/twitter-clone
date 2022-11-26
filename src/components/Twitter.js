@@ -11,7 +11,7 @@ import {
 import Footer from "./Footer";
 import Banner from "./Banner";
 import HomePage from "./HomePage";
-import Profile from "./Profile";
+import ProfilePage from "./ProfilePage";
 import Sidebar from "./Sidebar";
 import LogInModal from "./LogInModal";
 
@@ -71,7 +71,7 @@ export default function Twitter(props) {
         ) : (
           <div className="w-[600px] lg:w-[920px] xl:w-[990px] flex grow">
             {userPage ? (
-              <Profile db={props.db} user={userPage} />
+              <ProfilePage db={props.db} user={userPage} />
             ) : (
               <HomePage db={props.db} user={props.user} />
             )}
