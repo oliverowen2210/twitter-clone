@@ -51,6 +51,7 @@ function App(props) {
           }
         />
         <Route path="/:user" element={twitterEl} />
+        <Route path="/tweet/:tweetID" element={twitterEl} />
         <Route
           path="/signup"
           element={<SignupPage auth={{ login, register: createAccount }} />}
