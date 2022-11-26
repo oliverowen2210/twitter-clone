@@ -19,7 +19,7 @@ export default function HomePage(props) {
       const qSnap = await getDocs(q);
       let newTweets = [];
       qSnap.forEach((doc) => {
-        newTweets.push(doc.data());
+        newTweets.unshift(doc.data());
       });
       setTweets(newTweets);
       return newTweets;

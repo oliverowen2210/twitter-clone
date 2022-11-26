@@ -37,6 +37,8 @@ function App(props) {
     <Router>
       <Routes>
         <Route index element={twitterEl} />
+        <Route path="/home" element={twitterEl} />
+        <Route path="/explore" element={twitterEl} />
         <Route path="/:user" element={twitterEl} />
         <Route
           path="/signup"
