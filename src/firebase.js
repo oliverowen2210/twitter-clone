@@ -69,4 +69,4 @@ async function logout() {
 }
 
 export default app;
-export { db, auth, user, createAccount, login, logout };
+export { db, auth, createAccount, login, logout };

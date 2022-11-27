@@ -1,10 +1,13 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
+import { UserContext } from "./App";
 import SVGs from "../images/SVGs";
 
 export default function UserInfo(props) {
   let [showPopup, setShowPopup] = useState(false);
   let [popupRect, setPopupRect] = useState({ left: 0, bottom: 0 });
   let infoRef = useRef(null);
+  let user = useContext(UserContext);
+
   function updatePopupRect() {
     const boundingRect = infoRef.current.getBoundingClientRect();
     const bottom = boundingRect.height;
@@ -31,8 +34,8 @@ export default function UserInfo(props) {
       >
         <div className="profilepic rounded-full penguin" />
         <div>
-          <h3 className="font-bold">{props.user.username}</h3>
-          <p>@{props.user.handle}</p>
+          <h3 className="font-bold">{user.username}</h3>
+          <p>@{user.handle}</p>
         </div>
         <div className="pl-[20px] flex">
           <svg viewBox="0 0 24 24" className="w-[20px]">
@@ -66,7 +69,7 @@ export default function UserInfo(props) {
           onClick={props.logoutFunc}
           className="font-bold w-full p-3 transition-300 hover:bg-gray-200"
         >
-          Log out @{props.user.handle}
+          Log out @{user.handle}
         </button>
       </div>
     </div>

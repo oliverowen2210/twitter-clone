@@ -1,6 +1,6 @@
 export default function TweetButton(props) {
   return (
-    <button className="group flex items-center">
+    <button onClick={props.clickFunc} className="group flex items-center z-20">
       <div>
         <svg
           viewBox="0 0 24 24"

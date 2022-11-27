@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Bird from "./Bird";
 import SVGs from "../images/SVGs";
 
 export default function LogInModal(props) {
@@ -25,6 +26,7 @@ export default function LogInModal(props) {
   return props.open ? (
     <div className="bg-gray-800 bg-opacity-30 z-30 fixed t-0 w-screen h-screen flex justify-center items-center">
       <div className="flex flex-col pt-[24px] items-center bg-white relative rounded-xl h-[650px] w-[600px]">
+        <Bird link={null} />
         <button
           onClick={props.closeFunc}
           className="absolute top-[11px] left-[15px]"
