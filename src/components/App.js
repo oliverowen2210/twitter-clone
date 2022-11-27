@@ -56,12 +56,6 @@ function App(props) {
   }
 
   useEffect(() => {
-    if (window.location.pathname === "/" && user) {
-      window.location.href = "/home";
-    }
-  });
-
-  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (newUser) => {
       console.log("auth state change in app");
       if (newUser) {
@@ -87,15 +81,14 @@ function App(props) {
           }}
           loginFunc={login}
         />
-        <Banner user={props.user} logoutFunc={logout} />
+        <Banner user={user} logoutFunc={logout} />
         <div className="grow flex">
           <div className="flex">
             <Routes>
-              <Route index element={<HomePage db={db} user={user} />} />
               <Route path="/home" element={<HomePage db={db} user={user} />} />
               <Route
                 path="/explore"
-                element={<HomePage db={db} user={user} />}
+                element={<HomePage db={db} user={user} showBar={true} />}
               />
               <Route
                 path="notFound"
@@ -115,13 +108,10 @@ function App(props) {
                   <SignupPage auth={{ login, register: createAccount }} />
                 }
               />
+              <Route path="*" element={<HomePage db={db} user={user} />} />
             </Routes>
             <div className="w-[290px] lg:w-[350px] flex grow">
-              <Routes>
-                <Route path="/home" element={<Sidebar noBar={true} />} />
-
-                <Route path="*" element={<Sidebar />} />
-              </Routes>
+              <Sidebar user={user} />
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ export default function LogInModal(props) {
   }, [props.open, savedURL]);
 
   return props.open ? (
-    <div className="bg-gray-800 bg-opacity-30 z-10 fixed t-0 w-screen h-screen flex justify-center items-center">
+    <div className="bg-gray-800 bg-opacity-30 z-30 fixed t-0 w-screen h-screen flex justify-center items-center">
       <div className="flex flex-col pt-[24px] items-center bg-white relative rounded-xl h-[650px] w-[600px]">
         <button
           onClick={props.closeFunc}
