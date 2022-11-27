@@ -23,6 +23,7 @@ import LogInModal from "./LogInModal";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
+export const ModalContext = createContext(null);
 
 function App(props) {
   let [user, setUser] = useState(null);
@@ -39,9 +40,9 @@ function App(props) {
       handle: user.handle,
       datePosted: postDate,
       content: content,
-      retweets: [],
-      likes: [],
-      replies: [],
+      retweets: {},
+      likes: {},
+      replies: {},
       replyTo,
       id,
     };
@@ -74,60 +75,68 @@ function App(props) {
   }, []);
 
   return (
-    <DBContext.Provider value={db}>
-      <UserContext.Provider value={user}>
-        <Router>
-          <div className={"flex min-h-[100vh] overflow-x-hidden"}>
-            <LogInModal
-              open={showModal}
-              closeFunc={() => {
-                setShowModal(false);
-              }}
-              loginFunc={login}
-            />
-            <Banner logoutFunc={logout} />
-            <div className="grow flex">
-              <div className="flex">
-                <Routes>
-                  <Route path="/home" element={<HomePage />} />
-                  <Route
-                    path="/explore"
-                    element={<HomePage showBar={true} />}
-                  />
-                  <Route path="notFound" element={<NotFound />} />
-                  <Route path="/:userID" element={<ProfilePage />} />
-                  <Route path="/tweet/:tweetID" element={<TweetPage />} />
-                  <Route
-                    path="/signup"
-                    element={
-                      <SignupPage auth={{ login, register: createAccount }} />
-                    }
-                  />
-                  <Route path="*" element={<HomePage user={user} />} />
-                </Routes>
-                <div className="w-[290px] lg:w-[350px] flex grow">
-                  <Sidebar user={user} />
+    <ModalContext.Provider value={(state) => setShowModal(state)}>
+      <DBContext.Provider value={db}>
+        <UserContext.Provider value={user}>
+          <Router>
+            <div className={"flex min-h-[100vh] overflow-x-hidden"}>
+              <LogInModal
+                open={showModal}
+                closeFunc={() => {
+                  setShowModal(false);
+                }}
+                loginFunc={login}
+              />
+              <Banner logoutFunc={logout} />
+              <div className="grow flex">
+                <div className="flex">
+                  <Routes>
+                    <Route path="/home" element={<HomePage />} />
+                    <Route
+                      path="/explore"
+                      element={<HomePage showBar={true} />}
+                    />
+                    <Route path="notFound" element={<NotFound />} />
+                    <Route path="/:userID" element={<ProfilePage />} />
+                    <Route path="/tweet/:tweetID" element={<TweetPage />} />
+                    <Route
+                      path="/signup"
+                      element={
+                        <SignupPage auth={{ login, register: createAccount }} />
+                      }
+                    />
+                    <Route path="*" element={<HomePage />} />
+                  </Routes>
+                  <div className="w-[290px] lg:w-[350px] flex grow hidden lg:block">
+                    <Routes>
+                      <Route
+                        path="/explore"
+                        element={<Sidebar noBar={true} />}
+                      />
+                      <Route path="*" element={<Sidebar />} />
+                    </Routes>
+                  </div>
                 </div>
               </div>
-            </div>
-            {user ? null : (
-              <Footer
-                loginFunc={(state) => {
-                  setShowModal(state);
+              {user ? null : (
+                <Footer
+                  loginFunc={(state) => {
+                    setShowModal(state);
+                  }}
+                />
+              )}
+              <button
+                onClick={() => {
+                  tweet("i sniff socks");
                 }}
-              />
-            )}
-            <button
-              onClick={() => {
-                tweet("i sniff socks");
-              }}
-            >
-              xd
-            </button>
-          </div>
-        </Router>
-      </UserContext.Provider>
-    </DBContext.Provider>
+              >
+                xd
+              </button>
+            </div>
+          </Router>
+        </UserContext.Provider>
+      </DBContext.Provider>
+    </ModalContext.Provider>
   );
 }
 

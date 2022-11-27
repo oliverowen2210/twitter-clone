@@ -42,7 +42,9 @@ export default function Tweet(props) {
               />
               <Likes
                 data={props.data}
-                count={props.data.likes ? props.data.likes.length : null}
+                count={
+                  props.data.likes ? Object.keys(props.data.likes).length : null
+                }
               />
               <Share />
             </div>

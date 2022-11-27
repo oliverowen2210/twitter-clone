@@ -46,7 +46,7 @@ export default function ProfilePage(props) {
   }, [user, db]);
 
   return user ? (
-    <div className="border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
+    <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
       <Link to={`/`} className="sticky block flex p-3">
         <svg viewBox="0 0 24 24" className="w-[20px] mr-[30px]">
           <g>

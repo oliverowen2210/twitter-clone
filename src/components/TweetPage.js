@@ -33,6 +33,8 @@ export default function TweetPage(props) {
       <Tweets tweets={[tweet]} />
     </div>
   ) : (
-    <p>Loading...</p>
+    <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
+      Loading...
+    </div>
   );
 }
