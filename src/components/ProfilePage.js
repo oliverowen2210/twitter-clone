@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
 import Tweets from "./Tweets";
+import SVGs from "../images/SVGs";
 
 export default function ProfilePage(props) {
   let userHandle = useParams().userID;
@@ -44,7 +45,17 @@ export default function ProfilePage(props) {
 
   return user ? (
     <div className="border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
-      <div className="border-b-[1px] border-solid border-gray-200">
+      <Link to={`/`} className="sticky block flex p-3">
+        <svg viewBox="0 0 24 24" className="w-[20px] mr-[30px]">
+          <g>
+            <path d={SVGs.bird} />
+          </g>
+        </svg>
+
+        <h2 className="font-bold text-xl">{user.username}</h2>
+      </Link>
+
+      <div className="flex border-b-[1px] border-solid border-gray-200">
         <div>background image</div>
         <div className="profilepic rounded-full penguin w-[100px]"></div>
         <div>
