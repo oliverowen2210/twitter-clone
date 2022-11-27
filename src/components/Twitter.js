@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   doc,
-  addDoc,
+  setDoc,
   updateDoc,
   collection,
   arrayUnion,
@@ -22,7 +22,9 @@ export default function Twitter(props) {
   async function tweet(content, replyTo = null) {
     if (!props.user) return;
     let postDate = new Date();
-    const id = doc(collection(this.db, "tweets")).id;
+    const collectionRef = collection(props.db, "tweets");
+    const docRef = doc(collectionRef);
+    const id = docRef.id;
     const tweet = {
       author: props.user.username,
       handle: props.user.handle,
@@ -34,13 +36,13 @@ export default function Twitter(props) {
       replyTo,
       id,
     };
-    const docRef = await addDoc(collection(props.db, "tweets", id), tweet);
+
+    await setDoc(docRef, tweet);
+
     const userDocRef = doc(props.db, "users", props.user.uid);
     updateDoc(userDocRef, {
       tweets: arrayUnion({
-        content,
-        id: docRef.id,
-        replyTo,
+        id,
       }),
     });
     return tweet;
