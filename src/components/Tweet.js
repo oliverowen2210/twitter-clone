@@ -29,9 +29,9 @@ export default function Tweet(props) {
           </div>
           <div className="mt-3">
             <div className="max-w-md flex justify-between">
-              <Replies count={props.replies.length} />
-              <Retweets count={props.retweets.length} />
-              <Likes count={props.likes.length} />
+              <Replies count={props.replies ? props.replies.length : null} />
+              <Retweets count={props.retweets ? props.retweets.length : null} />
+              <Likes count={props.likes ? props.likes.length : null} />
               <Share />
             </div>
           </div>

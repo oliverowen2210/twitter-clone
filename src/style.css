@@ -571,6 +571,11 @@ video {
   position: relative;
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -622,8 +627,12 @@ video {
   margin-left: 12px;
 }
 
-.ml-8 {
-  margin-left: 2rem;
+.mt-\[40px\] {
+  margin-top: 40px;
+}
+
+.mt-\[32px\] {
+  margin-top: 32px;
 }
 
 .mb-\[16px\] {
@@ -638,12 +647,8 @@ video {
   margin-top: 0.75rem;
 }
 
-.mt-\[40px\] {
-  margin-top: 40px;
-}
-
-.mt-\[32px\] {
-  margin-top: 32px;
+.mr-\[20px\] {
+  margin-right: 20px;
 }
 
 .mt-auto {
@@ -652,6 +657,14 @@ video {
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.mr-\[26px\] {
+  margin-right: 26px;
+}
+
+.mr-\[30px\] {
+  margin-right: 30px;
 }
 
 .block {
@@ -694,6 +707,10 @@ video {
   height: 200px;
 }
 
+.min-h-\[100vh\] {
+  min-height: 100vh;
+}
+
 .min-h-\[99vh\] {
   min-height: 99vh;
 }
@@ -702,8 +719,8 @@ video {
   min-height: 36px;
 }
 
-.min-h-\[100vh\] {
-  min-height: 100vh;
+.w-\[290px\] {
+  width: 290px;
 }
 
 .w-\[88px\] {
@@ -794,10 +811,6 @@ video {
 
 .grow {
   flex-grow: 1;
-}
-
-.grow-2 {
-  flex-grow: 2;
 }
 
 .cursor-text {
@@ -1000,6 +1013,10 @@ video {
   padding-left: 12px;
 }
 
+.pl-8 {
+  padding-left: 2rem;
+}
+
 .pt-\[12px\] {
   padding-top: 12px;
 }
@@ -1041,6 +1058,11 @@ video {
 
 .text-\[13px\] {
   font-size: 13px;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -1173,6 +1195,16 @@ video {
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
+.focus\:bg-white:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 .group:hover .group-hover\:text-blue-400 {
   --tw-text-opacity: 1;
   color: rgb(96 165 250 / var(--tw-text-opacity));
@@ -1188,7 +1220,21 @@ video {
   color: rgb(236 72 153 / var(--tw-text-opacity));
 }
 
+.group:focus .group-focus\:bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.group:active .group-active\:bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 @media (min-width: 1024px) {
+  .lg\:w-\[350px\] {
+    width: 350px;
+  }
+
   .lg\:w-\[920px\] {
     width: 920px;
   }

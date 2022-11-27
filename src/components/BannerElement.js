@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function BannerElement(props) {
-  let bold = "";
-  if (window.location.pathname === props.link) bold = "font-bold";
+  let [bold, setBold] = useState("");
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === props.link) setBold("font-bold");
+    else setBold("");
+  }, [props.link, location]);
   return (
     <div
       className={

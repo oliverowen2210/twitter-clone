@@ -1,22 +1,17 @@
 import { useState, useEffect } from "react";
-import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  orderBy,
-  limit,
-} from "firebase/firestore";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
 
 import Tweets from "./Tweets";
 
 export default function ProfilePage(props) {
+  let userHandle = useParams().userID;
   let [user, setUser] = useState(null);
   let [tweets, setTweets] = useState([]);
 
   useEffect(() => {
     async function getUserInfo() {
-      let uidDocRef = doc(props.db, "handles", props.user);
+      let uidDocRef = doc(props.db, "handles", userHandle);
       let uidDoc = await getDoc(uidDocRef);
       let uid;
       try {
@@ -30,7 +25,7 @@ export default function ProfilePage(props) {
       setUser(userInfo);
     }
     getUserInfo();
-  }, [props.user]);
+  }, [props.user, props.db, userHandle]);
 
   useEffect(() => {
     async function getTweets() {
@@ -45,7 +40,7 @@ export default function ProfilePage(props) {
       setTweets(newTweets);
     }
     getTweets();
-  }, [user]);
+  }, [user, props.db]);
 
   return user ? (
     <div className="border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
@@ -62,7 +57,7 @@ export default function ProfilePage(props) {
       <div>{tweets ? <Tweets tweets={tweets} /> : null}</div>
     </div>
   ) : (
-    <div className="border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
+    <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
       loading
     </div>
   );
