@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer(props) {
   return (
     <div className="fixed bg-red-500 bottom-0 w-full">
@@ -22,11 +24,11 @@ export default function Footer(props) {
             >
               Log in
             </button>
-            <a href="/signup">
+            <Link to="/signup">
               <button className="bg-black hover:bg-gray-800 hover:text-red-600 text-red-500 rounded-full px-[16px] py-[8px] ml-[12px] font-bold">
                 Sign up
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

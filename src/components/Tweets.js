@@ -14,6 +14,7 @@ export default function Tweets(props) {
               replies={tweet.replies}
               replyTo={tweet.replyTo}
               retweets={tweet.retweets}
+              id={tweet.id}
               key={`${tweet.author} ${tweet.datePosted}`}
             />
           ))

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   doc,
   addDoc,
@@ -22,6 +22,7 @@ export default function Twitter(props) {
   async function tweet(content, replyTo = null) {
     if (!props.user) return;
     let postDate = new Date();
+    const id = doc(collection(this.db, "tweets")).id;
     const tweet = {
       author: props.user.username,
       handle: props.user.handle,
@@ -31,8 +32,9 @@ export default function Twitter(props) {
       likes: [],
       replies: [],
       replyTo,
+      id,
     };
-    const docRef = await addDoc(collection(props.db, "tweets"), tweet);
+    const docRef = await addDoc(collection(props.db, "tweets", id), tweet);
     const userDocRef = doc(props.db, "users", props.user.uid);
     updateDoc(userDocRef, {
       tweets: arrayUnion({
@@ -61,11 +63,11 @@ export default function Twitter(props) {
               <div>
                 Hmm...this page doesn’t exist. Try searching for something else.
               </div>
-              <a href="/explore">
+              <Link to="/explore">
                 <button className="hover:bg-red-600 mt-[32px] bg-red-500 border-solid border-[1px] border-black text-white font-bold px-[16px] py-[8px] rounded-full">
                   Search
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         ) : (

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Replies from "./Replies";
 import Retweets from "./Retweets";
 import Likes from "./Likes";
@@ -5,22 +7,22 @@ import Share from "./Share";
 
 export default function Tweet(props) {
   return (
-    <a
-      href="/tweet/123"
+    <Link
+      to="/tweet/123"
       className="duration-100 hover:bg-gray-100 block w-[600px] px-4 py-2 border-b-[1px] border-gray-200 border-solid"
     >
       <div className="flex ">
-        <a href={`/${props.handle}`}>
+        <Link to={`/${props.handle}`}>
           <div
             className={`profilepic rounded-full penguin`}
             alt="profile pic"
           />
-        </a>
+        </Link>
         <div className="w-full">
-          <a className="block flex w-fit" href={`/${props.handle}`}>
+          <Link className="block flex w-fit" to={`/${props.handle}`}>
             <h3 className="font-bold">{props.author}</h3>
             <p className="handle ml-1 text-gray-500">{props.handle}</p>
-          </a>
+          </Link>
           <div>
             <p className="leading-snug break-words">{props.content}</p>
           </div>
@@ -34,6 +36,6 @@ export default function Tweet(props) {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }

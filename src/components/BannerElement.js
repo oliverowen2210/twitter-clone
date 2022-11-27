@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function BannerElement(props) {
   let bold = "";
   if (window.location.pathname === props.link) bold = "font-bold";
@@ -8,7 +10,7 @@ export default function BannerElement(props) {
         ` flex justify-end xl:justify-start`
       }
     >
-      <a className="flex items-center" href={props.link ? props.link : null}>
+      <Link to={props.link ? props.link : null} className="flex items-center">
         <div className="flex items-center max-w-full p-[12px]">
           <svg
             viewBox="0 0 24 24"
@@ -26,7 +28,7 @@ export default function BannerElement(props) {
             {props.name ? props.name : null}
           </span>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }
