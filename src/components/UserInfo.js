@@ -40,7 +40,7 @@ export default function UserInfo(props) {
         <div className="pl-[20px] flex">
           <svg viewBox="0 0 24 24" className="w-[20px]">
             <g>
-              <path d={SVGs.dots} />
+              <path d={SVGs.dots.default} />
             </g>
           </svg>
         </div>

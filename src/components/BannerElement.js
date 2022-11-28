@@ -24,7 +24,7 @@ export default function BannerElement(props) {
             }`}
           >
             <g>
-              <path d={props.path} />
+              <path d={bold ? [props.path.alt] : [props.path.default]} />
             </g>
           </svg>
           <span

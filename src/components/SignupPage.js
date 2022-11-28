@@ -1,13 +1,16 @@
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "./App";
 export default function SignupPage(props) {
   let [username, setUsername] = useState("");
   let [handle, setHandle] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
+  const user = useContext(UserContext);
   return (
     <div>
+      {user ? <Navigate to="/home" /> : null}
       <input
         onChange={(e) => {
           setUsername(e.target.value);

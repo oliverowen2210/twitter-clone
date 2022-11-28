@@ -1,11 +1,22 @@
+import { useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import { UserContext } from "./App";
 import Replies from "./Replies";
 import Retweets from "./Retweets";
 import Likes from "./Likes";
 import Share from "./Share";
 
 export default function Tweet(props) {
+  const user = useContext(UserContext);
+  const [liked, setLiked] = useState(false);
+  useEffect(() => {
+    if (user && user.likes && !!user.likes[props.data.id]) {
+      setLiked(true);
+    } else setLiked(false);
+  }, [user, props.data.likes, props.data.id]);
+
   return (
     <div className="cursor-pointer  relative duration-100 hover:bg-gray-100 block w-[600px] px-4 py-2 border-b-[1px] border-gray-200 border-solid">
       <div className="flex relative">
@@ -45,6 +56,7 @@ export default function Tweet(props) {
                 count={
                   props.data.likes ? Object.keys(props.data.likes).length : null
                 }
+                alt={liked ? true : false}
               />
               <Share />
             </div>

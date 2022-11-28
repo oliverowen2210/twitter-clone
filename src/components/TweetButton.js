@@ -1,18 +1,31 @@
 export default function TweetButton(props) {
   return (
-    <button onClick={props.clickFunc} className="group flex items-center z-20">
+    <button
+      onClick={props.clickFunc}
+      className="group flex items-center z-20 p-1 rounded-full min-h-[20px] leading-[0px]"
+    >
       <div>
         <svg
           viewBox="0 0 24 24"
-          className={`w-4 text-gray-500 fill-current duration-200  group-hover:text-${props.color}`}
+          className={
+            (props.alt
+              ? `text-${props.color}`
+              : ` text-gray-500 group-hover:text-${props.color}`) +
+            " w-4 fill-current duration-200 "
+          }
         >
           <g>
-            <path d={props.path} />
+            <path d={props.alt ? [props.path.alt] : [props.path.default]} />
           </g>
         </svg>
       </div>
       <p
-        className={`px-2 text-gray-500 duration-200 group-hover:text-${props.color}`}
+        className={
+          (props.alt
+            ? `text-${props.color}`
+            : `text-gray-500 group-hover:text-${props.color}`) +
+          " px-2  duration-200"
+        }
       >
         {props.count ? props.count : null}
       </p>

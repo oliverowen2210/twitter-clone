@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { getDocs, collection, query, orderBy, limit } from "firebase/firestore";
+import { getDocs, collection, query, orderBy } from "firebase/firestore";
 
 import { DBContext } from "./App";
 import SearchBar from "./SearchBar";

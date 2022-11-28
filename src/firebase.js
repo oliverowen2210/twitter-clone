@@ -22,7 +22,6 @@ const config = {
 const app = firebase.initializeApp(config);
 const db = getFirestore(app);
 const auth = getAuth(app);
-let user = null;
 
 async function createAccount(username, handle, email, password) {
   const response = await createUserWithEmailAndPassword(auth, email, password);
@@ -52,7 +51,6 @@ async function createAccount(username, handle, email, password) {
 async function login(email, password) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    user = auth;
   } catch (err) {
     console.log(err);
   }

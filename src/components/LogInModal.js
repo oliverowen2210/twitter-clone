@@ -33,7 +33,7 @@ export default function LogInModal(props) {
         >
           <svg className="w-[22px] fill-current text-black" viewBox="0 0 24 24">
             <g>
-              <path d={SVGs.cross} />
+              <path d={SVGs.cross.default} />
             </g>
           </svg>
         </button>
