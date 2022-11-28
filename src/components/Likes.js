@@ -74,7 +74,6 @@ export default function Likes(props) {
         }
       }}
       color="pink-500"
-      bgcolor="pink-500"
       alt={highlight}
       path={SVGs.heart}
       count={count}

@@ -11,6 +11,7 @@ import Share from "./Share";
 export default function Tweet(props) {
   const user = useContext(UserContext);
   const [liked, setLiked] = useState(false);
+  const [retweeted, setRetweeted] = useState(false);
   useEffect(() => {
     if (user && user.likes && !!user.likes[props.data.id]) {
       setLiked(true);
@@ -49,7 +50,12 @@ export default function Tweet(props) {
               />
               <Retweets
                 data={props.data}
-                count={props.data.retweets ? props.data.retweets.length : null}
+                count={
+                  props.data.retweets
+                    ? Object.keys(props.data.retweets).length
+                    : null
+                }
+                alt={retweeted ? true : false}
               />
               <Likes
                 data={props.data}

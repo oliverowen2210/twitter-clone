@@ -25,6 +25,21 @@ export const UserContext = createContext(null);
 export const DBContext = createContext(null);
 export const ModalContext = createContext(null);
 
+/**TODO:
+ * style login modal
+ * style signup page
+ *
+ * add replies
+ * add retweets
+ * add profile pics
+ * add tweeting page
+ * add searchbar functionality
+ * add follows
+ * make home only show tweets by followed users
+ *
+ * change sidebar when logged in?
+ */
+
 function App(props) {
   let [user, setUser] = useState(null);
   let [showModal, setShowModal] = useState(false);
@@ -41,6 +56,7 @@ function App(props) {
       datePosted: postDate,
       content: content,
       retweets: {},
+      retweetOf: null,
       likes: {},
       replies: {},
       replyTo,
