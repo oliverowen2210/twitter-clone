@@ -2,10 +2,10 @@ import { useState, useContext, useEffect } from "react";
 import {
   doc,
   getDoc,
-  setDoc,
-  deleteDoc,
+  collection,
   deleteField,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 
 import { UserContext, DBContext, ModalContext } from "./App";
@@ -19,9 +19,7 @@ export default function Retweets(props) {
 
   const [count, setCount] = useState(props.count);
   const [highlight, setHighlight] = useState(
-    user &&
-      user.uid &&
-      (!!user.tweets[props.data.id] || !!user.tweets[`${props.data.id}-r`])
+    user && user.uid && !!user.tweets[props.data.id]
   );
   let locked;
   useEffect(() => {
@@ -42,31 +40,43 @@ export default function Retweets(props) {
         const tweetDocRef = doc(db, "tweets", props.data.id);
         const tweetDocSnap = await getDoc(tweetDocRef);
 
-        let retweetID = `${props.data.id}-r`;
-        const retweetDocRef = doc(db, "tweets", retweetID);
+        let retweetID = null;
+        if (props.data.originalID) retweetID = props.data.id;
 
-        if (!tweetDocSnap.data().retweets[user.uid]) {
+        if (!tweetDocSnap.data().retweets[user.uid] && !props.data.originalID) {
           /**retweet */
+
+          const retweetDoc = doc(collection(db, "tweets"));
+          retweetID = retweetDoc.id;
+
+          let retweetData = { ...props.data };
+          retweetData.originalID = retweetData.id;
+          retweetData.id = retweetID;
+
+          await setDoc(retweetDoc, retweetData);
 
           await updateDoc(userDocRef, {
             [`tweets.${retweetID}`]: {
-              retweet: true,
-              datePosted: dateRetweeted,
-              id: `${props.data.id}`,
+              id: retweetData.id,
+              originalID: retweetData.originalID,
+            },
+            [`retweets.${props.data.id}`]: {
+              retweetedOn: dateRetweeted,
+              retweetID: retweetData.id,
+              originalID: retweetData.originalID,
             },
           });
+
           await updateDoc(tweetDocRef, {
             [`retweets.${user.uid}`]: {
               retweetedOn: dateRetweeted,
               username: user.username,
               handle: user.handle,
               uid: user.uid,
+              retweetID: retweetData.id,
             },
           });
-          let retweetData = { ...props.data };
-          retweetData.originalID = retweetData.id;
-          retweetData.id = retweetID;
-          await setDoc(retweetDocRef, retweetData);
+
           await setCount(count + 1);
           await setHighlight(true);
           locked = false;
@@ -74,12 +84,12 @@ export default function Retweets(props) {
           /** unretweet*/
           await updateDoc(userDocRef, {
             [`tweets.${retweetID}`]: deleteField(),
+            [`retweets.${props.data.id}`]: deleteField(),
           });
 
           await updateDoc(tweetDocRef, {
             [`retweets.${user.uid}`]: deleteField(),
           });
-          await deleteDoc(retweetDocRef);
 
           /**update counter without refreshing page */
           await setCount(count - 1);
