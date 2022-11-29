@@ -65,10 +65,10 @@ function App(props) {
     await setDoc(docRef, tweet);
 
     const userDocRef = doc(db, "users", user.uid);
-    await updateDoc(userDocRef, {
-      tweets: arrayUnion({
+    updateDoc(userDocRef, {
+      [`tweets.${id}`]: {
         id,
-      }),
+      },
     });
     window.location.reload();
   }
