@@ -56,7 +56,6 @@ function App(props) {
       datePosted: postDate,
       content: content,
       retweets: {},
-      retweetOf: null,
       likes: {},
       replies: {},
       replyTo,
