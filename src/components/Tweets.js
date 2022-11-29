@@ -8,16 +8,17 @@ export default function Tweets(props) {
             <Tweet
               data={{
                 author: tweet.author,
-                handle: tweet.handle,
                 content: tweet.content,
                 datePosted: tweet.datePosted,
+                handle: tweet.handle,
+                id: tweet.id,
                 likes: tweet.likes,
+                originalID: tweet.originalID,
                 replies: tweet.replies,
                 replyTo: tweet.replyTo,
                 retweets: tweet.retweets,
-                id: tweet.id,
               }}
-              key={`${tweet.author} ${tweet.datePosted}`}
+              key={`${tweet.id} ${tweet.datePosted}`}
             />
           ))
         : null}
