@@ -19,7 +19,10 @@ export default function Tweet(props) {
   }, [user, props.data.likes, props.data.id]);
 
   return (
-    <div className="cursor-pointer  relative duration-100 hover:bg-gray-100 block w-[600px] px-4 py-2 border-b-[1px] border-gray-200 border-solid">
+    <div
+      className="cursor-pointer  relative duration-100 hover:bg-gray-100 block w-[600px] px-4 py-2 border-b-[1px] border-gray-200 border-solid"
+      id={`${props.data.id}`}
+    >
       <div className="flex relative">
         <Link
           to={`/tweet/${props.data.id}`}
@@ -56,6 +59,7 @@ export default function Tweet(props) {
                     : null
                 }
                 alt={retweeted ? true : false}
+                isRetweet={!!props.data.originalID}
               />
               <Likes
                 data={props.data}
