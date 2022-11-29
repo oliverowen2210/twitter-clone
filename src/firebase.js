@@ -40,7 +40,8 @@ async function createAccount(username, handle, email, password) {
       day: joinDate.getDate(),
       hour: joinDate.getHours(),
     },
-    tweets: [],
+    tweets: {},
+    retweets: {},
   });
   await setDoc(doc(db, "handles", handle), {
     id: user.uid,
