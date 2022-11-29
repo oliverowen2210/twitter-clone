@@ -1,6 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { getDocs, collection, query, orderBy } from "firebase/firestore";
+import {
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 import { DBContext } from "./App";
 import SearchBar from "./SearchBar";
@@ -17,9 +23,15 @@ export default function HomePage(props) {
       const q = query(collection(db, "tweets"), orderBy("datePosted"));
       const qSnap = await getDocs(q);
       let newTweets = [];
-      qSnap.forEach((doc) => {
-        newTweets.unshift(doc.data());
-      });
+      for (const doc of qSnap) {
+        const tweetData = doc.data();
+        if (!!tweetData.originalID) {
+          const docRef = doc(db, "tweets", tweetData.originalID);
+          const tweetDoc = await getDoc(docRef);
+          const tweetData = tweetDoc.data();
+        }
+        newTweets.unshift(tweetData);
+      }
       setTweets(newTweets);
       return newTweets;
     }
