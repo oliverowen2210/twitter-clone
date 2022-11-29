@@ -4,6 +4,7 @@ import {
   getDoc,
   collection,
   deleteField,
+  deleteDoc,
   updateDoc,
   setDoc,
 } from "firebase/firestore";
@@ -19,7 +20,7 @@ export default function Retweets(props) {
 
   const [count, setCount] = useState(props.count);
   const [highlight, setHighlight] = useState(
-    user && user.uid && !!user.tweets[props.data.id]
+    user && !!user.retweets[props.data.id]
   );
   let locked;
   useEffect(() => {
@@ -50,10 +51,11 @@ export default function Retweets(props) {
           retweetID = retweetDoc.id;
 
           let retweetData = { ...props.data };
+          delete retweetData.retweetID;
           retweetData.originalID = retweetData.id;
           retweetData.id = retweetID;
 
-          await setDoc(retweetDoc, retweetData);
+          await setDoc(doc(db, "tweets", retweetID), retweetData);
 
           await updateDoc(userDocRef, {
             [`tweets.${retweetID}`]: {
@@ -79,9 +81,16 @@ export default function Retweets(props) {
 
           await setCount(count + 1);
           await setHighlight(true);
-          locked = false;
+
+          /**reloads page to avoid having to link twinks to their retweets
+           * and vice versa. maybe someday?
+           */
+
+          window.location.reload();
         } else {
           /** unretweet*/
+          let retweetID = props.data.retweets[user.uid].retweetID;
+
           await updateDoc(userDocRef, {
             [`tweets.${retweetID}`]: deleteField(),
             [`retweets.${props.data.id}`]: deleteField(),
@@ -91,10 +100,11 @@ export default function Retweets(props) {
             [`retweets.${user.uid}`]: deleteField(),
           });
 
-          /**update counter without refreshing page */
-          await setCount(count - 1);
-          await setHighlight(false);
-          locked = false;
+          await deleteDoc(
+            doc(db, "tweets", user.retweets[props.data.id].retweetID)
+          );
+
+          window.location.reload();
         }
       }}
       color="green-400"

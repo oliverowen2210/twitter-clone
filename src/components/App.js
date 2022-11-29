@@ -2,14 +2,7 @@ import { useState, useEffect, createContext } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { db, auth, createAccount, login, logout } from "../firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  collection,
-  arrayUnion,
-} from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, collection } from "firebase/firestore";
 
 import SignupPage from "./SignupPage";
 import Footer from "./Footer";

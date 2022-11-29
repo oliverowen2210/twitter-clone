@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import {
+  doc,
   getDoc,
   getDocs,
   collection,
@@ -22,18 +23,20 @@ export default function HomePage(props) {
       console.log("getting tweets collection");
       const q = query(collection(db, "tweets"), orderBy("datePosted"));
       const qSnap = await getDocs(q);
-      let newTweets = [];
-      for (const doc of qSnap) {
-        const tweetData = doc.data();
-        if (!!tweetData.originalID) {
-          const docRef = doc(db, "tweets", tweetData.originalID);
+      let tweetData = [];
+      qSnap.forEach((doc) => {
+        tweetData.unshift(doc.data());
+      });
+      for (let i = 0; i < tweetData.length; i++) {
+        if (!!tweetData[i].originalID) {
+          const docRef = doc(db, "tweets", tweetData[i].originalID);
           const tweetDoc = await getDoc(docRef);
-          const tweetData = tweetDoc.data();
+          const data = tweetDoc.data();
+          data.retweetID = tweetData[i].id;
+          tweetData[i] = data;
         }
-        newTweets.unshift(tweetData);
       }
-      setTweets(newTweets);
-      return newTweets;
+      setTweets(tweetData);
     }
 
     getTweets();

@@ -1,4 +1,5 @@
 import Tweet from "./Tweet";
+import uniqid from "uniqid";
 
 export default function Tweets(props) {
   return (
@@ -14,11 +15,12 @@ export default function Tweets(props) {
                 id: tweet.id,
                 likes: tweet.likes,
                 originalID: tweet.originalID,
+                retweetID: tweet.retweetID,
                 replies: tweet.replies,
                 replyTo: tweet.replyTo,
                 retweets: tweet.retweets,
               }}
-              key={`${tweet.id} ${tweet.datePosted}`}
+              key={uniqid()}
             />
           ))
         : null}
