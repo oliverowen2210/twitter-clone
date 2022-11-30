@@ -59,7 +59,11 @@ export default function Likes(props) {
           });
           await setCount(count + 1);
           await setHighlight(true);
-          locked.current = false;
+          if (props.originalVisible) {
+            window.location.reload();
+          } else {
+            locked.current = false;
+          }
         } else {
           /** unlike */
           await updateDoc(userDocRef, {
@@ -73,7 +77,11 @@ export default function Likes(props) {
           /**update counter without refreshing page */
           await setCount(count - 1);
           await setHighlight(false);
-          locked.current = false;
+          if (props.originalVisible) {
+            window.location.reload();
+          } else {
+            locked.current = false;
+          }
         }
       }}
       color="pink-500"

@@ -86,8 +86,11 @@ export default function Retweets(props) {
           /**reloads page to avoid having to link twinks to their retweets
            * and vice versa. maybe someday?
            */
-
-          window.location.reload();
+          if (props.originalVisible) {
+            window.location.reload();
+          } else {
+            locked.current = false;
+          }
         } else {
           /** unretweet*/
           let retweetID = props.data.retweets[user.uid].retweetID;
@@ -105,7 +108,11 @@ export default function Retweets(props) {
             doc(db, "tweets", user.retweets[props.data.id].retweetID)
           );
 
-          window.location.reload();
+          if (props.originalVisible) {
+            window.location.reload();
+          } else {
+            locked.current = false;
+          }
         }
       }}
       color="green-400"
