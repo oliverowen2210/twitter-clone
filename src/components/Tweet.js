@@ -27,7 +27,9 @@ export default function Tweet(props) {
                 <path d={SVGs.arrows.default} />
               </g>
             </svg>
-            {user && props.userRetweeted ? (
+            {user &&
+            ((!props.data.originalID && props.userRetweeted) ||
+              props.data.retweetedBy === user.username) ? (
               <p className="font-bold text-sm">You retweeted</p>
             ) : (
               <p className="font-bold text-sm">
