@@ -31,7 +31,7 @@ export default function Tweet(props) {
               <p className="font-bold text-sm">You retweeted</p>
             ) : (
               <p className="font-bold text-sm">
-                ${props.data.retweetedBy} retweeted
+                {props.data.retweetedBy} retweeted
               </p>
             )}
           </div>
