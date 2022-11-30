@@ -38,20 +38,24 @@ export default function Retweets(props) {
 
         locked.current = true;
         const userDocRef = doc(db, "users", user.uid);
-        const tweetDocRef = doc(db, "tweets", props.data.id);
-        const tweetDocSnap = await getDoc(tweetDocRef);
+        let originalTweetDocID = props.data.originalID
+          ? props.data.originalID
+          : props.data.id;
+        const originalTweetDocRef = doc(db, "tweets", originalTweetDocID);
+        const originalTweetDocSnap = await getDoc(originalTweetDocRef);
 
-        let retweetID = null;
-        if (props.data.originalID) retweetID = props.data.id;
+        let retweetID;
 
-        if (!tweetDocSnap.data().retweets[user.uid]) {
+        if (!originalTweetDocSnap.data().retweets[user.uid]) {
           /**retweet */
 
           const retweetDoc = doc(collection(db, "tweets"));
           retweetID = retweetDoc.id;
 
           let retweetData = { ...props.data };
-          retweetData.originalID = retweetData.id;
+          retweetData.originalID = retweetData.originalID
+            ? retweetData.originalID
+            : retweetData.id;
           retweetData.id = retweetID;
           retweetData.retweetedBy = user.username;
 
@@ -70,7 +74,7 @@ export default function Retweets(props) {
             },
           });
 
-          await updateDoc(tweetDocRef, {
+          await updateDoc(originalTweetDocRef, {
             [`retweets.${user.uid}`]: {
               retweetedOn: dateRetweeted,
               username: user.username,
@@ -100,7 +104,7 @@ export default function Retweets(props) {
             [`retweets.${props.data.id}`]: deleteField(),
           });
 
-          await updateDoc(tweetDocRef, {
+          await updateDoc(originalTweetDocRef, {
             [`retweets.${user.uid}`]: deleteField(),
           });
 
