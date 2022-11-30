@@ -30,14 +30,14 @@ export default function UserInfo(props) {
           setShowPopup(true);
           updatePopupRect();
         }}
-        className="flex rounded-full transition-500 px-4 mb-2 py-2 hover:bg-gray-300"
+        className="flex rounded-full transition-500 xl:px-4 mb-2 py-2 hover:bg-gray-300"
       >
         <div className="profilepic rounded-full penguin" />
-        <div>
+        <div className="hidden xl:block">
           <h3 className="font-bold">{user.username}</h3>
           <p>@{user.handle}</p>
         </div>
-        <div className="pl-[20px] flex">
+        <div className="pl-[20px] flex hidden xl:block">
           <svg viewBox="0 0 24 24" className="w-[20px]">
             <g>
               <path d={SVGs.dots.default} />
