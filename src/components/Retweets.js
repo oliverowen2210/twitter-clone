@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import {
   doc,
   getDoc,
@@ -20,23 +20,23 @@ export default function Retweets(props) {
 
   const [count, setCount] = useState(props.count);
   const [highlight, setHighlight] = useState(
-    user && !!user.retweets[props.data.id]
+    props.highlight || (user && !!user.retweets[props.data.id])
   );
-  let locked;
+  let locked = useRef(null);
   useEffect(() => {
-    locked = false;
+    locked.current = false;
   });
   return (
     <TweetButton
       clickFunc={async () => {
-        if (locked) return;
+        if (locked.current) return;
         if (!user) {
           setModal(true);
           return;
         }
         const dateRetweeted = new Date();
 
-        locked = true;
+        locked.current = true;
         const userDocRef = doc(db, "users", user.uid);
         const tweetDocRef = doc(db, "tweets", props.data.id);
         const tweetDocSnap = await getDoc(tweetDocRef);
@@ -51,9 +51,9 @@ export default function Retweets(props) {
           retweetID = retweetDoc.id;
 
           let retweetData = { ...props.data };
-          delete retweetData.retweetID;
           retweetData.originalID = retweetData.id;
           retweetData.id = retweetID;
+          retweetData.retweetedBy = user.username;
 
           await setDoc(doc(db, "tweets", retweetID), retweetData);
 
@@ -61,6 +61,7 @@ export default function Retweets(props) {
             [`tweets.${retweetID}`]: {
               id: retweetData.id,
               originalID: retweetData.originalID,
+              retweetedBy: user.username,
             },
             [`retweets.${props.data.id}`]: {
               retweetedOn: dateRetweeted,
