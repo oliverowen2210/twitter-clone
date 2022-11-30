@@ -20,14 +20,14 @@ export default function Tweet(props) {
           to={`/tweet/${props.data.id}`}
           className="absolute w-full h-full"
         />
-        {props.data.retweetedBy ? (
+        {props.userRetweeted || props.data.retweetedBy ? (
           <div className="flex">
             <svg viewBox="0 0 24 24" className="w-[16px] ml-[28px] mr-[16px]">
               <g>
                 <path d={SVGs.arrows.default} />
               </g>
             </svg>
-            {user && props.data.retweetedBy === user.username ? (
+            {user && props.userRetweeted ? (
               <p className="font-bold text-sm">You retweeted</p>
             ) : (
               <p className="font-bold text-sm">
