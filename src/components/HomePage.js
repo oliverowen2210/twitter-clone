@@ -1,13 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import {
-  doc,
-  getDoc,
-  getDocs,
-  collection,
-  query,
-  orderBy,
-} from "firebase/firestore";
+import { getDocs, collection, query, orderBy } from "firebase/firestore";
 
 import { DBContext } from "./App";
 import SearchBar from "./SearchBar";
@@ -27,15 +20,6 @@ export default function HomePage(props) {
       qSnap.forEach((doc) => {
         tweetData.unshift(doc.data());
       });
-      for (let i = 0; i < tweetData.length; i++) {
-        if (!!tweetData[i].originalID) {
-          const docRef = doc(db, "tweets", tweetData[i].originalID);
-          const tweetDoc = await getDoc(docRef);
-          const data = tweetDoc.data();
-          data.retweetID = tweetData[i].id;
-          tweetData[i] = data;
-        }
-      }
       setTweets(tweetData);
     }
 
