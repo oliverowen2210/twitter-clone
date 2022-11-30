@@ -46,13 +46,14 @@ export default function Tweet(props) {
                     ? Object.keys(props.data.retweets).length
                     : null
                 }
-                isRetweet={!!props.data.originalID}
+                highlight={props.retweeted}
               />
               <Likes
                 data={props.data}
                 count={
                   props.data.likes ? Object.keys(props.data.likes).length : null
                 }
+                highlight={props.liked}
               />
               <Share />
             </div>
