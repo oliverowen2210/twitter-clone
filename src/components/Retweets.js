@@ -38,10 +38,10 @@ export default function Retweets(props) {
 
         locked.current = true;
         const userDocRef = doc(db, "users", user.uid);
-        let originalTweetDocID = props.data.originalID
+        let originalTweetID = props.data.originalID
           ? props.data.originalID
           : props.data.id;
-        const originalTweetDocRef = doc(db, "tweets", originalTweetDocID);
+        const originalTweetDocRef = doc(db, "tweets", originalTweetID);
         const originalTweetDocSnap = await getDoc(originalTweetDocRef);
 
         let retweetID;
@@ -64,13 +64,13 @@ export default function Retweets(props) {
           await updateDoc(userDocRef, {
             [`tweets.${retweetID}`]: {
               id: retweetData.id,
-              originalID: retweetData.originalID,
+              originalID: originalTweetID,
               retweetedBy: user.username,
             },
-            [`retweets.${props.data.id}`]: {
+            [`retweets.${originalTweetID}`]: {
               retweetedOn: dateRetweeted,
               retweetID: retweetData.id,
-              originalID: retweetData.originalID,
+              originalID: originalTweetID,
             },
           });
 
@@ -101,16 +101,14 @@ export default function Retweets(props) {
 
           await updateDoc(userDocRef, {
             [`tweets.${retweetID}`]: deleteField(),
-            [`retweets.${props.data.id}`]: deleteField(),
+            [`retweets.${originalTweetID}`]: deleteField(),
           });
 
           await updateDoc(originalTweetDocRef, {
             [`retweets.${user.uid}`]: deleteField(),
           });
 
-          await deleteDoc(
-            doc(db, "tweets", user.retweets[props.data.id].retweetID)
-          );
+          await deleteDoc(doc(db, "tweets", retweetID));
 
           if (props.originalVisible) {
             window.location.reload();
