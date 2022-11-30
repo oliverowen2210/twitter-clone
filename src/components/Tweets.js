@@ -49,13 +49,19 @@ export default function Tweets(props) {
               replyTo: tweet.replyTo,
               retweets: tweet.retweets,
             };
+
+            let liked = false;
             let retweeted = false;
             if (tweet.retweetedBy) {
               tweetData.retweetedBy = tweet.retweetedBy;
               if (tweetData.retweetedBy === user.username) {
                 retweeted = true;
               }
+              if (tweetData.likes[user.uid]) {
+                liked = true;
+              }
             }
+
             return (
               <Tweet data={tweetData} key={uniqid()} retweeted={retweeted} />
             );
