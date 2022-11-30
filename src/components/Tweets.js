@@ -58,16 +58,20 @@ export default function Tweets(props) {
               retweets: tweet.retweets,
             };
 
-            let liked = false;
-            let retweeted = false;
-            let originalVisible = tweet.originalVisible ? true : false;
             if (tweet.retweetedBy) {
               tweetData.retweetedBy = tweet.retweetedBy;
-              if (tweetData.retweetedBy === user.username) {
-                retweeted = true;
+            }
+
+            let userLiked = false;
+            let userRetweeted = false;
+            let originalVisible = tweet.originalVisible ? true : false;
+
+            if (user) {
+              if (tweetData.retweets[user.uid]) {
+                userRetweeted = true;
               }
               if (tweetData.likes[user.uid]) {
-                liked = true;
+                userLiked = true;
               }
             }
 
@@ -75,8 +79,8 @@ export default function Tweets(props) {
               <Tweet
                 data={tweetData}
                 key={uniqid()}
-                liked={liked}
-                retweeted={retweeted}
+                userLiked={userLiked}
+                userRetweeted={userRetweeted}
                 originalVisible={originalVisible}
               />
             );
