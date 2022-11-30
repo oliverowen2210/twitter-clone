@@ -24,7 +24,7 @@ export default function TweetPage(props) {
       <Link to={`/${tweet.handle}`} className="sticky block flex p-3">
         <svg viewBox="0 0 24 24" className="w-[20px] mr-[30px]">
           <g>
-            <path d={SVGs.bird} />
+            <path d={SVGs.arrow.default} />
           </g>
         </svg>
 
