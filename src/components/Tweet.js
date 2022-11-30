@@ -47,6 +47,7 @@ export default function Tweet(props) {
                     : null
                 }
                 highlight={props.retweeted}
+                originalVisible={props.originalVisible}
               />
               <Likes
                 data={props.data}
@@ -54,6 +55,7 @@ export default function Tweet(props) {
                   props.data.likes ? Object.keys(props.data.likes).length : null
                 }
                 highlight={props.liked}
+                originalVisible={props.originalVisible}
               />
               <Share />
             </div>
