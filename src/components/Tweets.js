@@ -20,7 +20,15 @@ export default function Tweets(props) {
     async function updateRetweets() {
       let copyTweetList = [...props.tweets];
       for (let tweet of copyTweetList) {
+        /** if tweets have an originalID, it means they're a retweet of that id */
         if (!!tweet.originalID) {
+          /**check if original will be on screen*/
+          for (let tweet2 of copyTweetList) {
+            if (tweet2.id === tweet.originalID) {
+              tweet.originalVisible = true;
+              tweet2.originalVisible = true;
+            }
+          }
           const originalTweet = await getTweet(tweet.originalID);
           tweet.likes = originalTweet.likes;
           tweet.retweets = originalTweet.retweets;
@@ -52,6 +60,7 @@ export default function Tweets(props) {
 
             let liked = false;
             let retweeted = false;
+            let originalVisible = tweet.originalVisible ? true : false;
             if (tweet.retweetedBy) {
               tweetData.retweetedBy = tweet.retweetedBy;
               if (tweetData.retweetedBy === user.username) {
@@ -63,7 +72,13 @@ export default function Tweets(props) {
             }
 
             return (
-              <Tweet data={tweetData} key={uniqid()} retweeted={retweeted} />
+              <Tweet
+                data={tweetData}
+                key={uniqid()}
+                liked={liked}
+                retweeted={retweeted}
+                originalVisible={originalVisible}
+              />
             );
           })
         : null}
