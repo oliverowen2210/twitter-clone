@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { doc, getDoc, deleteField, updateDoc } from "firebase/firestore";
 
 import { UserContext, DBContext, ModalContext } from "./App";
@@ -12,25 +12,28 @@ export default function Likes(props) {
 
   const [count, setCount] = useState(props.count);
   const [highlight, setHighlight] = useState(
-    user && user.uid && !!props.data.likes[user.uid]
+    props.highlight || (user && user.uid && !!props.data.likes[user.uid])
   );
-  let locked;
+  let locked = useRef(null);
   useEffect(() => {
-    locked = false;
+    locked.current = false;
   });
   return (
     <TweetButton
       clickFunc={async () => {
-        if (locked) return;
+        if (locked.current) return;
         if (!user) {
           setModal(true);
           return;
         }
         const dateLiked = new Date();
 
-        locked = true;
+        locked.current = true;
         const userDocRef = doc(db, "users", user.uid);
-        const tweetDocRef = doc(db, "tweets", props.data.id);
+        let tweetID;
+        if (props.data.originalID) tweetID = props.data.originalID;
+        else tweetID = props.data.id;
+        const tweetDocRef = doc(db, "tweets", tweetID);
 
         const tweetDocSnap = await getDoc(tweetDocRef);
         /** check if tweet has likes and if user already liked it */
@@ -56,7 +59,7 @@ export default function Likes(props) {
           });
           await setCount(count + 1);
           await setHighlight(true);
-          locked = false;
+          locked.current = false;
         } else {
           /** unlike */
           await updateDoc(userDocRef, {
@@ -70,7 +73,7 @@ export default function Likes(props) {
           /**update counter without refreshing page */
           await setCount(count - 1);
           await setHighlight(false);
-          locked = false;
+          locked.current = false;
         }
       }}
       color="pink-500"
