@@ -44,7 +44,7 @@ export default function Retweets(props) {
         let retweetID = null;
         if (props.data.originalID) retweetID = props.data.id;
 
-        if (!tweetDocSnap.data().retweets[user.uid] && !props.data.originalID) {
+        if (!tweetDocSnap.data().retweets[user.uid]) {
           /**retweet */
 
           const retweetDoc = doc(collection(db, "tweets"));
