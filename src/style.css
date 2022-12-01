@@ -1307,6 +1307,10 @@ video {
     display: inline;
   }
 
+  .xl\:flex {
+    display: flex;
+  }
+
   .xl\:w-\[275px\] {
     width: 275px;
   }

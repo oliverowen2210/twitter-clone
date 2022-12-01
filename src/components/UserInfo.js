@@ -37,7 +37,7 @@ export default function UserInfo(props) {
           <h3 className="font-bold">{user.username}</h3>
           <p>@{user.handle}</p>
         </div>
-        <div className="pl-[20px] flex hidden xl:block">
+        <div className="pl-[20px] hidden xl:flex">
           <svg viewBox="0 0 24 24" className="w-[20px]">
             <g>
               <path d={SVGs.dots.default} />

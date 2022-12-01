@@ -4,6 +4,7 @@ import { UserContext } from "./App";
 import Bird from "./Bird";
 import Home from "./Home";
 import Explore from "./Explore";
+import Profile from "./Profile";
 import UserInfo from "./UserInfo";
 
 export default function Sidebar(props) {
@@ -14,6 +15,7 @@ export default function Sidebar(props) {
         <Bird link={user ? "/home" : "/explore"} />
         <Home />
         <Explore />
+        <Profile />
 
         {user ? <UserInfo logoutFunc={props.logoutFunc} /> : null}
       </div>
