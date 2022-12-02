@@ -8,10 +8,11 @@ export default function TweetButton(props) {
         <svg
           viewBox="0 0 24 24"
           className={
+            (props.big ? "w-[19px] " : "w-4 ") +
             (props.alt
-              ? `text-${props.color}`
-              : ` text-gray-500 group-hover:text-${props.color}`) +
-            " w-4 fill-current duration-200 "
+              ? `text-${props.color} `
+              : `text-gray-500 group-hover:text-${props.color} `) +
+            "fill-current duration-200 "
           }
         >
           <g>
@@ -27,7 +28,7 @@ export default function TweetButton(props) {
           " px-2  duration-200"
         }
       >
-        {props.count ? props.count : null}
+        {!props.big && props.count ? props.count : null}
       </p>
     </button>
   );

@@ -126,6 +126,7 @@ export default function Retweets(props) {
       alt={highlight}
       path={SVGs.arrows}
       count={count}
+      big={props.big}
     />
   );
 }

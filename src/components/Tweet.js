@@ -52,6 +52,7 @@ export default function Tweet(props) {
               userRetweeted={props.userRetweeted}
               userLiked={props.userLiked}
               originalVisible={props.originalVisible}
+              big={true}
             />
           </div>
         ) : (

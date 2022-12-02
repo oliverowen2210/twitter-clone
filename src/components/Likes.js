@@ -88,6 +88,7 @@ export default function Likes(props) {
       alt={highlight}
       path={SVGs.heart}
       count={count}
+      big={props.big}
     />
   );
 }
