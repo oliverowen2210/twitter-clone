@@ -34,7 +34,8 @@ export default function ProfilePage(props) {
     async function getTweets() {
       if (!user) return;
       let newTweets = [];
-      for (let tweet of user.tweets) {
+      for (let userTweet in user.tweets) {
+        let tweet = user.tweets[userTweet];
         const tweetRef = doc(db, "tweets", tweet.id);
         const tweetDoc = await getDoc(tweetRef);
         const tweetData = tweetDoc.data();

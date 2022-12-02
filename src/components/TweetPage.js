@@ -30,7 +30,7 @@ export default function TweetPage(props) {
 
         <h2 className="font-bold text-xl">Tweet</h2>
       </Link>
-      <Tweets tweets={[tweet]} />
+      <Tweets tweets={[tweet]} big={true} />
     </div>
   ) : (
     <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">

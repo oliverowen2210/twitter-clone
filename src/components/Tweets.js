@@ -82,6 +82,7 @@ export default function Tweets(props) {
                 userLiked={userLiked}
                 userRetweeted={userRetweeted}
                 originalVisible={originalVisible}
+                big={props.big}
               />
             );
           })

@@ -110,6 +110,9 @@ export default function Retweets(props) {
 
           await deleteDoc(doc(db, "tweets", retweetID));
 
+          await setCount(count - 1);
+          await setHighlight(false);
+
           if (props.originalVisible) {
             window.location.reload();
           } else {
