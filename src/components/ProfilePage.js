@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { DBContext } from "./App";
 import Tweets from "./Tweets";
 import SVGs from "../images/SVGs";
+import ProfilePic from "./ProfilePic";
 
 export default function ProfilePage(props) {
   let userHandle = useParams().userID;
@@ -60,7 +61,7 @@ export default function ProfilePage(props) {
 
       <div className="flex border-b-[1px] border-solid border-gray-200">
         <div>background image</div>
-        <div className="profilepic rounded-full penguin w-[100px]"></div>
+        <ProfilePic />
         <div>
           <h3>{user.username}</h3>
           <p>{user.handle}</p>

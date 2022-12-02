@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useContext } from "react";
+
 import { UserContext } from "./App";
 import SVGs from "../images/SVGs";
+import ProfilePic from "./ProfilePic";
 
 export default function UserInfo(props) {
   let [showPopup, setShowPopup] = useState(false);
@@ -32,7 +34,7 @@ export default function UserInfo(props) {
         }}
         className="flex rounded-full transition-500 xl:px-4 mb-2 py-2 hover:bg-gray-300"
       >
-        <div className="profilepic rounded-full penguin" />
+        <ProfilePic />
         <div className="hidden xl:block">
           <h3 className="font-bold">{user.username}</h3>
           <p>@{user.handle}</p>
