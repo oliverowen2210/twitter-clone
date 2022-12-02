@@ -13,6 +13,8 @@ import { UserContext, DBContext, ModalContext } from "./App";
 import TweetButton from "./TweetButton";
 import SVGs from "../images/SVGs";
 
+/**it's deleting tweets when there's more than 3 retweets for some reason */
+
 export default function Retweets(props) {
   const user = useContext(UserContext);
   const db = useContext(DBContext);

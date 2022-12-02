@@ -83,6 +83,7 @@ export default function Tweets(props) {
                 userRetweeted={userRetweeted}
                 originalVisible={originalVisible}
                 big={props.big}
+                isReply={props.isReply}
               />
             );
           })
