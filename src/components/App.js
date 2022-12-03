@@ -50,7 +50,7 @@ function App(props) {
       content: content,
       retweets: {},
       likes: {},
-      replies: {},
+      replies: [],
       replyTo,
       id,
     };
