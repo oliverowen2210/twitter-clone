@@ -84,6 +84,7 @@ export default function Tweets(props) {
                 originalVisible={originalVisible}
                 big={props.big}
                 isReply={props.isReply}
+                noBorder={props.noBorder}
               />
             );
           })

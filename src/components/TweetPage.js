@@ -15,14 +15,11 @@ export default function TweetPage(props) {
 
   useEffect(() => {
     async function getTweet() {
-      if (tweet) return;
+      if (tweet && tweet.id === tweetId) return;
       const tweetDoc = await getDoc(doc(db, "tweets", tweetId));
       setTweet(tweetDoc.data());
     }
-    getTweet();
-  }, [tweetId, db, tweet]);
 
-  useEffect(() => {
     async function getReplies() {
       console.log("getting replies");
       if (!tweet || !tweet.replyTo) return;
@@ -38,8 +35,9 @@ export default function TweetPage(props) {
       setSecondReply(secondReplyData);
     }
 
+    getTweet();
     getReplies();
-  }, [tweet, db]);
+  }, [tweetId, db, tweet]);
 
   return tweet ? (
     <div className="border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
@@ -53,8 +51,13 @@ export default function TweetPage(props) {
         <h2 className="font-bold text-xl">Tweet</h2>
       </Link>
 
-      <Tweets tweets={[reply]} isReply={true} />
-      <Tweets tweets={[tweet]} big={true} />
+      {secondReply ? (
+        <Tweets tweets={[secondReply]} isReply={true} noBorder={true} />
+      ) : null}
+      {reply ? (
+        <Tweets tweets={[reply]} isReply={true} noBorder={true} />
+      ) : null}
+      <Tweets tweets={[tweet]} big={true} noBorder={true} />
     </div>
   ) : (
     <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
