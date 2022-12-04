@@ -2,11 +2,15 @@ import Replies from "./Replies";
 import Retweets from "./Retweets";
 import Likes from "./Likes";
 import Share from "./Share";
+import RetweetCounter from "./RetweetCounter";
+import LikeCounter from "./LikeCounter";
 
 export default function TweetButtons(props) {
   return (
     <div className={(props.big ? "flex flex-col items-center " : "") + "mt-3"}>
-      {props.big ? (
+      {props.big &&
+      (Object.keys(props.data.retweets).length ||
+        Object.keys(props.data.likes).length) ? (
         <div
           className={
             (props.big ? "border-t-[2px] border-gray-100 h-[48px] " : "") +
@@ -14,28 +18,10 @@ export default function TweetButtons(props) {
           }
         >
           {/**Retweet counter*/}
-          {props.data.retweets && Object.keys(props.data.retweets).length ? (
-            <div>
-              <p className="text-gray-600">
-                <strong className="text-black">
-                  {Object.keys(props.data.retweets).length}{" "}
-                </strong>
-                Retweets
-              </p>
-            </div>
-          ) : null}
+          <RetweetCounter retweets={props.data.retweets} />
 
           {/**Like counter */}
-          {props.data.likes && Object.keys(props.data.likes).length ? (
-            <div>
-              <p className="text-gray-600">
-                <strong className="text-black">
-                  {Object.keys(props.data.likes).length}{" "}
-                </strong>
-                Likes
-              </p>
-            </div>
-          ) : null}
+          <LikeCounter likes={props.data.likes} />
         </div>
       ) : null}
 

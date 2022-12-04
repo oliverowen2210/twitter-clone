@@ -576,6 +576,10 @@ video {
   position: sticky;
 }
 
+.top-\[0px\] {
+  top: 0px;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -707,6 +711,10 @@ video {
   height: 650px;
 }
 
+.h-\[34px\] {
+  height: 34px;
+}
+
 .h-\[53px\] {
   height: 53px;
 }
@@ -747,16 +755,16 @@ video {
   width: 290px;
 }
 
+.w-\[275px\] {
+  width: 275px;
+}
+
 .w-\[88px\] {
   width: 88px;
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-\[275px\] {
-  width: 275px;
 }
 
 .w-\[990px\] {
@@ -807,10 +815,6 @@ video {
 
 .w-4 {
   width: 1rem;
-}
-
-.w-\[98\%\] {
-  width: 98%;
 }
 
 .w-\[85\%\] {
@@ -1070,6 +1074,16 @@ video {
   padding-bottom: 8px;
 }
 
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .py-\[6px\] {
   padding-top: 6px;
   padding-bottom: 6px;
@@ -1083,11 +1097,6 @@ video {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .py-1 {
@@ -1146,14 +1155,18 @@ video {
   line-height: 1.75rem;
 }
 
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-\[14px\] {
+  font-size: 14px;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-\[13px\] {
@@ -1201,6 +1214,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -1211,9 +1229,14 @@ video {
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
-.text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
+.placeholder-slate-500::-webkit-input-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-slate-500::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-placeholder-opacity));
 }
 
 .placeholder-black::-webkit-input-placeholder {
@@ -1224,6 +1247,10 @@ video {
 .placeholder-black::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(0 0 0 / var(--tw-placeholder-opacity));
+}
+
+.opacity-50 {
+  opacity: 0.5;
 }
 
 .opacity-100 {
@@ -1269,6 +1296,10 @@ video {
           transform-origin: center center;
 }
 
+.hover\:cursor-default:hover {
+  cursor: default;
+}
+
 .hover\:bg-red-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -1306,6 +1337,10 @@ video {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.focus\:outline-0:focus {
+  outline-width: 0px;
 }
 
 .group:hover .group-hover\:bg-pink-500 {

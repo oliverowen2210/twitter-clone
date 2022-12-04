@@ -2,8 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 
-import { DBContext } from "./App";
+import { UserContext, DBContext } from "./App";
 import Tweets from "./Tweets";
+import ReplyBox from "./ReplyBox";
 import SVGs from "../images/SVGs";
 
 export default function TweetPage(props) {
@@ -12,6 +13,7 @@ export default function TweetPage(props) {
   let [topReply, setTopReply] = useState(null);
   let [secondTopReply, setSecondTopReply] = useState(null);
   let [bottomReplies, setBottomReplies] = useState([]);
+  const user = useContext(UserContext);
   const db = useContext(DBContext);
 
   useEffect(() => {
@@ -74,6 +76,8 @@ export default function TweetPage(props) {
       ) : null}
 
       <Tweets tweets={[tweet]} big={true} noBorder={true} />
+
+      {user ? <ReplyBox /> : null}
 
       {bottomReplies ? <Tweets tweets={bottomReplies} /> : null}
     </div>

@@ -45,7 +45,7 @@ export default function Tweet(props) {
                 </div>
               ) : null}
               <TweetAuthorBig data={props.data} />
-              <TweetContent content={props.data.content} />
+              <TweetContent content={props.data.content} big={true} />
             </div>
             <TweetButtons
               data={props.data}
