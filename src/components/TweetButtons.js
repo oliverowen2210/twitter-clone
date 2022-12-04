@@ -10,10 +10,32 @@ export default function TweetButtons(props) {
         <div
           className={
             (props.big ? "border-t-[2px] border-gray-100 h-[48px] " : "") +
-            "w-[95%] flex justify-center"
+            "w-full flex gap-[50px] items-center text-sm"
           }
         >
-          replies retweets likes share
+          {/**Retweet counter*/}
+          {props.data.retweets && Object.keys(props.data.retweets).length ? (
+            <div>
+              <p className="text-gray-600">
+                <strong className="text-black">
+                  {Object.keys(props.data.retweets).length}{" "}
+                </strong>
+                Retweets
+              </p>
+            </div>
+          ) : null}
+
+          {/**Like counter */}
+          {props.data.likes && Object.keys(props.data.likes).length ? (
+            <div>
+              <p className="text-gray-600">
+                <strong className="text-black">
+                  {Object.keys(props.data.likes).length}{" "}
+                </strong>
+                Likes
+              </p>
+            </div>
+          ) : null}
         </div>
       ) : null}
 
@@ -21,7 +43,7 @@ export default function TweetButtons(props) {
         className={
           (props.big
             ? "border-y-[2px] border-gray-100 h-[48px] justify-center "
-            : "") + "w-[95%] flex"
+            : "") + "w-full flex"
         }
       >
         <div

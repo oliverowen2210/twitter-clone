@@ -809,8 +809,8 @@ video {
   width: 1rem;
 }
 
-.w-\[95\%\] {
-  width: 95%;
+.w-\[98\%\] {
+  width: 98%;
 }
 
 .w-\[85\%\] {
@@ -891,6 +891,10 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-\[50px\] {
+  gap: 50px;
 }
 
 .gap-\[115px\] {
@@ -1205,6 +1209,11 @@ video {
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .placeholder-black::-webkit-input-placeholder {
