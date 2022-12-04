@@ -2,7 +2,7 @@ export default function TweetButton(props) {
   return (
     <button
       onClick={props.clickFunc}
-      className="group flex items-center z-20 p-1 rounded-full min-h-[20px] leading-[0px]"
+      className="group flex items-center z-20 py-1 rounded-full min-h-[20px] leading-[0px]"
     >
       <div>
         <svg
@@ -20,16 +20,18 @@ export default function TweetButton(props) {
           </g>
         </svg>
       </div>
-      <p
-        className={
-          (props.alt
-            ? `text-${props.color}`
-            : `text-gray-500 group-hover:text-${props.color}`) +
-          " px-2  duration-200"
-        }
-      >
-        {!props.big && props.count ? props.count : null}
-      </p>
+      {!props.big ? (
+        <p
+          className={
+            (props.alt
+              ? `text-${props.color}`
+              : `text-gray-500 group-hover:text-${props.color}`) +
+            " px-2  duration-200"
+          }
+        >
+          {props.count ? props.count : null}
+        </p>
+      ) : null}
     </button>
   );
 }

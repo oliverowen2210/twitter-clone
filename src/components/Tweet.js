@@ -13,9 +13,9 @@ export default function Tweet(props) {
   return (
     <div
       className={
-        (props.big ? "" : "cursor-pointer ") +
+        (props.big ? "" : "cursor-pointer hover:bg-gray-100 ") +
         (props.isReply || props.noBorder ? "" : "border-b-[1px] py-2 ") +
-        "relative duration-100 hover:bg-gray-100 block w-[600px] px-4 border-gray-200 border-solid"
+        "relative duration-100 block w-[600px] px-4 border-gray-200 border-solid"
       }
       id={`${props.data.retweetID ? props.data.retweetID : props.data.id}`}
     >
