@@ -122,6 +122,7 @@ export default function Retweets(props) {
   useEffect(() => {
     locked.current = false;
   });
+
   return (
     <TweetButton
       clickFunc={() => {

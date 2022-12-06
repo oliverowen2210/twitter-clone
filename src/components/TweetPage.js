@@ -39,13 +39,13 @@ export default function TweetPage(props) {
     }
 
     async function getBottomReplies() {
-      if (!tweet || !tweet.replies) return;
+      if (!tweet || !Object.keys(tweet.replies).length) return;
       let newBottomReplies = [];
-      for (let i = 0; i < tweet.replies.length; i++) {
-        const replyID = tweet.replies[i];
-        const replyDoc = await getDoc(doc(db, "tweets", replyID));
+      for (let tweetReply in tweet.replies) {
+        const reply = tweet.replies[tweetReply];
+        const replyDoc = await getDoc(doc(db, "tweets", reply.id));
         const replyData = replyDoc.data();
-        newBottomReplies.unshift(replyData);
+        newBottomReplies.push(replyData);
       }
       setBottomReplies(newBottomReplies);
     }
@@ -77,7 +77,7 @@ export default function TweetPage(props) {
 
       <Tweets tweets={[tweet]} big={true} noBorder={true} />
 
-      {user ? <ReplyBox /> : null}
+      {user ? <ReplyBox replyingTo={tweet} /> : null}
 
       {bottomReplies ? <Tweets tweets={bottomReplies} /> : null}
     </div>

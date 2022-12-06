@@ -17,6 +17,7 @@ import LogInModal from "./LogInModal";
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
 export const ModalContext = createContext(null);
+export const TweetContext = createContext(null);
 
 /**TODO:
  * style login modal
@@ -39,26 +40,43 @@ function App(props) {
 
   async function tweet(content, replyTo = null) {
     if (!user) return;
+
     let postDate = new Date();
     const collectionRef = collection(db, "tweets");
     const docRef = doc(collectionRef);
     const id = docRef.id;
-    const tweet = {
+    let tweet = {
       author: user.username,
       handle: user.handle,
       datePosted: postDate,
       content: content,
       retweets: {},
       likes: {},
-      replies: [],
+      replies: {},
       replyTo,
       id,
     };
 
+    if (replyTo) {
+      let replyID = replyTo.id;
+      let replyDocRef = doc(db, "tweets", replyID);
+
+      let newReplyToField = {};
+      newReplyToField.id = replyID;
+      newReplyToField.handle = replyTo.handle;
+
+      tweet.replyTo = newReplyToField;
+      await updateDoc(replyDocRef, {
+        [`replies.${replyID}`]: {
+          id,
+        },
+      });
+    }
+
     await setDoc(docRef, tweet);
 
     const userDocRef = doc(db, "users", user.uid);
-    updateDoc(userDocRef, {
+    await updateDoc(userDocRef, {
       [`tweets.${id}`]: {
         id,
       },
@@ -85,64 +103,68 @@ function App(props) {
   return (
     <ModalContext.Provider value={(state) => setShowModal(state)}>
       <DBContext.Provider value={db}>
-        <UserContext.Provider value={user}>
-          <Router>
-            <div className={"flex min-h-[100vh] overflow-x-hidden"}>
-              <LogInModal
-                open={showModal}
-                closeFunc={() => {
-                  setShowModal(false);
-                }}
-                loginFunc={login}
-              />
-              <Banner logoutFunc={logout} />
-              <div className="grow flex">
-                <div className="flex">
-                  <Routes>
-                    <Route path="/home" element={<HomePage />} />
-                    <Route
-                      path="/explore"
-                      element={<HomePage showBar={true} />}
-                    />
-                    <Route path="notFound" element={<NotFound />} />
-                    <Route path="/:userID" element={<ProfilePage />} />
-                    <Route path="/tweet/:tweetID" element={<TweetPage />} />
-                    <Route
-                      path="/signup"
-                      element={
-                        <SignupPage auth={{ login, register: createAccount }} />
-                      }
-                    />
-                    <Route path="*" element={<HomePage />} />
-                  </Routes>
-                  <div className="w-[290px] lg:w-[350px] flex grow hidden lg:block">
+        <TweetContext.Provider value={tweet}>
+          <UserContext.Provider value={user}>
+            <Router>
+              <div className={"flex min-h-[100vh] overflow-x-hidden"}>
+                <LogInModal
+                  open={showModal}
+                  closeFunc={() => {
+                    setShowModal(false);
+                  }}
+                  loginFunc={login}
+                />
+                <Banner logoutFunc={logout} />
+                <div className="grow flex">
+                  <div className="flex">
                     <Routes>
+                      <Route path="/home" element={<HomePage />} />
                       <Route
                         path="/explore"
-                        element={<Sidebar noBar={true} />}
+                        element={<HomePage showBar={true} />}
                       />
-                      <Route path="*" element={<Sidebar />} />
+                      <Route path="notFound" element={<NotFound />} />
+                      <Route path="/:userID" element={<ProfilePage />} />
+                      <Route path="/tweet/:tweetID" element={<TweetPage />} />
+                      <Route
+                        path="/signup"
+                        element={
+                          <SignupPage
+                            auth={{ login, register: createAccount }}
+                          />
+                        }
+                      />
+                      <Route path="*" element={<HomePage />} />
                     </Routes>
+                    <div className="w-[290px] lg:w-[350px] flex grow hidden lg:block">
+                      <Routes>
+                        <Route
+                          path="/explore"
+                          element={<Sidebar noBar={true} />}
+                        />
+                        <Route path="*" element={<Sidebar />} />
+                      </Routes>
+                    </div>
                   </div>
                 </div>
-              </div>
-              {user ? null : (
-                <Footer
-                  loginFunc={(state) => {
-                    setShowModal(state);
+                {user ? null : (
+                  <Footer
+                    loginFunc={(state) => {
+                      setShowModal(state);
+                    }}
+                  />
+                )}
+                <button
+                  onClick={() => {
+                    tweet("i sniff socks");
                   }}
-                />
-              )}
-              <button
-                onClick={() => {
-                  tweet("i sniff socks");
-                }}
-              >
-                xd
-              </button>
-            </div>
-          </Router>
-        </UserContext.Provider>
+                >
+                  xd
+                </button>
+              </div>
+            </Router>
+          </UserContext.Provider>
+        </TweetContext.Provider>
       </DBContext.Provider>
     </ModalContext.Provider>
   );
