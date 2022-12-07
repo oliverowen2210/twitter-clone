@@ -16,7 +16,7 @@ import LogInModal from "./LogInModal";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
-export const ModalContext = createContext(null);
+export const LayersContext = createContext(null);
 export const TweetContext = createContext(null);
 
 /**TODO:
@@ -36,7 +36,16 @@ export const TweetContext = createContext(null);
 
 function App(props) {
   let [user, setUser] = useState(null);
-  let [showModal, setShowModal] = useState(false);
+  let [layers, setLayers] = useState({
+    login: {
+      show: false,
+      toggle: function (state = true) {
+        let newLayers = { ...layers };
+        newLayers.login.show = state;
+        setLayers(newLayers);
+      },
+    },
+  });
 
   async function tweet(content, replyTo = null) {
     if (!user) return;
@@ -100,20 +109,18 @@ function App(props) {
     };
   }, []);
 
+  /**chjange to use state */
+
   return (
-    <ModalContext.Provider value={(state) => setShowModal(state)}>
+    <LayersContext.Provider value={layers}>
       <DBContext.Provider value={db}>
         <TweetContext.Provider value={tweet}>
           <UserContext.Provider value={user}>
             <Router>
-              <div className={"flex min-h-[100vh] overflow-x-hidden"}>
-                <LogInModal
-                  open={showModal}
-                  closeFunc={() => {
-                    setShowModal(false);
-                  }}
-                  loginFunc={login}
-                />
+              <div id="layers">
+                <LogInModal loginFunc={login} />
+              </div>
+              <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                 <Banner logoutFunc={logout} />
                 <div className="grow flex">
                   <div className="flex">
@@ -136,7 +143,7 @@ function App(props) {
                       />
                       <Route path="*" element={<HomePage />} />
                     </Routes>
-                    <div className="w-[290px] lg:w-[350px] flex grow hidden lg:block">
+                    <div className="w-[290px] lg:w-[350px] hidden lg:block">
                       <Routes>
                         <Route
                           path="/explore"
@@ -147,13 +154,7 @@ function App(props) {
                     </div>
                   </div>
                 </div>
-                {user ? null : (
-                  <Footer
-                    loginFunc={(state) => {
-                      setShowModal(state);
-                    }}
-                  />
-                )}
+                {user ? null : <Footer />}
                 <button
                   onClick={() => {
                     tweet("i sniff socks");
@@ -166,7 +167,7 @@ function App(props) {
           </UserContext.Provider>
         </TweetContext.Provider>
       </DBContext.Provider>
-    </ModalContext.Provider>
+    </LayersContext.Provider>
   );
 }
 

@@ -2,16 +2,16 @@ export default function TweetButton(props) {
   return (
     <button
       onClick={props.clickFunc}
-      className="group flex items-center z-20 py-1 rounded-full min-h-[20px] leading-[0px]"
+      className="relative group flex items-center z-20 py-1 rounded-full min-h-[20px] leading-[0px]"
     >
       <div>
         <svg
           viewBox="0 0 24 24"
           className={
-            (props.big ? "w-[19px] " : "w-4 ") +
+            (props.big ? "w-5 " : "w-4 ") +
             (props.alt
               ? `text-${props.color} `
-              : `text-gray-500 group-hover:text-${props.color} `) +
+              : `text-gray-700 group-hover:text-${props.color} `) +
             "fill-current duration-200 "
           }
         >

@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
+import { LayersContext } from "./App";
+
 export default function Footer(props) {
+  let toggleLoginModal = useContext(LayersContext).login.toggle;
   return (
     <div className="fixed bg-red-500 bottom-0 w-full">
       <div className="my-[12px] flex justify-center">
@@ -19,7 +23,9 @@ export default function Footer(props) {
 
           <div className="flex items-center">
             <button
-              onClick={props.loginFunc}
+              onClick={() => {
+                toggleLoginModal(true);
+              }}
               className="hover:bg-red-600 border-solid border-[1px] border-black text-white font-bold px-[16px] py-[8px] rounded-full"
             >
               Log in

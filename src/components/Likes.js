@@ -1,14 +1,14 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { doc, getDoc, deleteField, updateDoc } from "firebase/firestore";
 
-import { UserContext, DBContext, ModalContext } from "./App";
+import { UserContext, DBContext, LayersContext } from "./App";
 import TweetButton from "./TweetButton";
 import SVGs from "../images/SVGs";
 
 export default function Likes(props) {
   const user = useContext(UserContext);
   const db = useContext(DBContext);
-  const setModal = useContext(ModalContext);
+  const setModal = useContext(LayersContext).login.toggle;
 
   const [count, setCount] = useState(props.count);
   const [highlight, setHighlight] = useState(

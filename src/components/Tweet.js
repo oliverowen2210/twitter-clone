@@ -6,6 +6,7 @@ import RetweetedBy from "./RetweetedBy";
 import TweetAuthorBig from "./TweetAuthorBig";
 import TweetContent from "./TweetContent";
 import TweetButtons from "./TweetButtons";
+import TweetExtras from "./TweetExtras";
 import ProfilePic from "./ProfilePic";
 
 export default function Tweet(props) {
@@ -26,7 +27,9 @@ export default function Tweet(props) {
             className="absolute w-full h-full"
           />
         )}
-        {!props.big && (props.userRetweeted || props.data.retweetedBy) ? (
+        {!props.noRetweet &&
+        !props.big &&
+        (props.userRetweeted || props.data.retweetedBy) ? (
           <RetweetedBy
             user={user}
             data={props.data}
@@ -40,7 +43,7 @@ export default function Tweet(props) {
               {props.data.replyTo ? (
                 <div className="w-full flex">
                   <div className="h-[8px] flex basis-[48px] justify-center relative bottom-[8px]">
-                    <div className="w-[2px] bg-gray-400"></div>
+                    <div className="w-[2px] bg-gray-300 z-30 -mb-[4px]"></div>
                   </div>
                 </div>
               ) : null}
@@ -63,21 +66,25 @@ export default function Tweet(props) {
               {props.isReply ? (
                 <div className="w-full flex flex-col">
                   <div className="h-[8px] flex basis-[48px] justify-center relative bottom-[8px] right-[6px]">
-                    <div className="w-[2px] bg-gray-400"></div>
+                    <div className="w-[2px] bg-gray-300 -mb-[4px] z-30"></div>
                   </div>
                 </div>
               ) : null}
             </div>
             <div className="w-full">
-              <Link
-                className={"block flex w-fit relative z-10"}
-                to={`/${props.data.handle}`}
-              >
-                <h3 className="font-bold hover:underline">
-                  {props.data.author}
-                </h3>
+              <div className="flex">
+                <Link
+                  className={"block flex relative z-10"}
+                  to={`/${props.data.handle}`}
+                >
+                  <h3 className="font-bold hover:underline">
+                    {props.data.author}
+                  </h3>
+                </Link>
                 <p className="handle ml-1 text-gray-500">{props.data.handle}</p>
-              </Link>
+                <div className="grow" />
+                <TweetExtras />
+              </div>
               <TweetContent content={props.data.content} />
               <TweetButtons
                 data={props.data}

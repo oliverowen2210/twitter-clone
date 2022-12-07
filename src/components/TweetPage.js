@@ -68,18 +68,30 @@ export default function TweetPage(props) {
       </Link>
 
       {secondTopReply ? (
-        <Tweets tweets={[secondTopReply]} isReply={true} noBorder={true} />
+        <Tweets
+          tweets={[secondTopReply]}
+          isReply={true}
+          noBorder={true}
+          noRetweet={true}
+        />
       ) : null}
 
       {topReply ? (
-        <Tweets tweets={[topReply]} isReply={true} noBorder={true} />
+        <Tweets
+          tweets={[topReply]}
+          isReply={true}
+          noBorder={true}
+          noRetweet={true}
+        />
       ) : null}
 
-      <Tweets tweets={[tweet]} big={true} noBorder={true} />
+      <Tweets tweets={[tweet]} big={true} noBorder={true} noRetweet={true} />
 
       {user ? <ReplyBox replyingTo={tweet} /> : null}
 
-      {bottomReplies ? <Tweets tweets={bottomReplies} /> : null}
+      {bottomReplies ? (
+        <Tweets tweets={bottomReplies} noRetweet={true} />
+      ) : null}
     </div>
   ) : (
     <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">

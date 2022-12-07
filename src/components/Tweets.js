@@ -85,6 +85,7 @@ export default function Tweets(props) {
                 big={props.big}
                 isReply={props.isReply}
                 noBorder={props.noBorder}
+                noRetweet={props.noRetweet}
               />
             );
           })

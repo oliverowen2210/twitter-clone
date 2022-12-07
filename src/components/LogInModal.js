@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Bird from "./Bird";
 import SVGs from "../images/SVGs";
+import { LayersContext } from "./App";
 
 export default function LogInModal(props) {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [savedURL, setSavedURL] = useState("");
+  let modal = useContext(LayersContext).login;
 
   /**setting styles on HTML element to stop page from shifting around
    * and storing/setting page URL when toggling modal */
   useEffect(() => {
-    if (props.open) {
+    if (modal.show) {
       document.documentElement.style.overflowY = "hidden";
       document.documentElement.style.marginRight = "17px";
       if (!savedURL) setSavedURL(window.location.href);
@@ -21,14 +23,22 @@ export default function LogInModal(props) {
       window.history.pushState({}, "", savedURL);
       setSavedURL("");
     }
-  }, [props.open, savedURL]);
+  }, [modal.show, savedURL]);
 
-  return props.open ? (
-    <div className="bg-gray-800 bg-opacity-30 z-30 fixed t-0 w-screen h-screen flex justify-center items-center">
+  return modal.show ? (
+    <div className="bg-gray-800 z-[100] absolute top-0 left-0 w-full h-full bg-opacity-30 flex justify-center items-center">
+      <div
+        className="w-full h-full absolute top-0 left-0"
+        onClick={() => {
+          modal.toggle(false);
+        }}
+      ></div>
       <div className="flex flex-col pt-[24px] items-center bg-white relative rounded-xl h-[650px] w-[600px]">
         <Bird link={null} />
         <button
-          onClick={props.closeFunc}
+          onClick={() => {
+            modal.toggle(false);
+          }}
           className="absolute top-[11px] left-[15px]"
         >
           <svg className="w-[22px] fill-current text-black" viewBox="0 0 24 24">
@@ -53,7 +63,7 @@ export default function LogInModal(props) {
         <button
           onClick={() => {
             props.loginFunc(email, password);
-            props.closeFunc();
+            modal.toggle(false);
           }}
           className="border-solid border-[1px] rounded-full border-gray-500 font-bold p-3"
         >
