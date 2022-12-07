@@ -83,7 +83,7 @@ export default function Tweet(props) {
                 </Link>
                 <p className="handle ml-1 text-gray-500">{props.data.handle}</p>
                 <div className="grow" />
-                <TweetExtras />
+                <TweetExtras tweet={props.data} />
               </div>
               <TweetContent content={props.data.content} />
               <TweetButtons

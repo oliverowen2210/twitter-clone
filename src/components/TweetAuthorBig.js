@@ -15,7 +15,7 @@ export default function TweetAuthorBig(props) {
           </div>
         </Link>
         <div className="grow"></div>
-        <TweetExtras />
+        <TweetExtras tweet={props.data} />
       </div>
     </div>
   );

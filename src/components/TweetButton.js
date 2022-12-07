@@ -3,6 +3,7 @@ export default function TweetButton(props) {
     <button
       onClick={props.clickFunc}
       className="relative group flex items-center z-20 py-1 rounded-full min-h-[20px] leading-[0px]"
+      ref={props.innerRef ? props.innerRef : null}
     >
       <div>
         <svg

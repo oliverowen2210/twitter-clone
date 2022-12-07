@@ -14,6 +14,7 @@ import NotFound from "./NotFound.js";
 import Sidebar from "./Sidebar";
 import LogInModal from "./LogInModal";
 import UserInfoModal from "./UserInfoModal.js";
+import TweetExtrasModal from "./TweetExtrasModal.js";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
@@ -41,26 +42,52 @@ function App(props) {
     login: {
       show: false,
       toggle: function (state = true) {
-        let newLayers = { ...layers };
-        newLayers.login.show = state;
-        setLayers(newLayers);
+        updateLayers((n) => {
+          n.login.show = state;
+        });
       },
     },
     userInfo: {
       show: false,
       position: { left: 0, bottom: 0 },
       toggle: function (state = true) {
-        let newLayers = { ...layers };
-        newLayers.userInfo.show = state;
-        setLayers(newLayers);
+        updateLayers((n) => {
+          n.userInfo.show = state;
+        });
       },
       setPosition: function (left, bottom) {
-        let newLayers = { ...layers };
-        newLayers.userInfo.position = { left, bottom };
-        setLayers(newLayers);
+        updateLayers((n) => {
+          n.userInfo.position = { left, bottom };
+        });
+      },
+    },
+    tweetExtras: {
+      show: false,
+      position: { left: 0, bottom: 0 },
+      tweet: null,
+      toggle: function (state = true) {
+        updateLayers((n) => {
+          n.tweetExtras.show = state;
+        });
+      },
+      setPosition: function (left, bottom) {
+        updateLayers((n) => {
+          n.tweetExtras.position = { left, bottom };
+        });
+      },
+      setTweet: function (newTweet) {
+        updateLayers((n) => {
+          n.tweetExtras.tweet = newTweet;
+        });
       },
     },
   });
+
+  function updateLayers(func) {
+    let newLayers = { ...layers };
+    func(newLayers);
+    setLayers(newLayers);
+  }
 
   async function tweet(content, replyTo = null) {
     if (!user) return;
@@ -124,8 +151,6 @@ function App(props) {
     };
   }, []);
 
-  /**chjange to use state */
-
   return (
     <LayersContext.Provider value={layers}>
       <DBContext.Provider value={db}>
@@ -135,6 +160,7 @@ function App(props) {
               <div id="layers">
                 <LogInModal loginFunc={login} />
                 <UserInfoModal logoutFunc={logout} />
+                <TweetExtrasModal />
               </div>
               <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                 <Banner logoutFunc={logout} />
