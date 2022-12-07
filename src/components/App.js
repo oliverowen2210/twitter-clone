@@ -13,6 +13,7 @@ import TweetPage from "./TweetPage.js";
 import NotFound from "./NotFound.js";
 import Sidebar from "./Sidebar";
 import LogInModal from "./LogInModal";
+import UserInfoModal from "./UserInfoModal.js";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
@@ -42,6 +43,20 @@ function App(props) {
       toggle: function (state = true) {
         let newLayers = { ...layers };
         newLayers.login.show = state;
+        setLayers(newLayers);
+      },
+    },
+    userInfo: {
+      show: false,
+      position: { left: 0, bottom: 0 },
+      toggle: function (state = true) {
+        let newLayers = { ...layers };
+        newLayers.userInfo.show = state;
+        setLayers(newLayers);
+      },
+      setPosition: function (left, bottom) {
+        let newLayers = { ...layers };
+        newLayers.userInfo.position = { left, bottom };
         setLayers(newLayers);
       },
     },
@@ -119,6 +134,7 @@ function App(props) {
             <Router>
               <div id="layers">
                 <LogInModal loginFunc={login} />
+                <UserInfoModal logoutFunc={logout} />
               </div>
               <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                 <Banner logoutFunc={logout} />

@@ -1,20 +1,19 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useContext } from "react";
 
-import { UserContext } from "./App";
+import { UserContext, LayersContext } from "./App";
 import SVGs from "../images/SVGs";
 import ProfilePic from "./ProfilePic";
 
-export default function UserInfo(props) {
-  let [showPopup, setShowPopup] = useState(false);
-  let [popupRect, setPopupRect] = useState({ left: 0, bottom: 0 });
+export default function UserInfo() {
+  let popup = useContext(LayersContext).userInfo;
   let infoRef = useRef(null);
   let user = useContext(UserContext);
 
   function updatePopupRect() {
     const boundingRect = infoRef.current.getBoundingClientRect();
-    const bottom = boundingRect.height;
     const left = boundingRect.left;
-    setPopupRect({ left, bottom });
+    const bottom = boundingRect.height;
+    popup.setPosition(left, bottom);
   }
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export default function UserInfo(props) {
     <div ref={infoRef} className="mt-auto self-end">
       <div
         onClick={() => {
-          setShowPopup(true);
+          popup.toggle(true);
           updatePopupRect();
         }}
         className="flex rounded-full transition-500 xl:px-4 mb-2 py-2 hover:bg-gray-300"
@@ -46,33 +45,6 @@ export default function UserInfo(props) {
             </g>
           </svg>
         </div>
-      </div>
-
-      <div
-        className={
-          (showPopup ? "absolute " : "hidden ") + "top-0 left-0 w-full h-full"
-        }
-        onClick={() => {
-          setShowPopup(false);
-        }}
-      />
-
-      <div
-        className={
-          (showPopup ? "" : "hidden ") +
-          `fixed transition-1000 bg-white h-[200px] shadow-md border-gray-400 w-[300px] min-w-[225px] max-w-[375px]`
-        }
-        style={{
-          bottom: `${popupRect.bottom + 20}px`,
-          left: `${popupRect.left}px`,
-        }}
-      >
-        <button
-          onClick={props.logoutFunc}
-          className="font-bold w-full p-3 transition-300 hover:bg-gray-200"
-        >
-          Log out @{user.handle}
-        </button>
       </div>
     </div>
   );

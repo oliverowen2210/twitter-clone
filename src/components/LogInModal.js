@@ -26,7 +26,7 @@ export default function LogInModal(props) {
   }, [modal.show, savedURL]);
 
   return modal.show ? (
-    <div className="bg-gray-800 z-[100] absolute top-0 left-0 w-full h-full bg-opacity-30 flex justify-center items-center">
+    <div className="bg-gray-800 z-[100] fixed top-0 left-0 w-screen h-screen bg-opacity-30 flex justify-center items-center">
       <div
         className="w-full h-full absolute top-0 left-0"
         onClick={() => {
