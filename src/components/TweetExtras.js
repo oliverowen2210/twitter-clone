@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useEffect, useContext, useCallback } from "react";
 
 import { LayersContext } from "./App";
 import TweetButton from "./TweetButton";
@@ -8,22 +8,33 @@ export default function TweetExtras(props) {
   const popup = useContext(LayersContext).tweetExtras;
   const ref = useRef();
 
-  /**todo: figure out how to update position without refs? */
-  function updatePopupRect() {
+  const updatePopupRect = useCallback(() => {
     const boundingRect = ref.current.getBoundingClientRect();
-    const left = boundingRect.left;
-    const bottom = boundingRect.height;
-    popup.setPosition(left, bottom);
-  }
+    const left = boundingRect.left + 16;
+    const top = boundingRect.top;
+    popup.setPosition(left, top);
+  }, [popup]);
+
+  useEffect(() => {
+    let timer;
+
+    window.addEventListener("resize", () => {
+      clearTimeout(timer);
+      timer = setTimeout(updatePopupRect, 100);
+    });
+  }, [updatePopupRect]);
+
   return (
-    <TweetButton
-      color="blue-400"
-      path={SVGs.dots}
-      clickFunc={() => {
-        popup.setTweet(props.tweet);
-        popup.toggle(true);
-      }}
-      innerRef={ref}
-    />
+    <div ref={ref}>
+      <TweetButton
+        color="blue-400"
+        path={SVGs.dots}
+        clickFunc={() => {
+          popup.setTweet(props.tweet);
+          popup.toggle(true);
+          updatePopupRect();
+        }}
+      />
+    </div>
   );
 }

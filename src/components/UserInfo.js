@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useContext, useCallback } from "react";
 
 import { UserContext, LayersContext } from "./App";
 import SVGs from "../images/SVGs";
@@ -9,20 +9,21 @@ export default function UserInfo() {
   let infoRef = useRef(null);
   let user = useContext(UserContext);
 
-  function updatePopupRect() {
+  const updatePopupRect = useCallback(() => {
     const boundingRect = infoRef.current.getBoundingClientRect();
     const left = boundingRect.left;
     const bottom = boundingRect.height;
     popup.setPosition(left, bottom);
-  }
+  }, [popup]);
 
   useEffect(() => {
     let timer;
+
     window.addEventListener("resize", () => {
       clearTimeout(timer);
       timer = setTimeout(updatePopupRect, 100);
     });
-  }, []);
+  }, [popup, updatePopupRect]);
 
   return (
     <div ref={infoRef} className="mt-auto self-end">

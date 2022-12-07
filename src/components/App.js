@@ -63,16 +63,16 @@ function App(props) {
     },
     tweetExtras: {
       show: false,
-      position: { left: 0, bottom: 0 },
+      position: { left: 0, top: 0 },
       tweet: null,
       toggle: function (state = true) {
         updateLayers((n) => {
           n.tweetExtras.show = state;
         });
       },
-      setPosition: function (left, bottom) {
+      setPosition: function (left, top) {
         updateLayers((n) => {
-          n.tweetExtras.position = { left, bottom };
+          n.tweetExtras.position = { left, top };
         });
       },
       setTweet: function (newTweet) {
