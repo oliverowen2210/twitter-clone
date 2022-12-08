@@ -2,7 +2,15 @@ import { useState, useEffect, createContext } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { db, auth, createAccount, login, logout } from "../firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, setDoc, getDoc, updateDoc, collection } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  collection,
+  deleteDoc,
+  deleteField,
+} from "firebase/firestore";
 
 import SignupPage from "./SignupPage";
 import Footer from "./Footer";
@@ -98,6 +106,7 @@ function App(props) {
     const id = docRef.id;
     let tweet = {
       author: user.username,
+      authorID: user.uid,
       handle: user.handle,
       datePosted: postDate,
       content: content,
@@ -118,7 +127,7 @@ function App(props) {
 
       tweet.replyTo = newReplyToField;
       await updateDoc(replyDocRef, {
-        [`replies.${replyID}`]: {
+        [`replies.${id}`]: {
           id,
         },
       });
@@ -132,6 +141,59 @@ function App(props) {
         id,
       },
     });
+    window.location.reload();
+  }
+
+  async function deleteTweet(tweet) {
+    let tweetID;
+    if (tweet.originalID) tweetID = tweet.originalID;
+    else tweetID = tweet.id;
+
+    const tweetAuthorDocRef = doc(db, "users", tweet.authorID);
+    await updateDoc(tweetAuthorDocRef, {
+      [`tweets.${tweetID}`]: deleteField(),
+    });
+
+    /**if retweet, select the original tweet */
+
+    const tweetDocRef = doc(db, "tweets", tweetID);
+    await deleteDoc(tweetDocRef);
+
+    /**if tweet was a reply, remove it from the replies of the tweet it was replying to */
+    if (tweet.replyTo) {
+      const replyDocRef = doc(db, "tweets", tweet.replyTo.id);
+      await updateDoc(replyDocRef, {
+        [`replies.${tweetID}`]: deleteField(),
+      });
+    }
+
+    /**remove any likes */
+    if (Object.keys(tweet.likes).length) {
+      for (let like in tweet.likes) {
+        const likeUserDocRef = doc(db, "users", tweet.likes[like].uid);
+        await updateDoc(likeUserDocRef, {
+          [`likes.${tweetID}`]: deleteField(),
+        });
+      }
+    }
+
+    /**remove any retweets */
+    if (Object.keys(tweet.retweets).length) {
+      for (let retweet in tweet.retweets) {
+        const retweetID = tweet.retweets[retweet].retweetID;
+        const retweetDocRef = doc(db, "tweets", retweetID);
+        await deleteDoc(retweetDocRef);
+        const retweeterUserDocRef = doc(
+          db,
+          "users",
+          tweet.retweets[retweet].uid
+        );
+        await updateDoc(retweeterUserDocRef, {
+          [`retweets.${tweetID}`]: deleteField(),
+          [`tweets.${retweetID}`]: deleteField(),
+        });
+      }
+    }
     window.location.reload();
   }
 
@@ -160,7 +222,7 @@ function App(props) {
               <div id="layers">
                 <LogInModal loginFunc={login} />
                 <UserInfoModal logoutFunc={logout} />
-                <TweetExtrasModal />
+                <TweetExtrasModal deleteFunc={deleteTweet} />
               </div>
               <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                 <Banner logoutFunc={logout} />

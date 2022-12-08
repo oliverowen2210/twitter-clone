@@ -39,7 +39,10 @@ export default function TweetPage(props) {
     }
 
     async function getBottomReplies() {
-      if (!tweet || !Object.keys(tweet.replies).length) return;
+      if (!tweet || !Object.keys(tweet.replies).length) {
+        setBottomReplies([]);
+        return;
+      }
       let newBottomReplies = [];
       for (let tweetReply in tweet.replies) {
         const reply = tweet.replies[tweetReply];

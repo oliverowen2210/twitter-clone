@@ -1,11 +1,13 @@
 import { useRef, useEffect, useContext, useCallback } from "react";
 
-import { LayersContext } from "./App";
+import { UserContext, LayersContext } from "./App";
 import TweetButton from "./TweetButton";
 import SVGs from "../images/SVGs";
 
 export default function TweetExtras(props) {
+  const user = useContext(UserContext);
   const popup = useContext(LayersContext).tweetExtras;
+  const login = useContext(LayersContext).login;
   const ref = useRef();
 
   const updatePopupRect = useCallback(() => {
@@ -30,6 +32,10 @@ export default function TweetExtras(props) {
         color="blue-400"
         path={SVGs.dots}
         clickFunc={() => {
+          if (!user) {
+            login.toggle(true);
+            return;
+          }
           popup.setTweet(props.tweet);
           popup.toggle(true);
           updatePopupRect();

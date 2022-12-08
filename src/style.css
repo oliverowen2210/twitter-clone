@@ -739,6 +739,12 @@ video {
   height: 48px;
 }
 
+.h-fit {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-\[200px\] {
   height: 200px;
 }

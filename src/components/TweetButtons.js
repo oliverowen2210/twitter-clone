@@ -17,10 +17,8 @@ export default function TweetButtons(props) {
             "w-full flex gap-[50px] items-center text-sm"
           }
         >
-          {/**Retweet counter*/}
           <RetweetCounter retweets={props.data.retweets} />
 
-          {/**Like counter */}
           <LikeCounter likes={props.data.likes} />
         </div>
       ) : null}
@@ -40,7 +38,11 @@ export default function TweetButtons(props) {
         >
           <Replies
             data={props.data}
-            count={props.data.replies ? props.data.replies.length : null}
+            count={
+              Object.keys(props.data.replies).length
+                ? Object.keys(props.data.replies).length
+                : null
+            }
             big={props.big}
           />
           <Retweets

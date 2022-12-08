@@ -15,15 +15,21 @@ export default function TweetExtrasModal(props) {
         }}
       />
       <div
-        className="fixed transition-1000 bg-white h-[200px] shadow-md border-gray-400 w-[335px] min-w-[225px] max-w-[375px]"
+        className="fixed transition-1000 bg-white h-fit shadow-md border-gray-400 w-[335px] min-w-[225px] max-w-[375px]"
         style={{
           left: `${modal.position.left - 335}px`,
           top: `${modal.position.top}px`,
         }}
       >
-        {modal.tweet.id === user.uid ? <button>Delete</button> : null}
-        <p>{modal.position.left}</p>
-        <p>{modal.position.top}</p>
+        {modal.tweet.authorID === user.uid ? (
+          <button
+            onClick={() => {
+              props.deleteFunc(modal.tweet);
+            }}
+          >
+            Delete
+          </button>
+        ) : null}
       </div>
     </div>
   ) : null;

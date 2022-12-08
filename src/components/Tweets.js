@@ -47,6 +47,7 @@ export default function Tweets(props) {
         ? tweetList.map((tweet) => {
             let tweetData = {
               author: tweet.author,
+              authorID: tweet.authorID,
               content: tweet.content,
               datePosted: tweet.datePosted,
               handle: tweet.handle,
