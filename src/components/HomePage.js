@@ -26,7 +26,7 @@ export default function HomePage(props) {
     getTweets();
   }, [tweets.length, db]);
   return (
-    <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
+    <div className="w-[600px] border-x-[1px] border-gray-200 border-solid min-h-[99vh] max-w-[600px]">
       {window.location.pathname === "/" ? <Navigate to="/explore" /> : null}
       {props.showBar ? <SearchBar /> : null}
       <Tweets tweets={tweets} />

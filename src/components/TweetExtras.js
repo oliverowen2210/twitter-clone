@@ -6,25 +6,25 @@ import SVGs from "../images/SVGs";
 
 export default function TweetExtras(props) {
   const user = useContext(UserContext);
-  const popup = useContext(LayersContext).tweetExtras;
+  const modal = useContext(LayersContext).tweetExtras;
   const login = useContext(LayersContext).login;
   const ref = useRef();
 
-  const updatePopupRect = useCallback(() => {
+  const updateModalRect = useCallback(() => {
     const boundingRect = ref.current.getBoundingClientRect();
     const left = boundingRect.left + 16;
     const top = boundingRect.top;
-    popup.setPosition(left, top);
-  }, [popup]);
+    modal.setPosition(left, top);
+  }, [modal]);
 
   useEffect(() => {
     let timer;
 
     window.addEventListener("resize", () => {
       clearTimeout(timer);
-      timer = setTimeout(updatePopupRect, 100);
+      timer = setTimeout(updateModalRect, 100);
     });
-  }, [updatePopupRect]);
+  }, [updateModalRect]);
 
   return (
     <div ref={ref}>
@@ -36,9 +36,9 @@ export default function TweetExtras(props) {
             login.toggle(true);
             return;
           }
-          popup.setTweet(props.tweet);
-          popup.toggle(true);
-          updatePopupRect();
+          modal.setTweet(props.tweet);
+          modal.toggle(true);
+          updateModalRect();
         }}
       />
     </div>

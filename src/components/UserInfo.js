@@ -5,32 +5,32 @@ import SVGs from "../images/SVGs";
 import ProfilePic from "./ProfilePic";
 
 export default function UserInfo() {
-  let popup = useContext(LayersContext).userInfo;
+  let modal = useContext(LayersContext).userInfo;
   let infoRef = useRef(null);
   let user = useContext(UserContext);
 
-  const updatePopupRect = useCallback(() => {
+  const updateModalRect = useCallback(() => {
     const boundingRect = infoRef.current.getBoundingClientRect();
     const left = boundingRect.left;
     const bottom = boundingRect.height;
-    popup.setPosition(left, bottom);
-  }, [popup]);
+    modal.setPosition(left, bottom);
+  }, [modal]);
 
   useEffect(() => {
     let timer;
 
     window.addEventListener("resize", () => {
       clearTimeout(timer);
-      timer = setTimeout(updatePopupRect, 100);
+      timer = setTimeout(updateModalRect, 100);
     });
-  }, [popup, updatePopupRect]);
+  }, [modal, updateModalRect]);
 
   return (
     <div ref={infoRef} className="mt-auto self-end">
       <div
         onClick={() => {
-          popup.toggle(true);
-          updatePopupRect();
+          modal.toggle(true);
+          updateModalRect();
         }}
         className="flex rounded-full transition-500 xl:px-4 mb-2 py-2 hover:bg-gray-300"
       >
