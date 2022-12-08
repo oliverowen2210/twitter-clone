@@ -22,6 +22,7 @@ import NotFound from "./NotFound.js";
 import Sidebar from "./Sidebar";
 import LogInModal from "./LogInModal";
 import UserInfoModal from "./UserInfoModal.js";
+import TweetModal from "./TweetModal.js";
 import TweetExtrasModal from "./TweetExtrasModal.js";
 
 export const UserContext = createContext(null);
@@ -66,6 +67,14 @@ function App(props) {
       setPosition: function (left, bottom) {
         updateLayers((n) => {
           n.userInfo.position = { left, bottom };
+        });
+      },
+    },
+    tweet: {
+      show: false,
+      toggle: function (state = true) {
+        updateLayers((n) => {
+          n.tweet.show = state;
         });
       },
     },
@@ -222,11 +231,12 @@ function App(props) {
               <div id="layers">
                 <LogInModal loginFunc={login} />
                 <UserInfoModal logoutFunc={logout} />
+                <TweetModal tweetFunc={tweet} />
                 <TweetExtrasModal deleteFunc={deleteTweet} />
               </div>
               <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                 <Banner logoutFunc={logout} />
-                <div className="grow flex">
+                <div className="grow-2 flex">
                   <div className="flex">
                     <Routes>
                       <Route path="/home" element={<HomePage />} />
