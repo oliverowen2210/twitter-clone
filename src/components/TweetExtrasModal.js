@@ -1,10 +1,12 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { UserContext, LayersContext } from "./App";
 
 export default function TweetExtrasModal(props) {
-  let user = useContext(UserContext);
-  let modal = useContext(LayersContext).tweetExtras;
+  const navigate = useNavigate();
+  const user = useContext(UserContext);
+  const modal = useContext(LayersContext).tweetExtras;
 
   return modal.show ? (
     <div className="z-[100] fixed w-screen h-screen">
@@ -25,6 +27,7 @@ export default function TweetExtrasModal(props) {
           <button
             onClick={() => {
               props.deleteFunc(modal.tweet);
+              navigate(`/${user.handle}`);
             }}
           >
             Delete

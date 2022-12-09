@@ -45,7 +45,7 @@ export const TweetContext = createContext(null);
  * change sidebar when logged in?
  */
 
-function App(props) {
+function App() {
   let [user, setUser] = useState(null);
   let [layers, setLayers] = useState({
     login: {
@@ -203,7 +203,6 @@ function App(props) {
         });
       }
     }
-    window.location.reload();
   }
 
   useEffect(() => {
