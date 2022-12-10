@@ -260,21 +260,14 @@ function App() {
                       <Routes>
                         <Route
                           path="/explore"
-                          element={<Sidebar noBar={true} />}
+                          element={<Sidebar noBar={true} user={user} />}
                         />
-                        <Route path="*" element={<Sidebar />} />
+                        <Route path="*" element={<Sidebar user={user} />} />
                       </Routes>
                     </div>
                   </div>
                 </div>
                 {user ? null : <Footer />}
-                <button
-                  onClick={() => {
-                    tweet("i sniff socks");
-                  }}
-                >
-                  xd
-                </button>
               </div>
             </Router>
           </UserContext.Provider>
