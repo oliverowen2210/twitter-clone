@@ -33,42 +33,61 @@ export default function LogInModal(props) {
           modal.toggle(false);
         }}
       ></div>
-      <div className="flex flex-col pt-[24px] items-center bg-white relative rounded-xl h-[650px] w-[600px]">
-        <Bird link={null} />
-        <button
-          onClick={() => {
-            modal.toggle(false);
-          }}
-          className="absolute top-[11px] left-[15px]"
-        >
-          <svg className="w-[22px] fill-current text-black" viewBox="0 0 24 24">
-            <g>
-              <path d={SVGs.cross.default} />
-            </g>
-          </svg>
-        </button>
-        <h2>Sign in to Twitter</h2>
-        <input
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="email"
-        />
-        <input
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="password"
-        />
-        <button
-          onClick={() => {
-            props.loginFunc(email, password);
-            modal.toggle(false);
-          }}
-          className="border-solid border-[1px] rounded-full border-gray-500 font-bold p-3"
-        >
-          Sign In
-        </button>
+      <div className="flex flex-col items-center bg-white relative rounded-xl h-[450px] w-[600px]">
+        <div className="w-full flex">
+          <button
+            onClick={() => {
+              modal.toggle(false);
+            }}
+            className="relative left-[10px]"
+          >
+            <svg
+              className="w-[22px] fill-current text-black"
+              viewBox="0 0 24 24"
+            >
+              <g>
+                <path d={SVGs.cross.default} />
+              </g>
+            </svg>
+          </button>
+
+          <div className="grow justify-center flex">
+            <Bird link={null} />
+          </div>
+          <div />
+        </div>
+        <div className="grow flex flex-col justify-start items-center justify-center min-w-[364px] max-w-[364px] px-[32px] pb-[48px] m-auto h-full">
+          <h2 className="font-bold text-3xl my-[12px]">Sign in to Twitter</h2>
+          <div className="w-full py-[12px]">
+            <input
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              placeholder="Email"
+              className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 transition-100 rounded"
+            />
+          </div>
+          <div className="w-full py-[12px]">
+            <input
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              placeholder="Password"
+              type={"password"}
+              className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 transition-100 rounded"
+            />
+          </div>
+          <div className="grow" />
+          <button
+            onClick={() => {
+              props.loginFunc(email, password);
+              modal.toggle(false);
+            }}
+            className="border-solid bg-black text-white w-full border-[1px] rounded-full border-gray-500 font-bold p-3"
+          >
+            Log In
+          </button>
+        </div>
       </div>
     </div>
   ) : null;

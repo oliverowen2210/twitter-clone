@@ -596,12 +596,8 @@ video {
   left: 0px;
 }
 
-.top-\[11px\] {
-  top: 11px;
-}
-
-.left-\[15px\] {
-  left: 15px;
+.left-\[10px\] {
+  left: 10px;
 }
 
 .bottom-\[8px\] {
@@ -626,6 +622,10 @@ video {
 
 .z-20 {
   z-index: 20;
+}
+
+.m-auto {
+  margin: auto;
 }
 
 .my-\[12px\] {
@@ -731,8 +731,8 @@ video {
   height: 100vh;
 }
 
-.h-\[650px\] {
-  height: 650px;
+.h-\[450px\] {
+  height: 450px;
 }
 
 .h-\[34px\] {
@@ -865,6 +865,10 @@ video {
   width: 335px;
 }
 
+.min-w-\[364px\] {
+  min-width: 364px;
+}
+
 .min-w-\[32px\] {
   min-width: 32px;
 }
@@ -887,6 +891,10 @@ video {
 
 .max-w-\[600px\] {
   max-width: 600px;
+}
+
+.max-w-\[364px\] {
+  max-width: 364px;
 }
 
 .max-w-\[1000px\] {
@@ -945,6 +953,10 @@ video {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-end {
   justify-content: flex-end;
 }
@@ -987,6 +999,10 @@ video {
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-\[16px\] {
@@ -1111,6 +1127,10 @@ video {
   padding: 12px;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
 .p-3 {
   padding: 0.75rem;
 }
@@ -1134,6 +1154,16 @@ video {
   padding-right: 16px;
 }
 
+.px-\[32px\] {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.py-\[12px\] {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1147,11 +1177,6 @@ video {
 .py-\[6px\] {
   padding-top: 6px;
   padding-bottom: 6px;
-}
-
-.py-\[12px\] {
-  padding-top: 12px;
-  padding-bottom: 12px;
 }
 
 .py-2 {
@@ -1174,8 +1199,8 @@ video {
   padding-bottom: 4px;
 }
 
-.pt-\[24px\] {
-  padding-top: 24px;
+.pb-\[48px\] {
+  padding-bottom: 48px;
 }
 
 .pl-\[12px\] {
@@ -1213,6 +1238,11 @@ video {
 
 .text-\[15px\] {
   font-size: 15px;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-xl {
@@ -1343,8 +1373,20 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.outline {
+  outline-style: solid;
+}
+
+.outline-1 {
+  outline-width: 1px;
+}
+
 .outline-0 {
   outline-width: 0px;
+}
+
+.outline-gray-400 {
+  outline-color: #9ca3af;
 }
 
 .duration-\[0\.2s\] {
@@ -1423,8 +1465,16 @@ video {
   outline-offset: 2px;
 }
 
+.focus\:outline-2:focus {
+  outline-width: 2px;
+}
+
 .focus\:outline-0:focus {
   outline-width: 0px;
+}
+
+.focus\:outline-black:focus {
+  outline-color: #000;
 }
 
 .group:hover .group-hover\:bg-pink-500 {

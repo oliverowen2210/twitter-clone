@@ -34,15 +34,11 @@ export const TweetContext = createContext(null);
  * style login modal
  * style signup page
  *
- * add replies
- * add retweets
  * add profile pics
- * add tweeting page
  * add searchbar functionality
  * add follows
  * make home only show tweets by followed users
  *
- * change sidebar when logged in?
  */
 
 function App() {
