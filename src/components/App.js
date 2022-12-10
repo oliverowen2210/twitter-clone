@@ -31,7 +31,6 @@ export const LayersContext = createContext(null);
 export const TweetContext = createContext(null);
 
 /**TODO:
- * style login modal
  * style signup page
  *
  * add profile pics
@@ -44,11 +43,19 @@ export const TweetContext = createContext(null);
 function App() {
   let [user, setUser] = useState(null);
   let [layers, setLayers] = useState({
+    signup: {
+      show: false,
+      toggle: function (state = true) {
+        updateLayers((layers) => {
+          layers.login.show = state;
+        });
+      },
+    },
     login: {
       show: false,
       toggle: function (state = true) {
-        updateLayers((n) => {
-          n.login.show = state;
+        updateLayers((layers) => {
+          layers.login.show = state;
         });
       },
     },
@@ -56,21 +63,21 @@ function App() {
       show: false,
       position: { left: 0, bottom: 0 },
       toggle: function (state = true) {
-        updateLayers((n) => {
-          n.userInfo.show = state;
+        updateLayers((layers) => {
+          layers.userInfo.show = state;
         });
       },
       setPosition: function (left, bottom) {
-        updateLayers((n) => {
-          n.userInfo.position = { left, bottom };
+        updateLayers((layers) => {
+          layers.userInfo.position = { left, bottom };
         });
       },
     },
     tweet: {
       show: false,
       toggle: function (state = true) {
-        updateLayers((n) => {
-          n.tweet.show = state;
+        updateLayers((layers) => {
+          layers.tweet.show = state;
         });
       },
     },
@@ -79,18 +86,18 @@ function App() {
       position: { left: 0, top: 0 },
       tweet: null,
       toggle: function (state = true) {
-        updateLayers((n) => {
-          n.tweetExtras.show = state;
+        updateLayers((layers) => {
+          layers.tweetExtras.show = state;
         });
       },
       setPosition: function (left, top) {
-        updateLayers((n) => {
-          n.tweetExtras.position = { left, top };
+        updateLayers((layers) => {
+          layers.tweetExtras.position = { left, top };
         });
       },
       setTweet: function (newTweet) {
-        updateLayers((n) => {
-          n.tweetExtras.tweet = newTweet;
+        updateLayers((layers) => {
+          layers.tweetExtras.tweet = newTweet;
         });
       },
     },
@@ -146,7 +153,7 @@ function App() {
         id,
       },
     });
-    window.location.reload();
+    window.locatio(layers).reload();
   }
 
   async function deleteTweet(tweet) {
