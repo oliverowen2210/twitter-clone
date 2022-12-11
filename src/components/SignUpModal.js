@@ -11,8 +11,6 @@ export default function SignUpModal(props) {
   let [savedURL, setSavedURL] = useState("");
   let modal = useContext(LayersContext).signup;
 
-  /**setting styles on HTML element to stop page from shifting around
-   * and storing/setting page URL when toggling modal */
   useEffect(() => {
     if (modal.show) {
       document.documentElement.style.overflowY = "hidden";
