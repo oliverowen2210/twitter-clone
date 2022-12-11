@@ -32,8 +32,8 @@ export default function TweetExtras(props) {
         color="blue-400"
         path={SVGs.dots}
         clickFunc={() => {
-          if (!user) {
-            login.toggle(true);
+          if (!user || props.tweet.authorID !== user.uid) {
+            if (!user) login.toggle(true);
             return;
           }
           modal.setTweet(props.tweet);
