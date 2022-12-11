@@ -49,23 +49,34 @@ export default function ProfilePage(props) {
 
   return user ? (
     <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
-      <Link to={`/`} className="sticky block flex p-3">
+      <Link to={`/`} className="sticky block flex p-3 z-50 top-0">
         <svg viewBox="0 0 24 24" className="w-[20px] mr-[30px]">
           <g>
             <path d={SVGs.arrow.default} />
           </g>
         </svg>
 
-        <h2 className="font-bold text-xl">{user.username}</h2>
+        <div>
+          <h2 className="font-bold text-xl">{user.username}</h2>
+          <p className="">
+            {Object.keys(user.tweets).length
+              ? `${Object.keys(user.tweets).length} tweets`
+              : null}
+          </p>
+        </div>
       </Link>
 
-      <div className="flex border-b-[1px] border-solid border-gray-200">
-        <div>background image</div>
-        <ProfilePic />
-        <div>
-          <h3>{user.username}</h3>
-          <p>{user.handle}</p>
-          <p>other stuff</p>
+      <div className="flex z-40 relative border-b-[1px] border-solid border-gray-200">
+        <div className="h-[300px] w-full flex flex-col justify-end relative">
+          <div className="bg-gray-200 w-full h-[80%] absolute top-0 z-0" />
+          <div className="relative z-10 flex">
+            <ProfilePic />
+            <div>
+              <h3>{user.username}</h3>
+              <p>{user.handle}</p>
+              <p>other stuff</p>
+            </div>
+          </div>
         </div>
       </div>
 

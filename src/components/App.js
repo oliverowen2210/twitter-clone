@@ -31,7 +31,7 @@ export const LayersContext = createContext(null);
 export const TweetContext = createContext(null);
 
 /**TODO:
- * style signup page
+ * add form validation for signup page
  *
  * add profile pics
  * add searchbar functionality
@@ -239,7 +239,7 @@ function App() {
               </div>
               <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                 <Banner logoutFunc={logout} />
-                <div className="grow-2 flex">
+                <div className="grow w-[600px] lg:w-[990px] flex">
                   <div className="flex">
                     <Routes>
                       <Route path="/home" element={<HomePage />} />
@@ -252,7 +252,7 @@ function App() {
                       <Route path="/tweet/:tweetID" element={<TweetPage />} />
                       <Route path="*" element={<HomePage />} />
                     </Routes>
-                    <div className="w-[290px] lg:w-[350px] hidden lg:block">
+                    <div className="w-[290px] mr-[10px] lg:w-[350px] hidden lg:block">
                       <Routes>
                         <Route
                           path="/explore"
