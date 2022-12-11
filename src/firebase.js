@@ -23,7 +23,7 @@ const app = firebase.initializeApp(config);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-async function createAccount(username, handle, email, password) {
+async function createAccount({ username, handle, email, password }) {
   const response = await createUserWithEmailAndPassword(auth, email, password);
   const user = response.user;
   const joinDate = new Date();
