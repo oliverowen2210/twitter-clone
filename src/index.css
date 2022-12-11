@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.profilepic {
-  width: 48px;
-  height: 48px;
-
-  background-image: url("./images/penguin.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-right: 12px;
-}
-
 .handle::before {
   content: "@";
 }

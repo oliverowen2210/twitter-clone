@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { DBContext } from "./App";
 import Tweets from "./Tweets";
 import SVGs from "../images/SVGs";
-import ProfilePic from "./ProfilePic";
+import ProfilePicBig from "./ProfilePicBig";
 
 export default function ProfilePage(props) {
   let userHandle = useParams().userID;
@@ -49,8 +49,8 @@ export default function ProfilePage(props) {
 
   return user ? (
     <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
-      <Link to={`/`} className="sticky block flex p-3 z-50 top-0">
-        <svg viewBox="0 0 24 24" className="w-[20px] mr-[30px]">
+      <Link to={`/`} className="sticky block flex py-1 top-0">
+        <svg viewBox="0 0 24 24" className="ml-[10px] w-[20px] mr-[30px]">
           <g>
             <path d={SVGs.arrow.default} />
           </g>
@@ -58,7 +58,7 @@ export default function ProfilePage(props) {
 
         <div>
           <h2 className="font-bold text-xl">{user.username}</h2>
-          <p className="">
+          <p className="text-sm">
             {Object.keys(user.tweets).length
               ? `${Object.keys(user.tweets).length} tweets`
               : null}
@@ -66,16 +66,22 @@ export default function ProfilePage(props) {
         </div>
       </Link>
 
-      <div className="flex z-40 relative border-b-[1px] border-solid border-gray-200">
-        <div className="h-[300px] w-full flex flex-col justify-end relative">
-          <div className="bg-gray-200 w-full h-[80%] absolute top-0 z-0" />
-          <div className="relative z-10 flex">
-            <ProfilePic />
-            <div>
-              <h3>{user.username}</h3>
-              <p>{user.handle}</p>
-              <p>other stuff</p>
+      <div className="flex relative border-b-[1px] border-solid border-gray-200">
+        <div className="h-fit w-full flex flex-col">
+          <div className="bg-gray-200 w-full h-[200px]" />
+          <div className="flex flex-col px-[16px] h-[200px]">
+            <div className="w-full flex h-[34%]">
+              <div className="absolute min-w-[48px] h-auto w-[20%] mb-[12px] -mt-[13%]">
+                <ProfilePicBig />
+              </div>
+              <div className="grow" />
+              <button>Edit Profile</button>
             </div>
+            <div className="mt-[4px] mb-[12px]">
+              <h3 className="font-bold text-lg">{user.username}</h3>
+              <p className="text-gray-600">@{user.handle}</p>
+            </div>
+            <div>description</div>
           </div>
         </div>
       </div>
