@@ -12,18 +12,18 @@ import {
   deleteField,
 } from "firebase/firestore";
 
-import SignupPage from "./SignupPage";
 import Footer from "./Footer";
 import Banner from "./Banner";
 import HomePage from "./HomePage";
 import ProfilePage from "./ProfilePage";
-import TweetPage from "./TweetPage.js";
-import NotFound from "./NotFound.js";
+import TweetPage from "./TweetPage";
+import NotFound from "./NotFound";
 import Sidebar from "./Sidebar";
+import SignUpModal from "./SignUpModal";
 import LogInModal from "./LogInModal";
-import UserInfoModal from "./UserInfoModal.js";
-import TweetModal from "./TweetModal.js";
-import TweetExtrasModal from "./TweetExtrasModal.js";
+import UserInfoModal from "./UserInfoModal";
+import TweetModal from "./TweetModal";
+import TweetExtrasModal from "./TweetExtrasModal";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
@@ -47,7 +47,7 @@ function App() {
       show: false,
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.login.show = state;
+          layers.signup.show = state;
         });
       },
     },
@@ -153,7 +153,7 @@ function App() {
         id,
       },
     });
-    window.locatio(layers).reload();
+    window.location.reload();
   }
 
   async function deleteTweet(tweet) {
@@ -231,6 +231,7 @@ function App() {
           <UserContext.Provider value={user}>
             <Router>
               <div id="layers">
+                <SignUpModal signupFunc={createAccount} />
                 <LogInModal loginFunc={login} />
                 <UserInfoModal logoutFunc={logout} />
                 <TweetModal tweetFunc={tweet} />
@@ -249,14 +250,6 @@ function App() {
                       <Route path="notFound" element={<NotFound />} />
                       <Route path="/:userID" element={<ProfilePage />} />
                       <Route path="/tweet/:tweetID" element={<TweetPage />} />
-                      <Route
-                        path="/signup"
-                        element={
-                          <SignupPage
-                            auth={{ login, register: createAccount }}
-                          />
-                        }
-                      />
                       <Route path="*" element={<HomePage />} />
                     </Routes>
                     <div className="w-[290px] lg:w-[350px] hidden lg:block">
