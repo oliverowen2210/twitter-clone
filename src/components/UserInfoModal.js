@@ -15,7 +15,7 @@ export default function UserInfoModal(props) {
         }}
       />
       <div
-        className="fixed transition-1000 bg-white h-[200px] shadow-md border-gray-400 w-[300px] min-w-[225px] max-w-[375px]"
+        className="flex fixed shadow-[0_0_4px_0_gray] transition-1000 bg-white h-fit shadow-md border-gray-400 w-[300px] min-w-[225px] max-w-[375px]"
         style={{
           bottom: `${modal.position.bottom + 20}px`,
           left: `${modal.position.left}px`,
@@ -23,7 +23,7 @@ export default function UserInfoModal(props) {
       >
         <button
           onClick={props.logoutFunc}
-          className="font-bold w-full p-3 transition-300 hover:bg-gray-200"
+          className="font-bold w-full p-3 transition-300 hover:bg-gray-200 text-left"
         >
           Log out @{user.handle}
         </button>
