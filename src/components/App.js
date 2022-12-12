@@ -24,6 +24,7 @@ import LogInModal from "./LogInModal";
 import UserInfoModal from "./UserInfoModal";
 import TweetModal from "./TweetModal";
 import TweetExtrasModal from "./TweetExtrasModal";
+import EditProfileModal from "./EditProfileModal.js";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
@@ -98,6 +99,14 @@ function App() {
       setTweet: function (newTweet) {
         updateLayers((layers) => {
           layers.tweetExtras.tweet = newTweet;
+        });
+      },
+    },
+    editProfile: {
+      show: false,
+      toggle: function (state = true) {
+        updateLayers((layers) => {
+          layers.editProfile.show = state;
         });
       },
     },
@@ -236,6 +245,7 @@ function App() {
                 <UserInfoModal logoutFunc={logout} />
                 <TweetModal tweetFunc={tweet} />
                 <TweetExtrasModal deleteFunc={deleteTweet} />
+                <EditProfileModal />
               </div>
               <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                 <Banner logoutFunc={logout} />

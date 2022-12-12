@@ -6,6 +6,12 @@ module.exports = {
       flexGrow: {
         2: 2,
       },
+      outlineWidth: {
+        3: 3,
+      },
+      fontWeight: {
+        inherit: "inherit",
+      },
     },
   },
   plugins: [],

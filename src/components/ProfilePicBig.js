@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function ProfilePic(props) {
+export default function ProfilePicBig(props) {
   return props.link ? (
     <Link to={`/${props.link}`} className={"relative z-10"}>
       <div

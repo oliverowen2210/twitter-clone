@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
-import { DBContext } from "./App";
+import { DBContext, LayersContext } from "./App";
 import Tweets from "./Tweets";
 import SVGs from "../images/SVGs";
 import ProfilePicBig from "./ProfilePicBig";
@@ -12,6 +12,7 @@ export default function ProfilePage(props) {
   let [user, setUser] = useState(null);
   let [tweets, setTweets] = useState([]);
   const db = useContext(DBContext);
+  const editModal = useContext(LayersContext).editProfile;
 
   useEffect(() => {
     async function getUserInfo() {
@@ -75,7 +76,14 @@ export default function ProfilePage(props) {
                 <ProfilePicBig />
               </div>
               <div className="grow" />
-              <button>Edit Profile</button>
+              <button
+                onClick={() => {
+                  editModal.toggle(true);
+                }}
+                className="relative transition duration-300 hover:bg-gray-200 h-[36px] px-[10px] font-bold rounded-full outline outline-gray-300 outline-1 top-[12px]"
+              >
+                Edit Profile
+              </button>
             </div>
             <div className="mt-[4px] mb-[12px]">
               <h3 className="font-bold text-lg">{user.username}</h3>

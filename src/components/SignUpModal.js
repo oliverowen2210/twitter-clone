@@ -7,7 +7,6 @@ export default function SignUpModal(props) {
   let [handle, setHandle] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [birthdate, setBirthdate] = useState("");
   let [savedURL, setSavedURL] = useState("");
   let modal = useContext(LayersContext).signup;
 
@@ -73,14 +72,6 @@ export default function SignUpModal(props) {
                 setEmail(e.target.value);
               }}
               placeholder="Email"
-              className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 transition-100 rounded"
-            />
-            <input
-              onChange={(e) => {
-                setBirthdate(e.target.value);
-              }}
-              placeholder="Date of birth"
-              type={"date"}
               className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 transition-100 rounded"
             />
             <input
