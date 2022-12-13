@@ -8,7 +8,7 @@ export default function TweetAuthorBig(props) {
     <div className={"relative z-10"}>
       <div className="flex">
         <Link to={`/${props.data.handle}`} className="flex">
-          <ProfilePic />
+          <ProfilePic id={props.data.authorID} />
           <div className="grow">
             <h3 className="font-bold hover:underline">{props.data.author}</h3>
             <p className="handle text-gray-500">{props.data.handle}</p>

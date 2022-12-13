@@ -11,6 +11,7 @@ import ProfilePic from "./ProfilePic";
 
 export default function Tweet(props) {
   const user = useContext(UserContext);
+
   return (
     <div
       className={
@@ -62,7 +63,10 @@ export default function Tweet(props) {
           /**small tweet */
           <div className="flex">
             <div>
-              <ProfilePic link={`/${props.data.handle}`} />
+              <ProfilePic
+                link={`/${props.data.handle}`}
+                id={props.data.authorID}
+              />
               {props.isReply ? (
                 <div className="w-full flex flex-col">
                   <div className="h-[8px] flex basis-[48px] justify-center relative bottom-[8px] right-[6px]">

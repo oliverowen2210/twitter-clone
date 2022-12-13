@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { UserContext, DBContext, LayersContext } from "./App";
 import Tweets from "./Tweets";
 import SVGs from "../images/SVGs";
-import ProfilePicBig from "./ProfilePicBig";
+import ProfilePic from "./ProfilePic";
 
 export default function ProfilePage(props) {
   let currentUser = useContext(UserContext);
@@ -70,11 +70,18 @@ export default function ProfilePage(props) {
 
       <div className="flex relative border-b-[1px] border-solid border-gray-200">
         <div className="h-fit w-full flex flex-col">
-          <div className="bg-gray-200 w-full h-[200px]" />
+          <div
+            style={
+              userData.banner
+                ? { backgroundImage: `url(${userData.banner})` }
+                : null
+            }
+            className="bg-gray-200 bg-center bg-no-repeat bg-cover w-full h-[200px]"
+          />
           <div className="flex flex-col px-[16px] h-[200px]">
             <div className="w-full flex h-[34%]">
               <div className="absolute min-w-[48px] h-auto w-[20%] mb-[12px] -mt-[13%]">
-                <ProfilePicBig />
+                <ProfilePic big={true} id={userData.uid} />
               </div>
               <div className="grow" />
               {userData.uid === currentUser.uid ? (

@@ -8,6 +8,11 @@ export default function TweetExtrasModal(props) {
   const user = useContext(UserContext);
   const modal = useContext(LayersContext).tweetExtras;
 
+  async function handleDelete() {
+    await props.deleteFunc(modal.tweet);
+    window.location.reload();
+  }
+
   return modal.show ? (
     <div className="z-[100] fixed w-screen h-screen">
       <div
@@ -26,8 +31,7 @@ export default function TweetExtrasModal(props) {
         {modal.tweet.authorID === user.uid ? (
           <button
             onClick={() => {
-              props.deleteFunc(modal.tweet);
-              navigate(`/${user.handle}`);
+              handleDelete();
             }}
           >
             Delete

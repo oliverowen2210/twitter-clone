@@ -11,6 +11,7 @@ export default function TweetExtras(props) {
   const ref = useRef(null);
 
   const updateModalRect = useCallback(() => {
+    if (!ref.current) return;
     const boundingRect = ref.current.getBoundingClientRect();
     const left = boundingRect.left + 16;
     const top = boundingRect.top;
@@ -22,7 +23,7 @@ export default function TweetExtras(props) {
 
     window.addEventListener("resize", () => {
       clearTimeout(timer);
-      timer = setTimeout(updateModalRect, 100);
+      timer = setTimeout(updateModalRect, 200);
     });
   }, [updateModalRect]);
 

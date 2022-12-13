@@ -42,7 +42,9 @@ export const TweetContext = createContext(null);
 /**TODO:
  * add form validation for signup page
  *
- * add profile pics
+ * add "deleted tweet" replies
+ * add bio and name changes
+ * add account deletion
  * add searchbar functionality
  * add follows
  * make home only show tweets by followed users
@@ -56,6 +58,7 @@ function App() {
       show: false,
       toggle: function (state = true) {
         updateLayers((layers) => {
+          layers.signup.show = state;
           layers.signup.show = state;
         });
       },
@@ -171,6 +174,7 @@ function App() {
       },
     });
     window.location.reload();
+    window.location.reload();
   }
 
   async function deleteTweet(tweet) {
@@ -245,48 +249,49 @@ function App() {
     <LayersContext.Provider value={layers}>
       <DBContext.Provider value={db}>
         <StorageContext.Provider value={storage}>
-        <TweetContext.Provider value={tweet}>
-          <UserContext.Provider value={user}>
-            <Router>
-              <div id="layers">
-                <SignUpModal signupFunc={createAccount} />
-                <LogInModal loginFunc={login} />
-                <UserInfoModal logoutFunc={logout} />
-                <TweetModal tweetFunc={tweet} />
-                <TweetExtrasModal deleteFunc={deleteTweet} />
-                <EditProfileModal />
-              </div>
-              <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
-                <Banner logoutFunc={logout} />
-                <div className="grow w-[600px] lg:w-[990px] flex">
-                  <div className="flex">
-                    <Routes>
-                      <Route path="/home" element={<HomePage />} />
-                      <Route
-                        path="/explore"
-                        element={<HomePage showBar={true} />}
-                      />
-                      <Route path="notFound" element={<NotFound />} />
-                      <Route path="/:userID" element={<ProfilePage />} />
-                      <Route path="/tweet/:tweetID" element={<TweetPage />} />
-                      <Route path="*" element={<HomePage />} />
-                    </Routes>
-                    <div className="w-[290px] mr-[10px] lg:w-[350px] hidden lg:block">
+          <TweetContext.Provider value={tweet}>
+            <UserContext.Provider value={user}>
+              <Router>
+                <div id="layers">
+                  <SignUpModal signupFunc={createAccount} />
+                  <SignUpModal signupFunc={createAccount} />
+                  <LogInModal loginFunc={login} />
+                  <UserInfoModal logoutFunc={logout} />
+                  <TweetModal tweetFunc={tweet} />
+                  <TweetExtrasModal deleteFunc={deleteTweet} />
+                  <EditProfileModal />
+                </div>
+                <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
+                  <Banner logoutFunc={logout} />
+                  <div className="grow w-[600px] lg:w-[990px] flex">
+                    <div className="flex">
                       <Routes>
+                        <Route path="/home" element={<HomePage />} />
                         <Route
                           path="/explore"
-                          element={<Sidebar noBar={true} user={user} />}
+                          element={<HomePage showBar={true} />}
                         />
-                        <Route path="*" element={<Sidebar user={user} />} />
+                        <Route path="notFound" element={<NotFound />} />
+                        <Route path="/:userID" element={<ProfilePage />} />
+                        <Route path="/tweet/:tweetID" element={<TweetPage />} />
+                        <Route path="*" element={<HomePage />} />
                       </Routes>
+                      <div className="w-[290px] mr-[10px] lg:w-[350px] hidden lg:block">
+                        <Routes>
+                          <Route
+                            path="/explore"
+                            element={<Sidebar noBar={true} user={user} />}
+                          />
+                          <Route path="*" element={<Sidebar user={user} />} />
+                        </Routes>
+                      </div>
                     </div>
                   </div>
+                  {user ? null : <Footer />}
                 </div>
-                {user ? null : <Footer />}
-              </div>
-            </Router>
-          </UserContext.Provider>
-        </TweetContext.Provider>
+              </Router>
+            </UserContext.Provider>
+          </TweetContext.Provider>
         </StorageContext.Provider>
       </DBContext.Provider>
     </LayersContext.Provider>

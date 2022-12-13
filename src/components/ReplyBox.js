@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useContext } from "react";
 
-import { TweetContext } from "./App";
+import { UserContext, TweetContext } from "./App";
 import ProfilePic from "./ProfilePic";
 
 export default function ReplyBox(props) {
-  const [inputValue, setInputValue] = useState("");
+  const user = useContext(UserContext);
   const tweet = useContext(TweetContext);
+
+  const [inputValue, setInputValue] = useState("");
 
   let locked = useRef(null);
 
@@ -22,7 +24,7 @@ export default function ReplyBox(props) {
 
   return (
     <div className="flex px-4 py-3 items-center border-gray-100 border-b-[1px]">
-      <ProfilePic />
+      <ProfilePic id={user.uid} />
       <textarea
         placeholder="Tweet your reply"
         className="text-lg grow placeholder-slate-500 focus:outline-0 cursor-text resize-none"
