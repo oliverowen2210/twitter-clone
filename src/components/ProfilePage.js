@@ -2,22 +2,23 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
-import { DBContext, LayersContext } from "./App";
+import { UserContext, DBContext, LayersContext } from "./App";
 import Tweets from "./Tweets";
 import SVGs from "../images/SVGs";
 import ProfilePicBig from "./ProfilePicBig";
 
 export default function ProfilePage(props) {
+  let currentUser = useContext(UserContext);
   let userHandle = useParams().userID;
-  let [user, setUser] = useState(null);
+  let [userData, setUserData] = useState(null);
   let [tweets, setTweets] = useState([]);
   const db = useContext(DBContext);
   const editModal = useContext(LayersContext).editProfile;
 
   useEffect(() => {
-    async function getUserInfo() {
-      let uidDocRef = doc(db, "handles", userHandle);
-      let uidDoc = await getDoc(uidDocRef);
+    async function getUserData() {
+      let uidRef = doc(db, "handles", userHandle);
+      let uidDoc = await getDoc(uidRef);
       let uid;
       try {
         uid = uidDoc.data().id;
@@ -27,17 +28,17 @@ export default function ProfilePage(props) {
       let docRef = doc(db, "users", uid);
       let userDoc = await getDoc(docRef);
       let userInfo = userDoc.data();
-      setUser(userInfo);
+      setUserData(userInfo);
     }
-    getUserInfo();
+    getUserData();
   }, [db, userHandle]);
 
   useEffect(() => {
     async function getTweets() {
-      if (!user) return;
+      if (!userData) return;
       let newTweets = [];
-      for (let userTweet in user.tweets) {
-        let tweet = user.tweets[userTweet];
+      for (let userTweet in userData.tweets) {
+        let tweet = userData.tweets[userTweet];
         const tweetRef = doc(db, "tweets", tweet.id);
         const tweetDoc = await getDoc(tweetRef);
         const tweetData = tweetDoc.data();
@@ -46,9 +47,9 @@ export default function ProfilePage(props) {
       setTweets(newTweets);
     }
     getTweets();
-  }, [user, db]);
+  }, [userData, db]);
 
-  return user ? (
+  return userData ? (
     <div className="w-[600px] border-x-[1px] border-gray-200 border-solid grow-2 min-h-[99vh] max-w-[600px]">
       <Link to={`/`} className="sticky block flex py-1 top-0">
         <svg viewBox="0 0 24 24" className="ml-[10px] w-[20px] mr-[30px]">
@@ -58,10 +59,10 @@ export default function ProfilePage(props) {
         </svg>
 
         <div>
-          <h2 className="font-bold text-xl">{user.username}</h2>
+          <h2 className="font-bold text-xl">{userData.username}</h2>
           <p className="text-sm">
-            {Object.keys(user.tweets).length
-              ? `${Object.keys(user.tweets).length} tweets`
+            {Object.keys(userData.tweets).length
+              ? `${Object.keys(userData.tweets).length} tweets`
               : null}
           </p>
         </div>
@@ -76,18 +77,20 @@ export default function ProfilePage(props) {
                 <ProfilePicBig />
               </div>
               <div className="grow" />
-              <button
-                onClick={() => {
-                  editModal.toggle(true);
-                }}
-                className="relative transition duration-300 hover:bg-gray-200 h-[36px] px-[10px] font-bold rounded-full outline outline-gray-300 outline-1 top-[12px]"
-              >
-                Edit Profile
-              </button>
+              {userData.uid === currentUser.uid ? (
+                <button
+                  onClick={() => {
+                    editModal.toggle(true);
+                  }}
+                  className="relative transition duration-300 hover:bg-gray-200 h-[36px] px-[10px] font-bold rounded-full outline outline-gray-300 outline-1 top-[12px]"
+                >
+                  Edit Profile
+                </button>
+              ) : null}
             </div>
             <div className="mt-[4px] mb-[12px]">
-              <h3 className="font-bold text-lg">{user.username}</h3>
-              <p className="text-gray-600">@{user.handle}</p>
+              <h3 className="font-bold text-lg">{userData.username}</h3>
+              <p className="text-gray-600">@{userData.handle}</p>
             </div>
             <div>description</div>
           </div>
