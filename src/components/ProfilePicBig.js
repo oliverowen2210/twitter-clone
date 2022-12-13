@@ -10,7 +10,13 @@ export default function ProfilePicBig(props) {
     </Link>
   ) : (
     <div className="flex items-center justify-center absolute w-[140px] h-[140px] bg-white rounded-full">
-      <div className="bg-center bg-cover bg-no-repeat bg-[url('./images/penguin.png')] rounded-full w-[133.5px] h-[133.5px]" />
+      <div
+        style={props.src ? { backgroundImage: `url("${props.src}")` } : null}
+        className={
+          (!props.src ? " bg-[url('./images/penguin.png')] " : "") +
+          "bg-center bg-cover bg-no-repeat rounded-full w-[133.5px] h-[133.5px]"
+        }
+      />
     </div>
   );
 }
