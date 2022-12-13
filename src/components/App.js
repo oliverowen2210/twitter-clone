@@ -1,6 +1,13 @@
 import { useState, useEffect, createContext } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
-import { db, auth, createAccount, login, logout } from "../firebase.js";
+import {
+  db,
+  auth,
+  storage,
+  createAccount,
+  login,
+  logout,
+} from "../firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 import {
   doc,
@@ -28,6 +35,7 @@ import EditProfileModal from "./EditProfileModal.js";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
+export const StorageContext = createContext(null);
 export const LayersContext = createContext(null);
 export const TweetContext = createContext(null);
 
@@ -236,6 +244,7 @@ function App() {
   return (
     <LayersContext.Provider value={layers}>
       <DBContext.Provider value={db}>
+        <StorageContext.Provider value={storage}>
         <TweetContext.Provider value={tweet}>
           <UserContext.Provider value={user}>
             <Router>
@@ -278,6 +287,7 @@ function App() {
             </Router>
           </UserContext.Provider>
         </TweetContext.Provider>
+        </StorageContext.Provider>
       </DBContext.Provider>
     </LayersContext.Provider>
   );

@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const config = {
   apiKey: "AIzaSyDPy8ZjzbrfkdXSb_j54C9XmfUmx4gwtwc",
@@ -22,6 +23,7 @@ const config = {
 const app = firebase.initializeApp(config);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 async function createAccount({ username, handle, email, password }) {
   const response = await createUserWithEmailAndPassword(auth, email, password);
@@ -32,6 +34,9 @@ async function createAccount({ username, handle, email, password }) {
     email,
     uid: user.uid,
     handle,
+    banner: null,
+    PFP: null,
+    bio: "",
     authProvider: "local",
     joinDate: {
       date: joinDate,
@@ -68,4 +73,4 @@ async function logout() {
 }
 
 export default app;
-export { db, auth, createAccount, login, logout };
+export { db, auth, storage, createAccount, login, logout };
