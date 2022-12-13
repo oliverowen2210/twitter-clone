@@ -8,7 +8,7 @@ export default function TweetExtras(props) {
   const user = useContext(UserContext);
   const modal = useContext(LayersContext).tweetExtras;
   const login = useContext(LayersContext).login;
-  const ref = useRef();
+  const ref = useRef(null);
 
   const updateModalRect = useCallback(() => {
     const boundingRect = ref.current.getBoundingClientRect();
