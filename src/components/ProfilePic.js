@@ -16,7 +16,8 @@ export default function ProfilePic(props) {
         URL = await getDownloadURL(PFPRef);
         setPFPURL(URL);
       } catch (err) {
-        setPFPURL(null);
+        URL = await getDownloadURL(ref(storage, "defaultPFP.png"));
+        setPFPURL(URL);
       }
     }
     getURL();
