@@ -1053,6 +1053,10 @@ video {
   cursor: text;
 }
 
+.cursor-default {
+  cursor: default;
+}
+
 .resize-none {
   resize: none;
 }
@@ -1250,14 +1254,6 @@ video {
 
 .bg-opacity-30 {
   --tw-bg-opacity: 0.3;
-}
-
-.bg-\[url\(\"\.\/images\/penguin\.png\"\)\] {
-  background-image: url("./images/penguin.png");
-}
-
-.bg-\[url\(\'\.\/images\/penguin\.png\'\)\] {
-  background-image: url('./images/penguin.png');
 }
 
 .bg-cover {
@@ -1610,6 +1606,10 @@ video {
           transform: scaleX(-1);
   -webkit-transform-origin: center center;
           transform-origin: center center;
+}
+
+.invalid\:outline-red-200:invalid {
+  outline-color: #fecaca;
 }
 
 .focus-within\:font-bold:focus-within {

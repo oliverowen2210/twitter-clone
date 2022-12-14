@@ -282,6 +282,7 @@ function App() {
                             path="/explore"
                             element={<Sidebar noBar={true} user={user} />}
                           />
+                          <Route path="/notFound" element={<div />} />
                           <Route path="*" element={<Sidebar user={user} />} />
                         </Routes>
                       </div>
