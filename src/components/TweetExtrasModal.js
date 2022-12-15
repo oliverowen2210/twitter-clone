@@ -1,10 +1,8 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { UserContext, LayersContext } from "./App";
 
 export default function TweetExtrasModal(props) {
-  const navigate = useNavigate();
   const user = useContext(UserContext);
   const modal = useContext(LayersContext).tweetExtras;
 
