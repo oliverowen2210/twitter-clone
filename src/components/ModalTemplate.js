@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 function modalTemplate() {
   const modal = {
     /**get modal from Layers context */
