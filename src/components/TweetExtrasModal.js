@@ -1,6 +1,7 @@
 import { useContext } from "react";
 
 import { UserContext, LayersContext } from "./App";
+import SVGs from "../images/SVGs";
 
 export default function TweetExtrasModal(props) {
   const user = useContext(UserContext);
@@ -20,7 +21,7 @@ export default function TweetExtrasModal(props) {
         }}
       />
       <div
-        className="fixed transition-1000 bg-white h-fit shadow-md border-gray-400 w-[335px] min-w-[225px] max-w-[375px]"
+        className="flex fixed shadow-[0_0_4px_0_gray] bg-white h-fit shadow-md border-gray-400 w-[200px] min-w-[225px] max-w-[375px]"
         style={{
           left: `${modal.position.left - 335}px`,
           top: `${modal.position.top}px`,
@@ -31,8 +32,14 @@ export default function TweetExtrasModal(props) {
             onClick={() => {
               handleDelete();
             }}
+            className="flex items-center text-red-500 font-bold w-full p-2 duration-200 hover:bg-gray-200 text-left"
           >
-            Delete
+            <svg viewBox="0 0 24 24" className="w-[20px] fill-current">
+              <g>
+                <path d={SVGs.trashcan.default} />
+              </g>
+            </svg>
+            <p className="ml-[12px]">Delete</p>
           </button>
         ) : null}
       </div>
