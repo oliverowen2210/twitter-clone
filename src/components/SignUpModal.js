@@ -44,11 +44,9 @@ export default function SignUpModal(props) {
   async function checkIfHandleTaken(handle) {
     const docRef = doc(db, "handles", handle);
     try {
-      {
-        let docData = await getDoc(docRef);
-        if (!!docData.data()) return true;
-        else return false;
-      }
+      let docData = await getDoc(docRef);
+      if (!!docData.data()) return true;
+      else return false;
     } catch (err) {
       console.log(err);
     }
