@@ -8,7 +8,11 @@ import {
   login,
   logout,
 } from "../firebase.js";
-import { onAuthStateChanged } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  deleteUser,
+  reauthenticateWithCredential,
+} from "firebase/auth";
 import {
   doc,
   setDoc,
@@ -42,9 +46,6 @@ export const TweetContext = createContext(null);
 /**TODO:
  * add bio and name changes
  * add account deletion
- * add searchbar functionality
- * add follows
- * make home only show tweets by followed users
  */
 
 function App() {
@@ -114,6 +115,14 @@ function App() {
       toggle: function (state = true) {
         updateLayers((layers) => {
           layers.editProfile.show = state;
+        });
+      },
+    },
+    deleteAccount: {
+      show: false,
+      toggle: function (state = true) {
+        updateLayers((layers) => {
+          layers.deleteAccount.show = state;
         });
       },
     },
@@ -225,6 +234,24 @@ function App() {
     }
   }
 
+  async function deleteAccount() {
+    try {
+      await deleteUser(auth.currentUser);
+    } catch (err) {
+      return;
+    }
+    if (Object.keys(user.tweets).length) {
+      for (let tweet in user.tweets) {
+        const tweetRef = doc(db, "tweets", tweet.id);
+        const tweetDoc = await getDoc(tweetRef);
+        const tweetData = tweetDoc.data();
+        await deleteTweet(tweetData);
+      }
+    }
+    await deleteDoc(db, "handles", user.handle);
+    await deleteDoc(db, "users", user.uid);
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (newUser) => {
       console.log("auth state change in app");
@@ -252,7 +279,10 @@ function App() {
                   <SignUpModal signupFunc={createAccount} />
                   <SignUpModal signupFunc={createAccount} />
                   <LogInModal loginFunc={login} />
-                  <UserInfoModal logoutFunc={logout} />
+                  <UserInfoModal
+                    logoutFunc={logout}
+                    deleteFunc={deleteAccount}
+                  />
                   <TweetModal tweetFunc={tweet} />
                   <TweetExtrasModal deleteFunc={deleteTweet} />
                   <EditProfileModal />
