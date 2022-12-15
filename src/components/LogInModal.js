@@ -62,7 +62,7 @@ export default function LogInModal(props) {
                 setEmail(e.target.value);
               }}
               placeholder="Email"
-              className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 transition-100 rounded"
+              className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 duration-100 rounded"
             />
           </div>
           <div className="w-full py-[12px]">
@@ -72,7 +72,7 @@ export default function LogInModal(props) {
               }}
               placeholder="Password"
               type={"password"}
-              className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 transition-100 rounded"
+              className="p-4 w-full outline-gray-400 outline outline-1 focus:outline-black focus:outline-2 duration-100 rounded"
             />
           </div>
           <div className="grow" />

@@ -32,7 +32,7 @@ export default function UserInfo() {
           modal.toggle(true);
           updateModalRect();
         }}
-        className="flex rounded-full transition-500 xl:px-4 mb-2 py-2 hover:bg-gray-300"
+        className="flex rounded-full duration-500 xl:px-4 mb-2 py-2 hover:bg-gray-300"
       >
         <ProfilePic id={user.uid} />
         <div className="hidden xl:block">
