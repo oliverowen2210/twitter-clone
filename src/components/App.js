@@ -40,15 +40,11 @@ export const LayersContext = createContext(null);
 export const TweetContext = createContext(null);
 
 /**TODO:
- * add form validation for signup page
- *
- * add "deleted tweet" replies
  * add bio and name changes
  * add account deletion
  * add searchbar functionality
  * add follows
  * make home only show tweets by followed users
- *
  */
 
 function App() {
