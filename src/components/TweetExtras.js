@@ -13,7 +13,7 @@ export default function TweetExtras(props) {
   const updateModalRect = useCallback(() => {
     if (!ref.current) return;
     const boundingRect = ref.current.getBoundingClientRect();
-    const left = boundingRect.left + 16;
+    const left = boundingRect.left + 125;
     const top = boundingRect.top;
     modal.setPosition(left, top);
   }, [modal]);
