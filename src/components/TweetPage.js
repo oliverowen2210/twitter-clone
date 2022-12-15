@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { getDoc, doc } from "firebase/firestore";
 
 import { UserContext, DBContext } from "./App";
 import Tweets from "./Tweets";
+import DeletedTweet from "./DeletedTweet";
 import ReplyBox from "./ReplyBox";
 import SVGs from "../images/SVGs";
 
@@ -20,26 +21,45 @@ export default function TweetPage(props) {
     async function getTweet() {
       if (tweet && tweet.id === tweetId) return;
       const tweetDoc = await getDoc(doc(db, "tweets", tweetId));
-      setTweet(tweetDoc.data());
+      const tweetData = tweetDoc.data();
+      if (tweetData === undefined) {
+        setTweet("deleted");
+      } else setTweet(tweetData);
     }
 
     async function getTopReplies() {
       console.log("getting replies");
-      if (!tweet || !tweet.replyTo) return;
-      const replyDoc = await getDoc(doc(db, "tweets", tweet.replyTo.id));
-      const replyData = replyDoc.data();
-      setTopReply(replyData);
+      if (!tweet || tweet === "deleted" || !tweet.replyTo) return;
+      let replyData;
 
-      if (!replyData.replyTo) return;
-      const secondReplyDoc = await getDoc(
-        doc(db, "tweets", replyData.replyTo.id)
-      );
-      const secondReplyData = secondReplyDoc.data();
-      setSecondTopReply(secondReplyData);
+      try {
+        const replyDoc = await getDoc(doc(db, "tweets", tweet.replyTo.id));
+        replyData = replyDoc.data();
+        setTopReply(replyData);
+
+        if (!replyData.replyTo) return;
+      } catch (err) {
+        if (err instanceof TypeError) {
+          setTopReply("deleted");
+          return;
+        }
+      }
+
+      try {
+        const secondReplyDoc = await getDoc(
+          doc(db, "tweets", replyData.replyTo.id)
+        );
+        const secondReplyData = secondReplyDoc.data();
+        setSecondTopReply(secondReplyData);
+      } catch (err) {
+        if (err instanceof TypeError) {
+          setSecondTopReply("deleted");
+        }
+      }
     }
 
     async function getBottomReplies() {
-      if (!tweet || !Object.keys(tweet.replies).length) {
+      if (!tweet || tweet === "deleted" || !Object.keys(tweet.replies).length) {
         setBottomReplies([]);
         return;
       }
@@ -71,24 +91,36 @@ export default function TweetPage(props) {
       </Link>
 
       {secondTopReply ? (
-        <Tweets
-          tweets={[secondTopReply]}
-          isReply={true}
-          noBorder={true}
-          noRetweet={true}
-        />
+        secondTopReply === "deleted" ? (
+          <DeletedTweet />
+        ) : (
+          <Tweets
+            tweets={[secondTopReply]}
+            isReply={true}
+            noBorder={true}
+            noRetweet={true}
+          />
+        )
       ) : null}
 
       {topReply ? (
-        <Tweets
-          tweets={[topReply]}
-          isReply={true}
-          noBorder={true}
-          noRetweet={true}
-        />
+        topReply === "deleted" ? (
+          <DeletedTweet />
+        ) : (
+          <Tweets
+            tweets={[topReply]}
+            isReply={true}
+            noBorder={true}
+            noRetweet={true}
+          />
+        )
       ) : null}
 
-      <Tweets tweets={[tweet]} big={true} noBorder={true} noRetweet={true} />
+      {tweet === "deleted" ? (
+        <Navigate to="/notFound" />
+      ) : (
+        <Tweets tweets={[tweet]} big={true} noBorder={true} noRetweet={true} />
+      )}
 
       {user ? <ReplyBox replyingTo={tweet} /> : null}
 
