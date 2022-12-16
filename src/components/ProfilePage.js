@@ -78,7 +78,13 @@ export default function ProfilePage(props) {
             }
             className="bg-gray-200 bg-center bg-no-repeat bg-cover w-full h-[200px]"
           />
-          <div className="flex flex-col px-[16px] h-[200px]">
+          <div
+            className={
+              (userData.bio || userData.bio === ""
+                ? "h-fit "
+                : "h-[200px] justify-between") + "flex flex-col px-[16px]"
+            }
+          >
             <div className="w-full flex h-[34%]">
               <div className="absolute min-w-[48px] h-auto w-[20%] mb-[12px] -mt-[13%]">
                 <ProfilePic big={true} id={userData.uid} />
@@ -99,7 +105,7 @@ export default function ProfilePage(props) {
               <h3 className="font-bold text-lg">{userData.username}</h3>
               <p className="text-gray-600">@{userData.handle}</p>
             </div>
-            <div>description</div>
+            {userData.bio ? <div>{userData.bio}</div> : null}
           </div>
         </div>
       </div>

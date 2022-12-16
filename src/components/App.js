@@ -36,7 +36,6 @@ export const TweetContext = createContext(null);
 
 /**TODO:
  * add bio and name changes
- * add account deletion
  */
 
 function App() {

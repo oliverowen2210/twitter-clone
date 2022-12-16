@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -26,6 +26,12 @@ export default function EditProfileModal() {
     setSelectedPFP,
   ];
 
+  useEffect(() => {
+    if (!user) return;
+    setSelectedName(user.username);
+    if (!!user.bio) setSelectedBio(user.bio);
+  }, [user]);
+
   function didProfileChange() {
     for (let stateVar of stateVars) {
       if (stateVar) return true;
@@ -44,6 +50,20 @@ export default function EditProfileModal() {
   }
 
   async function handleSave() {
+    if (selectedName) {
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, {
+        username: selectedName,
+      });
+    }
+
+    if (selectedBio || selectedBio === "") {
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, {
+        bio: selectedBio,
+      });
+    }
+
     if (selectedBanner) {
       const imageRef = ref(storage, `${user.uid}/banner`);
 
@@ -197,30 +217,33 @@ export default function EditProfileModal() {
 
         <div className="w-full flex justify-center">
           <form className="w-[95%]">
-            <div className="mb-[32px] group focus-within:font-bold focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
-              <label
-                htmlFor="profileNameInput"
-                className="pl-[8px] font-inherit"
-              >
+            <div className="pl-[8px] mb-[32px] group focus-within:font-bold focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
+              <label htmlFor="profileNameInput" className=" font-inherit">
                 Name
               </label>
               <input
                 id="profileNameInput"
                 name="profileNameInput"
                 className="focus:outline-0"
+                value={selectedName}
+                onChange={(e) => {
+                  setSelectedName(e.target.value);
+                }}
               />
             </div>
-            <div className="group focus-within:font-bold focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
-              <label
-                htmlFor="profileBioInput"
-                className="pl-[8px] font-inherit"
-              >
+            <div className="pl-[8px] group focus-within:font-bold focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
+              <label htmlFor="profileBioInput" className="font-inherit">
                 Bio
               </label>
               <textarea
                 id="profileBioInput"
                 name="profileBioInput"
-                className="focus:outline-0 max-h-[150px]"
+                className="focus:outline-0 max-h-[150px] resize-none"
+                value={selectedBio}
+                onChange={(e) => {
+                  setSelectedBio(e.target.value);
+                }}
+                maxLength={150}
               />
             </div>
           </form>

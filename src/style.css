@@ -829,6 +829,10 @@ video {
   height: fit-content;
 }
 
+.h-\[125px\] {
+  height: 125px;
+}
+
 .h-\[34\%\] {
   height: 34%;
 }
@@ -1107,10 +1111,6 @@ video {
 
 .justify-between {
   justify-content: space-between;
-}
-
-.justify-evenly {
-  justify-content: space-evenly;
 }
 
 .gap-\[32px\] {
