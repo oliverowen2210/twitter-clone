@@ -34,10 +34,6 @@ export const StorageContext = createContext(null);
 export const LayersContext = createContext(null);
 export const TweetContext = createContext(null);
 
-/**TODO:
- * add bio and name changes
- */
-
 function App() {
   let [user, setUser] = useState(null);
   let [layers, setLayers] = useState({
