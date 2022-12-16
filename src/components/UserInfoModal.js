@@ -5,6 +5,12 @@ import { UserContext, LayersContext } from "./App";
 export default function UserInfoModal(props) {
   let user = useContext(UserContext);
   let modal = useContext(LayersContext).userInfo;
+  let deleteAccountModal = useContext(LayersContext).deleteAccount;
+
+  async function handleDeleteRequest() {
+    modal.toggle(false);
+    deleteAccountModal.toggle(true);
+  }
 
   return modal.show ? (
     <div className="z-[100] fixed w-screen h-screen">
@@ -28,7 +34,7 @@ export default function UserInfoModal(props) {
           Log out @{user.handle}
         </button>
         <button
-          onClick={props.deleteFunc}
+          onClick={handleDeleteRequest}
           className="font-bold w-full text-red-500 p-3 duration-300 hover:bg-gray-200 text-left"
         >
           Delete account
