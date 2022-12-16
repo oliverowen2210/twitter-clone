@@ -8,11 +8,7 @@ import {
   login,
   logout,
 } from "../firebase.js";
-import {
-  onAuthStateChanged,
-  deleteUser,
-  reauthenticateWithCredential,
-} from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   doc,
   setDoc,
@@ -23,6 +19,7 @@ import {
   deleteField,
 } from "firebase/firestore";
 
+import AppLayers from "./AppLayers.js";
 import Footer from "./Footer";
 import Banner from "./Banner";
 import HomePage from "./HomePage";
@@ -30,12 +27,6 @@ import ProfilePage from "./ProfilePage";
 import TweetPage from "./TweetPage";
 import NotFound from "./NotFound";
 import Sidebar from "./Sidebar";
-import SignUpModal from "./SignUpModal";
-import LogInModal from "./LogInModal";
-import UserInfoModal from "./UserInfoModal";
-import TweetModal from "./TweetModal";
-import TweetExtrasModal from "./TweetExtrasModal";
-import EditProfileModal from "./EditProfileModal.js";
 
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
@@ -183,6 +174,7 @@ function App() {
   }
 
   async function deleteTweet(tweet) {
+    if (!tweet) return;
     let tweetID;
     if (tweet.originalID) tweetID = tweet.originalID;
     else tweetID = tweet.id;
@@ -234,24 +226,6 @@ function App() {
     }
   }
 
-  async function deleteAccount() {
-    try {
-      await deleteUser(auth.currentUser);
-    } catch (err) {
-      return;
-    }
-    if (Object.keys(user.tweets).length) {
-      for (let tweet in user.tweets) {
-        const tweetRef = doc(db, "tweets", tweet.id);
-        const tweetDoc = await getDoc(tweetRef);
-        const tweetData = tweetDoc.data();
-        await deleteTweet(tweetData);
-      }
-    }
-    await deleteDoc(db, "handles", user.handle);
-    await deleteDoc(db, "users", user.uid);
-  }
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (newUser) => {
       console.log("auth state change in app");
@@ -275,18 +249,15 @@ function App() {
           <TweetContext.Provider value={tweet}>
             <UserContext.Provider value={user}>
               <Router>
-                <div id="layers">
-                  <SignUpModal signupFunc={createAccount} />
-                  <SignUpModal signupFunc={createAccount} />
-                  <LogInModal loginFunc={login} />
-                  <UserInfoModal
-                    logoutFunc={logout}
-                    deleteFunc={deleteAccount}
-                  />
-                  <TweetModal tweetFunc={tweet} />
-                  <TweetExtrasModal deleteFunc={deleteTweet} />
-                  <EditProfileModal />
-                </div>
+                <AppLayers
+                  functions={{
+                    login,
+                    logout,
+                    createAccount,
+                    tweet,
+                    deleteTweet,
+                  }}
+                />
                 <div className={"z-10 flex min-h-[100vh] overflow-x-hidden"}>
                   <Banner logoutFunc={logout} />
                   <div className="grow w-[600px] lg:w-[990px] flex">
