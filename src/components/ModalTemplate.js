@@ -1,12 +1,13 @@
-/* eslint-disable no-unused-vars */
-function modalTemplate() {
+import { useContext } from "react";
+
+import { LayersContext } from "./App";
+
+export default function modalTemplate() {
+  /**const modal = useContext(LayersContext).modalName*/
   const modal = {
-    /**get modal from Layers context */
-    show: false,
-    toggle: function () {
-      return;
-    },
+    show: true,
   };
+
   return modal.show ? (
     <div className="bg-gray-800 z-[100] fixed top-0 left-0 w-screen h-screen bg-opacity-30 flex justify-center items-center">
       <div
