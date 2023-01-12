@@ -223,7 +223,6 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (newUser) => {
-      console.log("auth state change in app");
       if (newUser) {
         let docRef = doc(db, "users", newUser.uid);
         let docData = await getDoc(docRef);

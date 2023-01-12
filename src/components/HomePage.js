@@ -13,7 +13,6 @@ export default function HomePage(props) {
   useEffect(() => {
     async function getTweets() {
       if (tweets.length) return;
-      console.log("getting tweets collection");
       const q = query(collection(db, "tweets"), orderBy("datePosted"));
       const qSnap = await getDocs(q);
       let tweetData = [];
