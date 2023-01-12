@@ -101,7 +101,7 @@ export default function ProfilePage(props) {
                 </button>
               ) : null}
             </div>
-            <div className="mt-[4px] mb-[12px]">
+            <div className="mt-[4px] mb-[12px] z-0">
               <h3 className="font-bold text-lg">{userData.username}</h3>
               <p className="text-gray-600">@{userData.handle}</p>
             </div>
