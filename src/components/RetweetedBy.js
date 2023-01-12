@@ -1,3 +1,4 @@
+import React from "react";
 import SVGs from "../images/SVGs";
 
 export default function RetweetedBy(props) {

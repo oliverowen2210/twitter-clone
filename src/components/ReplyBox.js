@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { UserContext, TweetContext } from "./App";
 import ProfilePic from "./ProfilePic";

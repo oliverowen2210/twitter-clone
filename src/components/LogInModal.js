@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Bird from "./Bird";
 import SVGs from "../images/SVGs";
 import { LayersContext } from "./App";

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { doc, getDoc, deleteDoc } from "@firebase/firestore";
 import {
   EmailAuthProvider,

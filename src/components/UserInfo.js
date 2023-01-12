@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext, useCallback } from "react";
+import React, { useRef, useEffect, useContext, useCallback } from "react";
 
 import { UserContext, LayersContext } from "./App";
 import SVGs from "../images/SVGs";

@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { renderMatches, Link } from "react-router-dom";
 
 import ProfilePic from "./ProfilePic";
 import TweetExtras from "./TweetExtras";

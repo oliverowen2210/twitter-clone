@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import { UserContext, LayersContext } from "./App";
 import ProfilePic from "./ProfilePic";

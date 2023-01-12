@@ -1,3 +1,5 @@
+import React from "react";
+
 import SignUpModal from "./SignUpModal";
 import LogInModal from "./LogInModal";
 import UserInfoModal from "./UserInfoModal";

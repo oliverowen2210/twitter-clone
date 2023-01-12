@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import { LayersContext } from "./App";
 import SVGs from "../images/SVGs";

@@ -1,3 +1,4 @@
+import React from "react";
 import TweetButton from "./TweetButton";
 import SVGs from "../images/SVGs";
 

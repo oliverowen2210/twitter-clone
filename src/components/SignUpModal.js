@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { doc, getDoc } from "firebase/firestore";
 
 import SVGs from "../images/SVGs";

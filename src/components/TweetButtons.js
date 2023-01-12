@@ -1,3 +1,5 @@
+import React from "react";
+
 import Replies from "./Replies";
 import Retweets from "./Retweets";
 import Likes from "./Likes";

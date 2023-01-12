@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function LikeCounter(props) {
   return props.likes && Object.keys(props.likes).length ? (
     <div>

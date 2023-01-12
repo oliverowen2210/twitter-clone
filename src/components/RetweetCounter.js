@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function RetweetCounter(props) {
   return props.retweets && Object.keys(props.retweets).length ? (
     <div>

@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function DeletedTweet() {
   return (
     <div className=" px-[16px]">

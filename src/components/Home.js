@@ -1,3 +1,5 @@
+import React from "react";
+
 import BannerElement from "./BannerElement";
 import SVGs from "../images/SVGs";
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import {
   db,
@@ -39,7 +39,7 @@ function App() {
   let [layers, setLayers] = useState({
     signup: {
       show: false,
-      toggle: function (state = true) {
+      toggle: function(state = true) {
         updateLayers((layers) => {
           layers.signup.show = state;
           layers.signup.show = state;
@@ -48,7 +48,7 @@ function App() {
     },
     login: {
       show: false,
-      toggle: function (state = true) {
+      toggle: function(state = true) {
         updateLayers((layers) => {
           layers.login.show = state;
         });
@@ -57,12 +57,12 @@ function App() {
     userInfo: {
       show: false,
       position: { left: 0, bottom: 0 },
-      toggle: function (state = true) {
+      toggle: function(state = true) {
         updateLayers((layers) => {
           layers.userInfo.show = state;
         });
       },
-      setPosition: function (left, bottom) {
+      setPosition: function(left, bottom) {
         updateLayers((layers) => {
           layers.userInfo.position = { left, bottom };
         });
@@ -70,7 +70,7 @@ function App() {
     },
     tweet: {
       show: false,
-      toggle: function (state = true) {
+      toggle: function(state = true) {
         updateLayers((layers) => {
           layers.tweet.show = state;
         });
@@ -80,17 +80,17 @@ function App() {
       show: false,
       position: { left: 0, top: 0 },
       tweet: null,
-      toggle: function (state = true) {
+      toggle: function(state = true) {
         updateLayers((layers) => {
           layers.tweetExtras.show = state;
         });
       },
-      setPosition: function (left, top) {
+      setPosition: function(left, top) {
         updateLayers((layers) => {
           layers.tweetExtras.position = { left, top };
         });
       },
-      setTweet: function (newTweet) {
+      setTweet: function(newTweet) {
         updateLayers((layers) => {
           layers.tweetExtras.tweet = newTweet;
         });
@@ -98,7 +98,7 @@ function App() {
     },
     editProfile: {
       show: false,
-      toggle: function (state = true) {
+      toggle: function(state = true) {
         updateLayers((layers) => {
           layers.editProfile.show = state;
         });
@@ -106,7 +106,7 @@ function App() {
     },
     deleteAccount: {
       show: false,
-      toggle: function (state = true) {
+      toggle: function(state = true) {
         updateLayers((layers) => {
           layers.deleteAccount.show = state;
         });
