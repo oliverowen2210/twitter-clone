@@ -69,7 +69,7 @@ export default function ProfilePage(props) {
       </Link>
 
       <div className="flex relative border-b-[1px] border-solid border-gray-200">
-        <div className="h-fit w-full flex flex-col">
+        <div className="h-fit w-full pb-[8px] flex flex-col">
           <div
             style={
               userData.banner
@@ -101,7 +101,7 @@ export default function ProfilePage(props) {
                 </button>
               ) : null}
             </div>
-            <div className="mt-[4px] mb-[12px] z-0">
+            <div className="mt-[56px] mb-[12px] z-0">
               <h3 className="font-bold text-lg">{userData.username}</h3>
               <p className="text-gray-600">@{userData.handle}</p>
             </div>
