@@ -19,7 +19,7 @@ import {
   deleteField,
 } from "firebase/firestore";
 
-import AppLayers from "./AppLayers.js";
+import Modals from "./modals/Modals.js";
 import Footer from "./Footer";
 import Banner from "./Banner";
 import HomePage from "./HomePage";
