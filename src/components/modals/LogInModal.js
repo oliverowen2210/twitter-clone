@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import Bird from "../Bird";
 import SVGs from "../../images/SVGs";
-import { LayersContext } from "../App";
+import { ModalsContext } from "../App";
 
 export default function LogInModal(props) {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [savedURL, setSavedURL] = useState("");
-  let modal = useContext(LayersContext).login;
+  let modal = useContext(ModalsContext).login;
 
   useEffect(() => {
     if (modal.show) {

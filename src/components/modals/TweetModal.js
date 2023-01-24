@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 
-import { UserContext, LayersContext } from "../App";
+import { UserContext, ModalsContext } from "../App";
 import ProfilePic from "../ProfilePic";
 import SVGs from "../../images/SVGs";
 
 export default function TweetModal(props) {
   let user = useContext(UserContext);
-  let modal = useContext(LayersContext).tweet;
+  let modal = useContext(ModalsContext).tweet;
   let [inputValue, setInputValue] = useState("");
 
   return modal.show ? (

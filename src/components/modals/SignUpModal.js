@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { doc, getDoc } from "firebase/firestore";
 
 import SVGs from "../../images/SVGs";
-import { DBContext, LayersContext } from "../App";
+import { DBContext, ModalsContext } from "../App";
 
 export default function SignUpModal(props) {
   let [nameIsValid, setNameIsValid] = useState(false);
@@ -16,7 +16,7 @@ export default function SignUpModal(props) {
   let [savedURL, setSavedURL] = useState("");
 
   let db = useContext(DBContext);
-  let modal = useContext(LayersContext).signup;
+  let modal = useContext(ModalsContext).signup;
 
   let handleTimer;
   let handleInputRef = useRef(null);

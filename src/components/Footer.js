@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 
-import { LayersContext } from "./App";
+import { ModalsContext } from "./App";
 
 export default function Footer(props) {
-  const toggleLogInModal = useContext(LayersContext).login.toggle;
-  const toggleSignUpModal = useContext(LayersContext).signup.toggle;
+  const toggleLogInModal = useContext(ModalsContext).login.toggle;
+  const toggleSignUpModal = useContext(ModalsContext).signup.toggle;
   return (
     <div className="fixed bg-red-500 bottom-0 w-full">
       <div className="my-[12px] flex justify-center">

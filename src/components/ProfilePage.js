@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
-import { UserContext, DBContext, LayersContext } from "./App";
+import { UserContext, DBContext, ModalsContext } from "./App";
 import Tweets from "./Tweets";
 import SVGs from "../images/SVGs";
 import ProfilePic from "./ProfilePic";
@@ -13,7 +13,7 @@ export default function ProfilePage(props) {
   let [userData, setUserData] = useState(null);
   let [tweets, setTweets] = useState([]);
   const db = useContext(DBContext);
-  const editModal = useContext(LayersContext).editProfile;
+  const editModal = useContext(ModalsContext).editProfile;
 
   useEffect(() => {
     async function getUserData() {

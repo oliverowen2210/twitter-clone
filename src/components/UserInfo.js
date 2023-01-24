@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useContext, useCallback } from "react";
 
-import { UserContext, LayersContext } from "./App";
+import { UserContext, ModalsContext } from "./App";
 import SVGs from "../images/SVGs";
 import ProfilePic from "./ProfilePic";
 
 export default function UserInfo() {
-  let modal = useContext(LayersContext).userInfo;
+  let modal = useContext(ModalsContext).userInfo;
   let infoRef = useRef(null);
   let user = useContext(UserContext);
 

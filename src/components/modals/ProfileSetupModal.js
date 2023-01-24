@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { LayersContext } from "../App";
+import { ModalsContext } from "../App";
 
 export default function ProfileSetupModal(props) {
   let [savedURL, setSavedURL] = useState("");
-  let modal = useContext(LayersContext).profileSetup;
+  let modal = useContext(ModalsContext).profileSetup;
 
   useEffect(() => {
     if (modal.show) {

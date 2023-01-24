@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useContext, useCallback } from "react";
 
-import { UserContext, LayersContext } from "./App";
+import { UserContext, ModalsContext } from "./App";
 import TweetButton from "./TweetButton";
 import SVGs from "../images/SVGs";
 
 export default function TweetExtras(props) {
   const user = useContext(UserContext);
-  const modal = useContext(LayersContext).tweetExtras;
-  const login = useContext(LayersContext).login;
+  const modal = useContext(ModalsContext).tweetExtras;
+  const login = useContext(ModalsContext).login;
   const ref = useRef(null);
 
   const updateModalRect = useCallback(() => {

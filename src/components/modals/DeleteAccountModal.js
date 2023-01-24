@@ -6,14 +6,14 @@ import {
   deleteUser,
 } from "@firebase/auth";
 
-import { UserContext, DBContext, LayersContext } from "../App";
+import { UserContext, DBContext, ModalsContext } from "../App";
 import { auth } from "../../firebase";
 import SVGs from "../../images/SVGs";
 
 export default function DeleteAccountModal(props) {
   const user = useContext(UserContext);
   const db = useContext(DBContext);
-  const modal = useContext(LayersContext).deleteAccount;
+  const modal = useContext(ModalsContext).deleteAccount;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

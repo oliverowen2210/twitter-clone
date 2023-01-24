@@ -4,10 +4,10 @@
  * my Blog API project wasn't feasible. */
 import React, { useContext } from "react";
 
-import { LayersContext } from "./App";
+import { ModalsContext } from "./App";
 
 export default function modalTemplate() {
-  /**const modal = useContext(LayersContext).modalName*/
+  /**const modal = useContext(ModalsContext).modalName*/
   const modal = {
     show: true,
   };

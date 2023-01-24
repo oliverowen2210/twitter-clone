@@ -31,18 +31,18 @@ import Sidebar from "./Sidebar";
 export const UserContext = createContext(null);
 export const DBContext = createContext(null);
 export const StorageContext = createContext(null);
-export const LayersContext = createContext(null);
+export const ModalsContext = createContext(null);
 export const TweetContext = createContext(null);
 
 function App() {
   let [user, setUser] = useState(null);
-  let [layers, setLayers] = useState({
+  let [modals, setModals] = useState({
     signup: {
       show: false,
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.signup.show = state;
-          layers.signup.show = state;
+          modals.signup.show = state;
+          modals.signup.show = state;
         });
       },
     },
@@ -50,7 +50,7 @@ function App() {
       show: false,
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.login.show = state;
+          modals.login.show = state;
         });
       },
     },
@@ -59,12 +59,12 @@ function App() {
       position: { left: 0, bottom: 0 },
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.userInfo.show = state;
+          modals.userInfo.show = state;
         });
       },
       setPosition: function (left, bottom) {
         updateLayers((layers) => {
-          layers.userInfo.position = { left, bottom };
+          modals.userInfo.position = { left, bottom };
         });
       },
     },
@@ -72,7 +72,7 @@ function App() {
       show: false,
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.tweet.show = state;
+          modals.tweet.show = state;
         });
       },
     },
@@ -82,17 +82,17 @@ function App() {
       tweet: null,
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.tweetExtras.show = state;
+          modals.tweetExtras.show = state;
         });
       },
       setPosition: function (left, top) {
         updateLayers((layers) => {
-          layers.tweetExtras.position = { left, top };
+          modals.tweetExtras.position = { left, top };
         });
       },
       setTweet: function (newTweet) {
         updateLayers((layers) => {
-          layers.tweetExtras.tweet = newTweet;
+          modals.tweetExtras.tweet = newTweet;
         });
       },
     },
@@ -100,7 +100,7 @@ function App() {
       show: false,
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.editProfile.show = state;
+          modals.editProfile.show = state;
         });
       },
     },
@@ -108,16 +108,16 @@ function App() {
       show: false,
       toggle: function (state = true) {
         updateLayers((layers) => {
-          layers.deleteAccount.show = state;
+          modals.deleteAccount.show = state;
         });
       },
     },
   });
 
   function updateLayers(func) {
-    let newLayers = { ...layers };
-    func(newLayers);
-    setLayers(newLayers);
+    let newModals = { ...modals };
+    func(newModals);
+    setModals(newModals);
   }
 
   async function tweet(content, replyTo = null) {
@@ -237,7 +237,7 @@ function App() {
   }, []);
 
   return (
-    <LayersContext.Provider value={layers}>
+    <ModalsContext.Provider value={modals}>
       <DBContext.Provider value={db}>
         <StorageContext.Provider value={storage}>
           <TweetContext.Provider value={tweet}>
@@ -286,7 +286,7 @@ function App() {
           </TweetContext.Provider>
         </StorageContext.Provider>
       </DBContext.Provider>
-    </LayersContext.Provider>
+    </ModalsContext.Provider>
   );
 }
 

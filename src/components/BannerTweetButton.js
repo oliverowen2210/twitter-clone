@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 
-import { LayersContext } from "./App";
+import { ModalsContext } from "./App";
 import SVGs from "../images/SVGs";
 
 export default function BannerTweetButton() {
-  let modal = useContext(LayersContext).tweet;
+  let modal = useContext(ModalsContext).tweet;
 
   return (
     <button

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 
-import { UserContext, LayersContext } from "../App";
+import { UserContext, ModalsContext } from "../App";
 
 export default function UserInfoModal(props) {
   let user = useContext(UserContext);
-  let modal = useContext(LayersContext).userInfo;
-  let deleteAccountModal = useContext(LayersContext).deleteAccount;
+  let modal = useContext(ModalsContext).userInfo;
+  let deleteAccountModal = useContext(ModalsContext).deleteAccount;
 
   async function handleDeleteRequest() {
     modal.toggle(false);

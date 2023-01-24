@@ -3,14 +3,14 @@ import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { storage } from "../../firebase";
-import { UserContext, DBContext, LayersContext } from "../App";
+import { UserContext, DBContext, ModalsContext } from "../App";
 import ProfilePic from "../ProfilePic";
 import SVGs from "../../images/SVGs";
 
 export default function EditProfileModal() {
   const user = useContext(UserContext);
   const db = useContext(DBContext);
-  const modal = useContext(LayersContext).editProfile;
+  const modal = useContext(ModalsContext).editProfile;
 
   let [selectedName, setSelectedName] = useState(null);
   let [selectedBio, setSelectedBio] = useState(null);

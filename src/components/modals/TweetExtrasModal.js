@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 
-import { UserContext, LayersContext } from "../App";
+import { UserContext, ModalsContext } from "../App";
 import SVGs from "../../images/SVGs";
 
 export default function TweetExtrasModal(props) {
   const user = useContext(UserContext);
-  const modal = useContext(LayersContext).tweetExtras;
+  const modal = useContext(ModalsContext).tweetExtras;
 
   async function handleDelete() {
     await props.deleteFunc(modal.tweet);
