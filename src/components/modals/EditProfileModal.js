@@ -228,7 +228,7 @@ export default function EditProfileModal() {
         {/** text inputs */}
         <div className="w-full flex justify-center">
           <form className="w-[95%]">
-            <div className="pl-[8px] mb-[32px] group focus-within:font-bold focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
+            <div className="pl-[8px] mb-[32px] group focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
               <label htmlFor="profileNameInput" className=" font-inherit">
                 Name
               </label>
@@ -242,7 +242,7 @@ export default function EditProfileModal() {
                 }}
               />
             </div>
-            <div className="pl-[8px] group focus-within:font-bold focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
+            <div className="pl-[8px] group focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">
               <label htmlFor="profileBioInput" className="font-inherit">
                 Bio
               </label>
