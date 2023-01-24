@@ -11,12 +11,15 @@ export default function TweetModal(props) {
 
   return modal.show ? (
     <div className="bg-gray-800 z-[100] fixed top-0 left-0 w-screen h-screen bg-opacity-30 flex justify-center items-center">
+      {/** screen block */}
       <div
         className="absolute w-full h-full top-0 left-0"
         onClick={() => {
           modal.toggle(false);
         }}
       />
+
+      {/** modal */}
       <div className="flex shrink flex-col items-center bg-white relative rounded-xl h-fit w-[600px] max-w-[600px]">
         <div className="h-[53px] w-full flex px-[16px]">
           <button

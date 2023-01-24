@@ -12,8 +12,10 @@ export default function EditProfileModal() {
   const db = useContext(DBContext);
   const modal = useContext(ModalsContext).editProfile;
 
-  let [selectedName, setSelectedName] = useState(null);
-  let [selectedBio, setSelectedBio] = useState(null);
+  let [selectedName, setSelectedName] = useState(
+    user.username ? user.name : null
+  );
+  let [selectedBio, setSelectedBio] = useState(user.bio ? user.bio : null);
   let [selectedBanner, setSelectedBanner] = useState(null);
   let [selectedPFP, setSelectedPFP] = useState(null);
 
@@ -95,6 +97,7 @@ export default function EditProfileModal() {
 
   return modal.show ? (
     <div className="bg-gray-800 z-[100] fixed top-0 left-0 w-screen h-screen bg-opacity-30 flex justify-center items-center">
+      {/** screen block */}
       <div
         className="w-full h-full absolute top-0 left-0"
         onClick={() => {
@@ -102,9 +105,13 @@ export default function EditProfileModal() {
           discardChanges();
         }}
       ></div>
+
+      {/** modal */}
       <div className="flex flex-col items-center bg-white relative rounded-xl overflow-x-hidden overflow-y-auto h-[650px] w-[600px]">
         <div className="flex items-center w-full pt-[12px] mb-[12px]">
           <div className="w-[16px]" />
+
+          {/** X button on the top left */}
           <button
             onClick={() => {
               modal.toggle(false);
@@ -120,6 +127,7 @@ export default function EditProfileModal() {
               </g>
             </svg>
           </button>
+
           <div className="w-[32px]" />
           <h3 className="font-bold text-lg">Edit profile</h3>
           <div className="grow" />
@@ -137,6 +145,7 @@ export default function EditProfileModal() {
           </button>
         </div>
 
+        {/**banner/header image input */}
         <div
           style={
             selectedBanner
@@ -178,6 +187,7 @@ export default function EditProfileModal() {
           </label>
         </div>
 
+        {/** profile picture file input */}
         <div className="w-full ml-[36px] h-[96px]">
           <div className="relative w-[140px] h-[140px] bottom-[72px] flex items-center justify-center">
             <div className="absolute">
@@ -215,6 +225,7 @@ export default function EditProfileModal() {
           </div>
         </div>
 
+        {/** text inputs */}
         <div className="w-full flex justify-center">
           <form className="w-[95%]">
             <div className="pl-[8px] mb-[32px] group focus-within:font-bold focus-within:outline-black rounded focus-within:outline-3 outline outline-gray-400 outline-1 flex flex-col">

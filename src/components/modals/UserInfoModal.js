@@ -14,12 +14,15 @@ export default function UserInfoModal(props) {
 
   return modal.show ? (
     <div className="z-[100] fixed w-screen h-screen">
+      {/** screen block */}
       <div
         className="absolute w-full h-full top-0 left-0"
         onClick={() => {
           modal.toggle(false);
         }}
       />
+
+      {/** modal */}
       <div
         className="flex flex-col fixed shadow-[0_0_4px_0_gray] duration-1000 bg-white h-fit shadow-md border-gray-400 w-[300px] min-w-[225px] max-w-[375px]"
         style={{
