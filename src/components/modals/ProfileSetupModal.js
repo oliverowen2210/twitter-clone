@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import SVGs from "../images/SVGs";
-import { LayersContext } from "./App";
+import { LayersContext } from "../App";
 
 export default function ProfileSetupModal(props) {
   let [savedURL, setSavedURL] = useState("");

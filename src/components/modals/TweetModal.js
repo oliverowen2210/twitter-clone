@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 
-import { UserContext, LayersContext } from "./App";
-import ProfilePic from "./ProfilePic";
-import SVGs from "../images/SVGs";
+import { UserContext, LayersContext } from "../App";
+import ProfilePic from "../ProfilePic";
+import SVGs from "../../images/SVGs";
 
 export default function TweetModal(props) {
   let user = useContext(UserContext);

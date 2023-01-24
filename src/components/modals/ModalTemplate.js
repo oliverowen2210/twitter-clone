@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-vars */
+/** This component is a template that I used to create various other modal components.
+ * Twitter'smodals don't have a consistent style, so using one customizable component like in
+ * my Blog API project wasn't feasible. */
 import React, { useContext } from "react";
 
 import { LayersContext } from "./App";

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
-import { UserContext, LayersContext } from "./App";
-import SVGs from "../images/SVGs";
+import { UserContext, LayersContext } from "../App";
+import SVGs from "../../images/SVGs";
 
 export default function TweetExtrasModal(props) {
   const user = useContext(UserContext);

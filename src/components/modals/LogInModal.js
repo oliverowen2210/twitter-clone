@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import Bird from "./Bird";
-import SVGs from "../images/SVGs";
-import { LayersContext } from "./App";
+import Bird from "../Bird";
+import SVGs from "../../images/SVGs";
+import { LayersContext } from "../App";
 
 export default function LogInModal(props) {
   let [email, setEmail] = useState("");

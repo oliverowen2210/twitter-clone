@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { doc, getDoc } from "firebase/firestore";
 
-import SVGs from "../images/SVGs";
-import { DBContext, LayersContext } from "./App";
+import SVGs from "../../images/SVGs";
+import { DBContext, LayersContext } from "../App";
 
 export default function SignUpModal(props) {
   let [nameIsValid, setNameIsValid] = useState(false);

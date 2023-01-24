@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-import { storage } from "../firebase";
-import { UserContext, DBContext, LayersContext } from "./App";
-import ProfilePic from "./ProfilePic";
-import SVGs from "../images/SVGs";
+import { storage } from "../../firebase";
+import { UserContext, DBContext, LayersContext } from "../App";
+import ProfilePic from "../ProfilePic";
+import SVGs from "../../images/SVGs";
 
 export default function EditProfileModal() {
   const user = useContext(UserContext);

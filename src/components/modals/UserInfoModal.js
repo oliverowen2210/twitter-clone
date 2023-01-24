@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { UserContext, LayersContext } from "./App";
+import { UserContext, LayersContext } from "../App";
 
 export default function UserInfoModal(props) {
   let user = useContext(UserContext);
