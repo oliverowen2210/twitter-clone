@@ -243,7 +243,7 @@ function App() {
           <TweetContext.Provider value={tweet}>
             <UserContext.Provider value={user}>
               <Router>
-                <AppLayers
+                <Modals
                   functions={{
                     login,
                     logout,
