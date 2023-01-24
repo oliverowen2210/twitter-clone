@@ -3,10 +3,12 @@ import { getDoc, doc } from "firebase/firestore";
 
 import { UserContext, DBContext } from "./App";
 import Tweet from "./Tweet";
-import uniqid from "uniqid";
 
 export default function Tweets(props) {
+  /**after running convertRetweetsToOriginals(), tweetList will hold an updated
+   * version of props.tweets with retweets replaced by the original tweets*/
   let [tweetList, setTweetList] = useState([]);
+  let [busy, setBusy] = useState(true);
 
   const user = useContext(UserContext);
   const db = useContext(DBContext);
@@ -17,7 +19,7 @@ export default function Tweets(props) {
       const tweetDoc = await getDoc(docRef);
       return tweetDoc.data();
     }
-    async function updateRetweets() {
+    async function convertRetweetsToOriginals() {
       let copyTweetList = [...props.tweets];
       for (let tweet of copyTweetList) {
         /** if tweets have an originalID, it means they're a retweet of that id */
@@ -35,13 +37,14 @@ export default function Tweets(props) {
           tweet.replies = originalTweet.replies;
         }
       }
-      setTweetList(copyTweetList);
+      await setTweetList(copyTweetList);
+      setBusy(false);
     }
 
-    updateRetweets();
+    convertRetweetsToOriginals();
   }, [props.tweets, db]);
 
-  return (
+  return busy ? null : (
     <ul>
       {tweetList.length
         ? tweetList.map((tweet) => {
@@ -79,7 +82,7 @@ export default function Tweets(props) {
             return (
               <Tweet
                 data={tweetData}
-                key={uniqid()}
+                key={`tweet ${tweetData.id}`}
                 userLiked={userLiked}
                 userRetweeted={userRetweeted}
                 originalVisible={originalVisible}
