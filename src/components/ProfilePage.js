@@ -90,7 +90,7 @@ export default function ProfilePage(props) {
                 <ProfilePic big={true} id={userData.uid} />
               </div>
               <div className="grow" />
-              {userData.uid === currentUser.uid ? (
+              {userData.uid === currentUser?.uid ? (
                 <button
                   onClick={() => {
                     editModal.toggle(true);
