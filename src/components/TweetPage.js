@@ -32,6 +32,8 @@ export default function TweetPage(props) {
       if (!tweet || tweet === "deleted" || !tweet.replyTo) return;
       let replyData;
 
+      /**Get the tweet that the current tweet is a reply to if any, as topReply
+       * If it is also a reply, get the tweet it's a reply to as secondTopReply */
       try {
         const replyDoc = await getDoc(doc(db, "tweets", tweet.replyTo.id));
         replyData = replyDoc.data();
