@@ -90,7 +90,7 @@ export default function TweetPage(props) {
         <h2 className="font-bold text-xl">Tweet</h2>
       </Link>
 
-      {secondTopReply ? (
+      {secondTopReply && topReply.replyTo ? (
         secondTopReply === "deleted" ? (
           <DeletedTweet />
         ) : (
@@ -103,7 +103,7 @@ export default function TweetPage(props) {
         )
       ) : null}
 
-      {topReply ? (
+      {topReply && tweet.replyTo ? (
         topReply === "deleted" ? (
           <DeletedTweet />
         ) : (
