@@ -28,7 +28,6 @@ export default function TweetPage(props) {
     }
 
     async function getTopReplies() {
-      console.log("getting replies");
       if (!tweet || tweet === "deleted" || !tweet.replyTo) return;
       let replyData;
 
@@ -37,12 +36,12 @@ export default function TweetPage(props) {
       try {
         const replyDoc = await getDoc(doc(db, "tweets", tweet.replyTo.id));
         replyData = replyDoc.data();
-        setTopReply(replyData);
+        await setTopReply(replyData);
 
         if (!replyData.replyTo) return;
       } catch (err) {
         if (err instanceof TypeError) {
-          setTopReply("deleted");
+          await setTopReply("deleted");
           return;
         }
       }
@@ -52,17 +51,17 @@ export default function TweetPage(props) {
           doc(db, "tweets", replyData.replyTo.id)
         );
         const secondReplyData = secondReplyDoc.data();
-        setSecondTopReply(secondReplyData);
+        await setSecondTopReply(secondReplyData);
       } catch (err) {
         if (err instanceof TypeError) {
-          setSecondTopReply("deleted");
+          await setSecondTopReply("deleted");
         }
       }
     }
 
     async function getBottomReplies() {
       if (!tweet || tweet === "deleted" || !Object.keys(tweet.replies).length) {
-        setBottomReplies([]);
+        await setBottomReplies([]);
         return;
       }
       let newBottomReplies = [];
@@ -72,7 +71,7 @@ export default function TweetPage(props) {
         const replyData = replyDoc.data();
         newBottomReplies.push(replyData);
       }
-      setBottomReplies(newBottomReplies);
+      await setBottomReplies(newBottomReplies);
     }
 
     getTweet();
