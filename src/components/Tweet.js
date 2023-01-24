@@ -12,6 +12,9 @@ import ProfilePic from "./ProfilePic";
 export default function Tweet(props) {
   const user = useContext(UserContext);
 
+  /**This component handles both "big tweets", the large version of tweets
+   * shown when you go to a specific tweet's page, and "small tweets", which are the tweets seen
+   * everywhere else such as the homepage. */
   return (
     <div
       className={
@@ -22,6 +25,7 @@ export default function Tweet(props) {
       id={`${props.data.retweetID ? props.data.retweetID : props.data.id}`}
     >
       <div className="flex relative flex-col">
+        {/** Cover small tweets with a link to their page */}
         {props.big ? null : (
           <Link
             to={`/tweet/${props.data.id}`}
