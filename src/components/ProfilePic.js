@@ -10,20 +10,23 @@ export default function ProfilePic(props) {
   const [busy, setBusy] = useState(true);
 
   useEffect(() => {
+    /**if no specific image is provided in props.src, download the profile pic
+     * of user provided in props.id */
     async function getURL() {
+      if (PFPURL || props.src) return;
       let PFPRef = ref(storage, `${props.id}/PFP`);
       let URL;
       try {
         URL = await getDownloadURL(PFPRef);
-        setPFPURL(URL);
+        await setPFPURL(URL);
       } catch (err) {
         URL = await getDownloadURL(ref(storage, "defaultPFP.png"));
-        setPFPURL(URL);
+        await setPFPURL(URL);
       }
       setBusy(false);
     }
     getURL();
-  }, [PFPURL, props.storage, props.id, storage]);
+  }, [PFPURL, props.storage, props.id, storage, props.src]);
 
   return busy ? null : (
     <Link to={props.link ? `${props.link}` : null} className={"relative z-10"}>
