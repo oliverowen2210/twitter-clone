@@ -6,7 +6,7 @@ export default function Footer(props) {
   const toggleLogInModal = useContext(ModalsContext).login.toggle;
   const toggleSignUpModal = useContext(ModalsContext).signup.toggle;
   return (
-    <div className="fixed bg-red-500 bottom-0 w-full">
+    <div className="fixed bg-red-500 bottom-0 w-full z-[20]">
       <div className="my-[12px] flex justify-center">
         <div className="w-[275px]"></div>
 
