@@ -242,7 +242,7 @@ function App() {
         <StorageContext.Provider value={storage}>
           <TweetContext.Provider value={tweet}>
             <UserContext.Provider value={user}>
-              <Router>
+              <Router basename={`${process.env.PUBLIC_URL}`}>
                 <Modals
                   functions={{
                     login,
