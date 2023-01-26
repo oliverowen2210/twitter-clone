@@ -133,6 +133,7 @@ function App() {
       handle: user.handle,
       datePosted: postDate,
       content: content,
+      originalID: null,
       retweets: {},
       likes: {},
       replies: {},
