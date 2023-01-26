@@ -13,9 +13,9 @@ export default function EditProfileModal() {
   const modal = useContext(ModalsContext).editProfile;
 
   let [selectedName, setSelectedName] = useState(
-    user.username ? user.name : null
+    user?.username ? user.username : null
   );
-  let [selectedBio, setSelectedBio] = useState(user.bio ? user.bio : null);
+  let [selectedBio, setSelectedBio] = useState(user?.bio ? user.bio : null);
   let [selectedBanner, setSelectedBanner] = useState(null);
   let [selectedPFP, setSelectedPFP] = useState(null);
 
