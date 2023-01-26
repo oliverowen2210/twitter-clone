@@ -14,7 +14,7 @@ export default function SearchBar(props) {
         </span>
       </div>
       <input
-        placeholder="Search Twitter"
+        placeholder="Search Twitter?"
         className="focus:outline-none group-focus:bg-white bg-gray-200 p-[12px] rounded-r-full cursor-text opacity-100 placeholder-black w-full text-black font-[15px]"
       ></input>
     </div>
