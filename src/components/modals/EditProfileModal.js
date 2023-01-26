@@ -190,14 +190,17 @@ export default function EditProfileModal() {
         {/** profile picture file input */}
         <div className="w-full ml-[36px] h-[96px]">
           <div className="relative w-[140px] h-[140px] bottom-[72px] flex items-center justify-center">
-            <div className="absolute">
+            <div className="relative z-0">
               <ProfilePic
                 big={true}
                 id={!selectedPFP ? user.uid : null}
                 src={selectedPFP ? URL.createObjectURL(selectedPFP) : null}
               />
             </div>
-            <label htmlFor="PFPFileInput">
+            <label
+              htmlFor="PFPFileInput"
+              className="z-10 absolute w-full h-full flex justify-center items-center"
+            >
               <div
                 id="selectPFP"
                 className="w-[48px] h-[48px] flex justify-center items-center bg-gray-900 hover:bg-gray-700 duration-200 cursor-pointer opacity-70 rounded-full text-white"
