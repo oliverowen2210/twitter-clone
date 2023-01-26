@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 
-import { ModalsContext } from "./App";
+import { UserContext, ModalsContext } from "./App";
 import SVGs from "../images/SVGs";
 
 export default function BannerTweetButton() {
+  let user = useContext(UserContext);
   let modal = useContext(ModalsContext).tweet;
 
-  return (
+  return !user ? null : (
     <button
       onClick={() => {
         modal.toggle(true);
