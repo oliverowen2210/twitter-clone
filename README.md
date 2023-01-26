@@ -2,7 +2,7 @@ Un sitio basado en la red social Twitter, creado utilizando a ReactJS y Tailwind
 
 Enlace: https://twitter-clone-production-c7a4.up.railway.app/
 
-(imagen)
+![Imagen del sitio. Cuatro "tweets" se pueden ver.](https://user-images.githubusercontent.com/95064346/214756071-af1b5cd8-b129-47ed-b7cb-d2d7c2cb805e.png)
 
 # Caracteristicas
 
