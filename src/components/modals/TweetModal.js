@@ -39,7 +39,7 @@ export default function TweetModal(props) {
 
         <div className="py-[4px] px-[16px] w-full flex">
           <div className="mr-[12px]">
-            <ProfilePic />
+            <ProfilePic src={user.PFP} />
           </div>
           <div>
             <textarea
