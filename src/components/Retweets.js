@@ -55,6 +55,7 @@ export default function Retweets(props) {
         ? retweetData.originalID
         : retweetData.id;
       retweetData.id = retweetID;
+      retweetData.datePosted = new Date();
       retweetData.retweetedBy = user.username;
 
       await setDoc(doc(db, "tweets", retweetID), retweetData);
